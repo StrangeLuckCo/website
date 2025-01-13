@@ -1,9 +1,12 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 
 export default async function Home() {
   const videoUrl =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/sample-15s.mp4";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/DRAFT-REEL-SLSTUDIO-20250102_v2.mp4";
+  const logoUrl =
+    "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
   return (
     <>
@@ -51,7 +54,16 @@ export default async function Home() {
             textShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
           }}
         >
-          <h1
+          <Image
+            alt="demo"
+            src={logoUrl}
+            height={300}
+            width={500}
+            style={{
+              maxWidth: 500,
+            }}
+          />
+          {/* <h1
             style={{
               backgroundColor: "black",
               padding: "5px",
@@ -59,7 +71,7 @@ export default async function Home() {
             }}
           >
             Welcome to My Website
-          </h1>
+          </h1> */}
         </div>
       </div>
     </>
