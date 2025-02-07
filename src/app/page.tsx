@@ -78,10 +78,10 @@ export default async function Home() {
       {/* Work Section */}
       <section
         id="work"
-        className="min-h-screen flex flex-col bg-gray-800 text-white py-10 px-32"
+        className="min-h-screen flex flex-col bg-gray-800 text-white py-10 px-32 pb-20"
       >
-        <h2 className="text-4xl font-bold">CHOOSE YOUR PATH</h2>
-        <nav className="flex justify-between p-1">
+        <h2 className="text-4xl font-bold mb-4">CHOOSE YOUR PATH</h2>
+        <nav className="flex justify-between p-1 mb-6">
           <div className="flex space-x-6">
             <a className="hover:text-gray-400">Cinematography</a> <span>|</span>
             <a className="hover:text-gray-400">Editing</a>
@@ -129,7 +129,7 @@ export default async function Home() {
         <h2 className="text-6xl font-bold">Services</h2>
         <div className="flex gap-40 text-xl">
           <div>
-            <h3>Consulting</h3>
+            <h3 className="text-3xl underline mb-5">Consulting</h3>
             <ul>
               <li>Brand Strategy</li>
               <li>Creative Development and Direction</li>
@@ -137,7 +137,7 @@ export default async function Home() {
             </ul>
           </div>
           <div>
-            <h3>Production</h3>
+            <h3 className="text-3xl underline mb-5">Production</h3>
             <ul>
               <li>Audio Podcast</li>
               <li>Production</li>
@@ -149,7 +149,7 @@ export default async function Home() {
             </ul>
           </div>
           <div>
-            <h3>Experiences</h3>
+            <h3 className="text-3xl underline mb-5">Experiences</h3>
             <ul>
               <li>Curation and Exhibition</li>
               <li>Immersive Media</li>
@@ -165,15 +165,17 @@ export default async function Home() {
         className="min-h-screen flex items-center justify-center bg-gray-600 text-white p-10"
       >
         <div className="flex gap-10">
-          <div>
-            <h3>Jacki Huntington</h3>
+          <div className="flex flex-col gap-3">
+            <h3 className="text-4xl mb-4">
+              Jacki <br /> Huntington
+            </h3>
             <Image
               src="/SL.png"
-              width={100}
-              height={150}
+              width={200}
+              height={350}
               alt="Jackie Huntington"
             />
-            <h4>Co-Founder</h4>
+            <h4>CO-FOUNDER</h4>
             <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
             <p>
               Storytelling work has taken Jacki across continents and cultures,
@@ -191,15 +193,19 @@ export default async function Home() {
             </p>
           </div>
           <div>
-            <div>
-              <h3>JESS DIPIERRO OBERT</h3>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-4xl mb-4">
+                JESS DIPIERRO
+                <br />
+                OBERT
+              </h3>
               <Image
                 src="/SL.png"
-                width={100}
-                height={150}
+                width={200}
+                height={350}
                 alt="Jess DiPierro Obert"
               />
-              <h4>Co-Founder</h4>
+              <h4>CO-FOUNDER</h4>
               <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR</p>
               <p>
                 Jess is an award-winning investigative visual journalist,
@@ -218,10 +224,12 @@ export default async function Home() {
             </div>
           </div>
           <div>
-            <div>
-              <h3>JEN NG</h3>
-              <Image src="/SL.png" width={100} height={150} alt="Jen Ng" />
-              <h4>Co-Founder</h4>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-4xl">
+                JEN <br /> NG
+              </h3>
+              <Image src="/SL.png" width={200} height={350} alt="Jen Ng" />
+              <h4>CO-FOUNDER</h4>
               <p>
                 ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
               </p>
@@ -248,15 +256,16 @@ export default async function Home() {
         id="contact"
         className="min-h-screen flex flex-col bg-gray-500 text-white p-10 gap-10"
       >
-        <h2 className="text-4xl font-bold">LET&#39;S TALK</h2>
+        <h2 className="flex justify-center text-5xl font-bold">
+          LET&#39;S TALK
+        </h2>
         <div className="flex items-center">
           <div>IMAGE</div>
-          <div className="max-w-lg mx-auto p-6 bg-gray-800 rounded-lg shadow-lg text-white">
-            <form className="space-y-4">
-              {/* Full Name */}
+          <div className="flex flex-col gap-4 items-center mx-auto p-6 text-white">
+            <form className="space-y-4 w-[450px]">
               <div>
                 <label
-                  className="block text-sm font-medium mb-1"
+                  className="text-sm font-medium mb-1 hidden"
                   htmlFor="fullName"
                 >
                   Full Name
@@ -264,16 +273,15 @@ export default async function Home() {
                 <input
                   type="text"
                   id="fullName"
-                  placeholder="Your Full Name"
+                  placeholder="Full Name"
                   className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
-              {/* Email Address */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-1"
+                  className="text-sm font-medium mb-1 hidden"
                   htmlFor="email"
                 >
                   Email Address
@@ -281,24 +289,22 @@ export default async function Home() {
                 <input
                   type="email"
                   id="email"
-                  placeholder="Your Email Address"
+                  placeholder="Email Address"
                   className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
-              {/* Description */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-1"
+                  className="text-sm font-medium mb-1 hidden"
                   htmlFor="description"
                 >
                   Description
                 </label>
                 <textarea
                   id="description"
-                  placeholder="Tell us a bit about your dream project!"
-                  rows="4"
+                  placeholder="Tell us a bit about your dream project"
                   className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -312,9 +318,10 @@ export default async function Home() {
                 SEND
               </button>
             </form>
+            <p>hi@strangeluck.com</p>
           </div>
 
-          <div className="flex flex-col gap-10 text-2xl">
+          <div className="flex flex-col items-center gap-10 text-2xl">
             <a>INSTAGRAM</a>
             <a>VIMEO</a>
           </div>
