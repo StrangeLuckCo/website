@@ -8,9 +8,9 @@ const PortfolioThumbnail = ({
   description: string;
 }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <Image alt="SL thumbnail" src={"/SL.png"} height={300} width={300} />
-      <h3>{title}</h3>
+      <h3 className="text-2xl">{title}</h3>
       <p>{description}</p>
     </div>
   );

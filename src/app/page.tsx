@@ -64,7 +64,7 @@ export default async function Home() {
       {/* About Section */}
       <section
         id="about"
-        className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-10"
+        className="min-h-24 text-xl flex items-center justify-center bg-gray-900 text-white p-60"
       >
         <p>
           Strange Luck helps your audience fall in love with the world — its
@@ -78,7 +78,7 @@ export default async function Home() {
       {/* Work Section */}
       <section
         id="work"
-        className="min-h-screen flex flex-col bg-gray-800 text-white p-10"
+        className="min-h-screen flex flex-col bg-gray-800 text-white py-10 px-32"
       >
         <h2 className="text-4xl font-bold">CHOOSE YOUR PATH</h2>
         <nav className="flex justify-between p-1">
@@ -95,25 +95,25 @@ export default async function Home() {
         </nav>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <PortfolioThumbnail
-            title={"Title"}
+            title={"TITLE"}
             description={
               "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
             }
           />
           <PortfolioThumbnail
-            title={"Title"}
+            title={"TITLE"}
             description={
               "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
             }
           />
           <PortfolioThumbnail
-            title={"Title"}
+            title={"TITLE"}
             description={
               "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
             }
           />
           <PortfolioThumbnail
-            title={"Title"}
+            title={"TITLE"}
             description={
               "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
             }
