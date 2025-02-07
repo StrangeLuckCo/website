@@ -164,7 +164,83 @@ export default async function Home() {
         id="staff"
         className="min-h-screen flex items-center justify-center bg-gray-600 text-white p-10"
       >
-        <h2 className="text-4xl font-bold">Meet the Staff</h2>
+        <div className="flex gap-10">
+          <div>
+            <h3>Jacki Huntington</h3>
+            <Image
+              src="/SL.png"
+              width={100}
+              height={150}
+              alt="Jackie Huntington"
+            />
+            <h4>Co-Founder</h4>
+            <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
+            <p>
+              Storytelling work has taken Jacki across continents and cultures,
+              from the bustling streets of Port-au-Prince, Haiti, to the serene
+              landscapes of the Mississippi Delta. With a background as a
+              producer at Refinery29 working in New York City and Los Angeles,
+              Jacki has pioneered groundbreaking feminist and body-positive
+              video content that continues to shape the media industry's
+              aesthetic. Jacki has worked as a producer, editor, and composer
+              for a variety of podcasts including The City of the Rails, Under
+              the Influence with Jo Piazza and Really Good Shares. These days,
+              she is managing communications for the Center for Global Health at
+              Mass General Brigham as she forges ahead with a handful of
+              independent documentary film projects.
+            </p>
+          </div>
+          <div>
+            <div>
+              <h3>JESS DIPIERRO OBERT</h3>
+              <Image
+                src="/SL.png"
+                width={100}
+                height={150}
+                alt="Jess DiPierro Obert"
+              />
+              <h4>Co-Founder</h4>
+              <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR</p>
+              <p>
+                Jess is an award-winning investigative visual journalist,
+                producer and filmmaker. She is focused on solution-based
+                storytelling, and has worked globally in countries like Haiti
+                since 2016. From 2018 to 2020, Jess led a series of workshops
+                for Girls Voices, a nonprofit organization that empowers young
+                girls globally to develop their media storytelling skills. She
+                received a ‘Still I Rise’ Visual Arts Grant to work on a film
+                about women peace builders in conflict zones within Port Au
+                Prince, Haiti, which premiered at FESPACO in Burkina Faso. Jess’
+                work has been exhibited at Prix Bayeux Calvados-Normandie and
+                has received a Radio Television Digital News Association (RTDNA)
+                Murrow award and Vimeo Staff Pick.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3>JEN NG</h3>
+              <Image src="/SL.png" width={100} height={150} alt="Jen Ng" />
+              <h4>Co-Founder</h4>
+              <p>
+                ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
+              </p>
+              <p>
+                Jen’s world is a playground for human connection. Her lifelong
+                interest in art, media, and psychology has led her to work as an
+                art director, brand strategist, and experience designer for
+                clients with a story to tell. Projects range from design for an
+                oral history program to research and design for an augmented
+                reality immersive news app. She works on social justice projects
+                rooted in LGBTQIA+ issues, race, and youth empowerment. Workshop
+                design and facilitation create a nice break from the screen,
+                allowing her to take her digital skills offline. Her ongoing
+                work explores ways that story, identity, and self-expression can
+                work together to strengthen communities.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Contact Section */}
