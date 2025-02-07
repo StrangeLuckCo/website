@@ -323,7 +323,8 @@ export default async function Home() {
 
       {/* Footer */}
       <footer className="bg-black text-white text-center py-4">
-        <div className="space-x-4">
+        <div className="space-x-4 flex justify-center">
+          <p>© 2025 STRANGE LUCK. All rights reserved.</p>
           <a href="#" className="hover:text-gray-400">
             Privacy Policy
           </a>
