@@ -246,9 +246,79 @@ export default async function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex items-center justify-center bg-gray-500 text-white p-10"
+        className="min-h-screen flex flex-col bg-gray-500 text-white p-10 gap-10"
       >
-        <h2 className="text-4xl font-bold">Contact Us</h2>
+        <h2 className="text-4xl font-bold">LET&#39;S TALK</h2>
+        <div className="flex items-center">
+          <div>IMAGE</div>
+          <div className="max-w-lg mx-auto p-6 bg-gray-800 rounded-lg shadow-lg text-white">
+            <form className="space-y-4">
+              {/* Full Name */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="fullName"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="fullName"
+                  placeholder="Your Full Name"
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              {/* Email Address */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="email"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Your Email Address"
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              {/* Description */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="description"
+                >
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  placeholder="Tell us a bit about your dream project!"
+                  rows="4"
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md"
+              >
+                SEND
+              </button>
+            </form>
+          </div>
+
+          <div className="flex flex-col gap-10 text-2xl">
+            <a>INSTAGRAM</a>
+            <a>VIMEO</a>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}
