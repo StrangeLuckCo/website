@@ -9,6 +9,8 @@ export default async function Home() {
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
+  const contenfulAPIURL = `https://cdn.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENFUL_ACCESS_TOKEN}`;
+  console.log(contenfulAPIURL);
   return (
     <>
       {/* Preload the video */}
