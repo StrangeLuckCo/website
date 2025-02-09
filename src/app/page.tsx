@@ -1,16 +1,39 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
+import { getEntities } from "../pages/api/entities";
 
-export default async function Home() {
+export default function Home() {
+  const [imageEntity, setImageEntity] = useState({ URL: "" });
+  const [error, setError] = useState<string | null>(null);
+
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/DRAFT-REEL-SLSTUDIO-20250102_v2.mp4";
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
-  const contenfulAPIURL = `https://cdn.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENFUL_ACCESS_TOKEN}`;
-  console.log(contenfulAPIURL);
+  useEffect(() => {
+    const fetchEntities = async () => {
+      try {
+        const res = await getEntities();
+        console.log("app res: ", res);
+        if (!res) {
+          setError("Entity not found.");
+        } else {
+          setImageEntity(res);
+        }
+      } catch (err) {
+        console.error("Error fetching entities:", err);
+        setError("Failed to fetch entities. Please try again later.");
+      }
+    };
+
+    fetchEntities();
+  }, []);
+
   return (
     <>
       {/* Preload the video */}
@@ -96,30 +119,42 @@ export default async function Home() {
           </div>
         </nav>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <PortfolioThumbnail
-            title={"TITLE"}
-            description={
-              "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-            }
-          />
-          <PortfolioThumbnail
-            title={"TITLE"}
-            description={
-              "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-            }
-          />
-          <PortfolioThumbnail
-            title={"TITLE"}
-            description={
-              "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-            }
-          />
-          <PortfolioThumbnail
-            title={"TITLE"}
-            description={
-              "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-            }
-          />
+          {imageEntity?.URL && (
+            <PortfolioThumbnail
+              title={"TITLE"}
+              description={
+                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+              }
+              imgURL={imageEntity.URL}
+            />
+          )}
+          {imageEntity?.URL && (
+            <PortfolioThumbnail
+              title={"TITLE"}
+              description={
+                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+              }
+              imgURL={imageEntity.URL}
+            />
+          )}
+          {imageEntity?.URL && (
+            <PortfolioThumbnail
+              title={"TITLE"}
+              description={
+                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+              }
+              imgURL={imageEntity.URL}
+            />
+          )}
+          {imageEntity?.URL && (
+            <PortfolioThumbnail
+              title={"TITLE"}
+              description={
+                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+              }
+              imgURL={imageEntity.URL}
+            />
+          )}
         </div>
       </section>
 

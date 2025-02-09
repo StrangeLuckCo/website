@@ -3,15 +3,17 @@ import Image from "next/image";
 const PortfolioThumbnail = ({
   title,
   description,
+  imgURL,
 }: {
   title: string;
   description: string;
+  imgURL: string;
 }) => {
   return (
     <div className="flex flex-col gap-4 max-w-[400px] mb-2">
       <Image
         alt="SL thumbnail"
-        src={"/SL.png"}
+        src={imgURL || "/SL.png"}
         height={300}
         width={300}
         className="w-full max-h-[250px]"
