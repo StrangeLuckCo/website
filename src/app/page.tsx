@@ -103,58 +103,75 @@ export default function Home() {
       {/* Work Section */}
       <section
         id="work"
-        className="min-h-screen flex flex-col bg-gray-800 text-white py-10 px-32 pb-20"
+        className="relative min-h-screen flex flex-col text-white py-10 px-32 pb-20"
       >
-        <h2 className="text-4xl font-bold mb-4">CHOOSE YOUR PATH</h2>
-        <nav className="flex justify-between p-1 mb-6">
-          <div className="flex space-x-6">
-            <a className="hover:text-gray-400">Cinematography</a> <span>|</span>
-            <a className="hover:text-gray-400">Editing</a>
-            <span>|</span>
-            <a className="hover:text-gray-400">Directing</a>
-            <span>|</span>
-            <a className="hover:text-gray-400">Sound Design</a>
-            <span>|</span>
-            <a className="hover:text-gray-400">Art Direction</a>
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/BlueVHS.mp4" type="video/mp4" />
+          <source src="/BlueVHS.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Content Overlay */}
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-4">CHOOSE YOUR PATH</h2>
+          <nav className="flex justify-between p-1 mb-6">
+            <div className="flex space-x-6">
+              <a className="hover:text-gray-400">Cinematography</a>
+              <span>|</span>
+              <a className="hover:text-gray-400">Editing</a>
+              <span>|</span>
+              <a className="hover:text-gray-400">Directing</a>
+              <span>|</span>
+              <a className="hover:text-gray-400">Sound Design</a>
+              <span>|</span>
+              <a className="hover:text-gray-400">Art Direction</a>
+            </div>
+          </nav>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {imageEntity?.URL && (
+              <PortfolioThumbnail
+                title={"TITLE"}
+                description={
+                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+                }
+                imgURL={imageEntity.URL}
+              />
+            )}
+            {imageEntity?.URL && (
+              <PortfolioThumbnail
+                title={"TITLE"}
+                description={
+                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+                }
+                imgURL={imageEntity.URL}
+              />
+            )}
+            {imageEntity?.URL && (
+              <PortfolioThumbnail
+                title={"TITLE"}
+                description={
+                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+                }
+                imgURL={imageEntity.URL}
+              />
+            )}
+            {imageEntity?.URL && (
+              <PortfolioThumbnail
+                title={"TITLE"}
+                description={
+                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
+                }
+                imgURL={imageEntity.URL}
+              />
+            )}
           </div>
-        </nav>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {imageEntity?.URL && (
-            <PortfolioThumbnail
-              title={"TITLE"}
-              description={
-                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-              }
-              imgURL={imageEntity.URL}
-            />
-          )}
-          {imageEntity?.URL && (
-            <PortfolioThumbnail
-              title={"TITLE"}
-              description={
-                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-              }
-              imgURL={imageEntity.URL}
-            />
-          )}
-          {imageEntity?.URL && (
-            <PortfolioThumbnail
-              title={"TITLE"}
-              description={
-                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-              }
-              imgURL={imageEntity.URL}
-            />
-          )}
-          {imageEntity?.URL && (
-            <PortfolioThumbnail
-              title={"TITLE"}
-              description={
-                "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-              }
-              imgURL={imageEntity.URL}
-            />
-          )}
         </div>
       </section>
 
