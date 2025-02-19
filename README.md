@@ -1,3 +1,19 @@
+Notes for Documentation:
+
+Contentful :: metadata
+(Sound Design, etc.)
+— description
+— MarkdownDescription
+— title
+— slug
+— credits
+— S3 file location
+— S3 thumbnail location
+
+S3
+— object file
+— thumbnail file
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

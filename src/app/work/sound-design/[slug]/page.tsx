@@ -7,8 +7,14 @@ import Image from "next/image";
 
 export default function SoundDesign() {
   const { slug } = useParams();
-  const [audioUrl, setAudioUrl] = useState();
-  const [thumbnailUrl, setThumbnailUrl] = useState();
+  // const [audioUrl, setAudioUrl] = useState();
+  const [audioMetadata, setAudioMetadata] = useState({
+    markdownDescription: "",
+    credits: "",
+    thumbnailUrl: "",
+    fileUrl: "",
+  });
+  // const [thumbnailUrl, setThumbnailUrl] = useState();
   const [error, setError] = useState<string | null>(null);
   //const req = "https://cdn.contentful.com/spaces/t86k561yagqf/environments/master/entries?access_token=2Zr43owZxrmzOCYvgwPnlz1kJ7iYH0TlaP1_qsfb4Ic&content_type=soundDesign"
 
@@ -16,17 +22,12 @@ export default function SoundDesign() {
     const fetchAudio = async () => {
       try {
         const res = await getAudioEntityBySlug(slug);
+        console.log("res: ", res);
 
-        if (!res) {
+        if (!res || !res.fields) {
           setError("Audio file not found.");
         } else {
-          const extractedThumbnailUrl =
-            res.fields?.thumbnailUrl?.content?.[0]?.content?.[0]?.value || null;
-          const extractedAudioUrl =
-            res.fields?.fileUrl?.content?.[0]?.content?.[0]?.value || null;
-
-          setThumbnailUrl(extractedThumbnailUrl);
-          setAudioUrl(extractedAudioUrl);
+          setAudioMetadata(res.fields);
         }
       } catch (err) {
         console.error("Error fetching audio file:", err);
@@ -41,9 +42,9 @@ export default function SoundDesign() {
 
   return (
     <div className="flex flex-col min-h-screen w-full items-center justify-center p-10 bg-black text-white">
-      {thumbnailUrl && (
+      {audioMetadata.thumbnailUrl && (
         <Image
-          src={thumbnailUrl}
+          src={audioMetadata.thumbnailUrl}
           alt="Song Thumbnail"
           width={300}
           height={300}
@@ -51,14 +52,18 @@ export default function SoundDesign() {
         />
       )}
 
-      {audioUrl && (
+      {audioMetadata.fileUrl && (
         <audio controls autoPlay className="mt-5">
-          <source src={audioUrl} type="audio/mp3" />
+          <source src={audioMetadata.fileUrl} type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
       )}
 
-      <DescriptionOverlay />
+      <DescriptionOverlay
+        description={audioMetadata.markdownDescription}
+        credits={audioMetadata.credits}
+        image={audioMetadata.thumbnailUrl}
+      />
     </div>
   );
 }
