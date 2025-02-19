@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getAudioEntityBySlug } from "../../../pages/api/audio";
+import { useParams } from "next/navigation";
+import { getAudioEntityBySlug } from "../../../../pages/api/audio";
 import Image from "next/image";
 
 export default function SoundDesign() {
+  const { slug } = useParams();
   const [audioUrl, setAudioUrl] = useState();
   const [thumbnailUrl, setThumbnailUrl] = useState();
   const [error, setError] = useState<string | null>(null);
@@ -12,7 +14,7 @@ export default function SoundDesign() {
   useEffect(() => {
     const fetchAudio = async () => {
       try {
-        const res = await getAudioEntityBySlug();
+        const res = await getAudioEntityBySlug(slug);
         console.log("app res: ", res);
         if (!res) {
           setError("Audio file not found.");
@@ -31,8 +33,10 @@ export default function SoundDesign() {
       }
     };
 
-    fetchAudio();
-  }, []);
+    if (slug) {
+      fetchAudio();
+    }
+  }, [slug]);
 
   return (
     <div className="flex flex-col items-center justify-center p-10 bg-gray-900 text-white">
