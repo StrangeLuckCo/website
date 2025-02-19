@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getAudioEntityBySlug } from "../../../../pages/api/audio";
+import DescriptionOverlay from "../../../components/DescriptionOverlay";
 import Image from "next/image";
 
 export default function SoundDesign() {
@@ -15,7 +16,7 @@ export default function SoundDesign() {
     const fetchAudio = async () => {
       try {
         const res = await getAudioEntityBySlug(slug);
-        console.log("app res: ", res);
+
         if (!res) {
           setError("Audio file not found.");
         } else {
@@ -39,8 +40,7 @@ export default function SoundDesign() {
   }, [slug]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-10 bg-gray-900 text-white">
-      {/* Thumbnail Image */}
+    <div className="flex flex-col min-h-screen w-full items-center justify-center p-10 bg-black text-white">
       {thumbnailUrl && (
         <Image
           src={thumbnailUrl}
@@ -51,13 +51,14 @@ export default function SoundDesign() {
         />
       )}
 
-      {/* Audio Player */}
       {audioUrl && (
         <audio controls autoPlay className="mt-5">
           <source src={audioUrl} type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
       )}
+
+      <DescriptionOverlay />
     </div>
   );
 }
