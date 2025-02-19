@@ -1,12 +1,11 @@
 export default async function handler(req, res) {
-  const contenfulAPIURL = `${process.env.NEXT_PUBLIC_CONTENTFUL_API_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENTFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`;
-
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  // if (req.method !== "GET") {
+  //   return res.status(405).json({ error: "Method not allowed" });
+  // }
 
   try {
-    const response = await fetch(contenfulAPIURL, {
+    const { proxyRequestURL } = req.body;
+    const response = await fetch(proxyRequestURL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

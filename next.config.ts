@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.ctfassets.net",
       },
+      {
+        protocol: "https",
+        hostname: "t2.genius.com",
+      },
     ],
   },
 };

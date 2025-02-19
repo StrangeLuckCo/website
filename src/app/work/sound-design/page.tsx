@@ -1,3 +1,59 @@
+"use client";
+import { useEffect, useState } from "react";
+import { getAudioEntityBySlug } from "../../../pages/api/audio";
+import Image from "next/image";
+
 export default function SoundDesign() {
-  return <>SoundDesign!</>;
+  const [audioUrl, setAudioUrl] = useState();
+  const [thumbnailUrl, setThumbnailUrl] = useState();
+  const [error, setError] = useState<string | null>(null);
+  //const req = "https://cdn.contentful.com/spaces/t86k561yagqf/environments/master/entries?access_token=2Zr43owZxrmzOCYvgwPnlz1kJ7iYH0TlaP1_qsfb4Ic&content_type=soundDesign"
+
+  useEffect(() => {
+    const fetchAudio = async () => {
+      try {
+        const res = await getAudioEntityBySlug();
+        console.log("app res: ", res);
+        if (!res) {
+          setError("Audio file not found.");
+        } else {
+          const extractedThumbnailUrl =
+            res.fields?.thumbnailUrl?.content?.[0]?.content?.[0]?.value || null;
+          const extractedAudioUrl =
+            res.fields?.fileUrl?.content?.[0]?.content?.[0]?.value || null;
+
+          setThumbnailUrl(extractedThumbnailUrl);
+          setAudioUrl(extractedAudioUrl);
+        }
+      } catch (err) {
+        console.error("Error fetching audio file:", err);
+        setError("Failed to fetch audio file. Please try again later.");
+      }
+    };
+
+    fetchAudio();
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center p-10 bg-gray-900 text-white">
+      {/* Thumbnail Image */}
+      {thumbnailUrl && (
+        <Image
+          src={thumbnailUrl}
+          alt="Song Thumbnail"
+          width={300}
+          height={300}
+          className="rounded-lg shadow-lg"
+        />
+      )}
+
+      {/* Audio Player */}
+      {audioUrl && (
+        <audio controls autoPlay className="mt-5">
+          <source src={audioUrl} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
+    </div>
+  );
 }

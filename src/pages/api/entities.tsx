@@ -5,8 +5,15 @@ export const getEntities = async (): Promise<any> => {
     return null;
   }
 
+  const contenfulAPIURL = `${process.env.NEXT_PUBLIC_CONTENTFUL_API_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENTFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`;
   try {
-    const res = await fetch(`/api/proxy`);
+    const res = await fetch(`/api/proxy`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ proxyRequestURL: contenfulAPIURL }),
+    });
 
     if (res.status === 404) {
       console.warn(`Entities not found.`);
