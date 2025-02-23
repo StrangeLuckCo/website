@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getAudioEntityBySlug } from "../../../../pages/api/audio";
 import DescriptionOverlay from "../../../components/DescriptionOverlay";
+import AudioVisualizer from "../../../components/AudioVisualizer";
 import Image from "next/image";
 
 export default function SoundDesign() {
@@ -13,6 +14,7 @@ export default function SoundDesign() {
     credits: "",
     thumbnailUrl: "",
     fileUrl: "",
+    title: "",
   });
   // const [thumbnailUrl, setThumbnailUrl] = useState();
   const [error, setError] = useState<string | null>(null);
@@ -41,8 +43,12 @@ export default function SoundDesign() {
   }, [slug]);
 
   return (
-    <div className="flex flex-col min-h-screen w-full items-center justify-center p-10 bg-black text-white">
-      {audioMetadata.thumbnailUrl && (
+    <div className="flex flex-col min-h-screen w-full items-center gap-10 p-4 bg-black text-white">
+      <h1 className="text-yellow-300 text-6xl">{audioMetadata.title}</h1>
+      {audioMetadata.fileUrl && (
+        <AudioVisualizer audioUrl={audioMetadata.fileUrl} />
+      )}
+      {/* {audioMetadata.thumbnailUrl && (
         <Image
           src={audioMetadata.thumbnailUrl}
           alt="Song Thumbnail"
@@ -50,7 +56,7 @@ export default function SoundDesign() {
           height={300}
           className="rounded-lg shadow-lg"
         />
-      )}
+      )} */}
 
       {audioMetadata.fileUrl && (
         <audio controls autoPlay className="mt-5">
