@@ -2,48 +2,69 @@
 import { useEffect, useRef, useState } from "react";
 
 interface AudioVisualizerProps {
-  audioUrl: string;
+  audioRef: React.RefObject<HTMLAudioElement>;
 }
 
-export default function AudioVisualizer({ audioUrl }: AudioVisualizerProps) {
+export default function AudioVisualizer({ audioRef }: AudioVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null);
-  const [analyzer, setAnalyzer] = useState<AnalyserNode | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const [bufferLength, setBufferLength] = useState<number>(0);
   const [dataArray, setDataArray] = useState<Uint8Array | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
+  // **Ensure AudioContext is created only when audio starts playing**
   useEffect(() => {
-    if (!audioUrl) return;
-    const audio = new Audio(audioUrl);
-    audio.crossOrigin = "anonymous";
-    audioRef.current = audio;
-  }, [audioUrl]);
+    const handleAudioPlay = () => {
+      if (!audioRef.current || audioCtxRef.current) return;
 
+      // ✅ Create AudioContext inside user interaction
+      audioCtxRef.current = new (window.AudioContext ||
+        window.webkitAudioContext)();
+      analyserRef.current = audioCtxRef.current.createAnalyser();
+      analyserRef.current.fftSize = 2048;
+
+      setBufferLength(analyserRef.current.frequencyBinCount);
+      setDataArray(new Uint8Array(analyserRef.current.frequencyBinCount));
+
+      // ✅ Create MediaElementSource **only once**
+      if (!sourceRef.current) {
+        sourceRef.current = audioCtxRef.current.createMediaElementSource(
+          audioRef.current
+        );
+        sourceRef.current.connect(analyserRef.current);
+        analyserRef.current.connect(audioCtxRef.current.destination);
+      }
+    };
+
+    audioRef.current?.addEventListener("play", handleAudioPlay);
+    return () => audioRef.current?.removeEventListener("play", handleAudioPlay);
+  }, [audioRef]);
+
+  // **Waveform Drawing Effect**
   useEffect(() => {
-    if (!analyzer || !canvasRef.current || !isPlaying) return;
+    if (!analyserRef.current || !canvasRef.current || !dataArray) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
-    let scrollOffset = 0;
 
     const drawWaveform = () => {
-      if (!analyzer || !dataArray) return;
-      analyzer.getByteTimeDomainData(dataArray);
+      if (!analyserRef.current || !dataArray) return;
+      analyserRef.current.getByteTimeDomainData(dataArray);
 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.lineWidth = 5; // **Thicker Line**
-      ctx.strokeStyle = "#FFFFFF"; // **Solid White Color**
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "#FFFFFF";
       ctx.beginPath();
 
-      const sliceWidth = (canvas.width / bufferLength) * 5;
-      let x = scrollOffset;
+      const sliceWidth = canvas.width / bufferLength;
+      let x = 0;
 
       for (let i = 0; i < bufferLength; i++) {
         const v = dataArray[i] / 128.0;
@@ -58,51 +79,13 @@ export default function AudioVisualizer({ audioUrl }: AudioVisualizerProps) {
       }
 
       ctx.stroke();
-
-      scrollOffset -= 1;
-      if (scrollOffset < -canvas.width) {
-        scrollOffset = 0;
-      }
-
       animationFrameId = requestAnimationFrame(drawWaveform);
     };
 
     drawWaveform();
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [analyzer, dataArray, isPlaying]);
-
-  const handlePlayPause = () => {
-    if (!audioRef.current) return;
-
-    if (!audioCtx) {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      setAudioCtx(ctx);
-
-      const source = ctx.createMediaElementSource(audioRef.current);
-      const analyser = ctx.createAnalyser();
-
-      analyser.fftSize = 2048;
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-
-      source.connect(analyser);
-      analyser.connect(ctx.destination);
-
-      setAnalyzer(analyser);
-      setBufferLength(bufferLength);
-      setDataArray(dataArray);
-    }
-
-    if (audioRef.current.paused) {
-      audioCtx?.resume(); // ✅ Resume the AudioContext after user gesture
-      audioRef.current.play();
-      setIsPlaying(true);
-    } else {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
+  }, [dataArray, bufferLength]);
 
   return (
     <div className="flex flex-col items-center">
@@ -112,12 +95,6 @@ export default function AudioVisualizer({ audioUrl }: AudioVisualizerProps) {
         height={200}
         className="border border-gray-500 mt-4"
       />
-      <button
-        onClick={handlePlayPause}
-        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
-      >
-        {isPlaying ? "Pause" : "Play"}
-      </button>
     </div>
   );
 }

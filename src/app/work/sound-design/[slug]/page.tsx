@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { getAudioEntityBySlug } from "../../../../pages/api/audio";
 import DescriptionOverlay from "../../../components/DescriptionOverlay";
@@ -8,7 +8,6 @@ import Image from "next/image";
 
 export default function SoundDesign() {
   const { slug } = useParams();
-  // const [audioUrl, setAudioUrl] = useState();
   const [audioMetadata, setAudioMetadata] = useState({
     markdownDescription: "",
     credits: "",
@@ -16,17 +15,15 @@ export default function SoundDesign() {
     fileUrl: "",
     title: "",
   });
-  // const [thumbnailUrl, setThumbnailUrl] = useState();
   const [error, setError] = useState<string | null>(null);
-  //const req = "https://cdn.contentful.com/spaces/t86k561yagqf/environments/master/entries?access_token=2Zr43owZxrmzOCYvgwPnlz1kJ7iYH0TlaP1_qsfb4Ic&content_type=soundDesign"
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     const fetchAudio = async () => {
       try {
         const res = await getAudioEntityBySlug(slug);
-        console.log("res: ", res);
-
-        if (!res || !res.fields) {
+        if (!res || !res.fields || !res.fields.fileUrl) {
           setError("Audio file not found.");
         } else {
           setAudioMetadata(res.fields);
@@ -42,34 +39,76 @@ export default function SoundDesign() {
     }
   }, [slug]);
 
+  useEffect(() => {
+    if (!audioMetadata.fileUrl || !audioRef.current) return;
+    audioRef.current.src = audioMetadata.fileUrl; // ✅ Set the URL for the audio element
+    audioRef.current.crossOrigin = "anonymous"; // ✅ Fix CORS issue
+
+    // ✅ Ensure audio loads before attempting play
+    audioRef.current.addEventListener("canplaythrough", () => {});
+
+    return () => {
+      audioRef.current?.removeEventListener("canplaythrough", () => {});
+    };
+  }, [audioMetadata.fileUrl]);
+
+  // 🔥 Toggle play/pause when clicking on z-index: 0 elements
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (!audioRef.current) return;
+
+      // 🔍 Check if the clicked element has z-index: 0
+      const target = event.target as HTMLElement;
+      const computedStyle = window.getComputedStyle(target);
+      const zIndex = computedStyle.getPropertyValue("z-index");
+      if (parseInt(zIndex, 10) <= 0) {
+        if (!audioCtxRef.current) {
+          // ✅ Create AudioContext inside user interaction
+          audioCtxRef.current = new (window.AudioContext ||
+            window.webkitAudioContext)();
+        }
+
+        if (audioCtxRef.current.state === "suspended") {
+          audioCtxRef.current.resume().then(() => {
+            console.log("AudioContext resumed");
+          });
+        }
+
+        if (audioRef.current.paused) {
+          audioRef.current
+            .play()
+            .catch((err) => console.error("Play failed:", err));
+        } else {
+          console.log("Pausing audio...");
+          audioRef.current.pause();
+        }
+      }
+    };
+
+    document.body.addEventListener("click", handleClick);
+    return () => document.body.removeEventListener("click", handleClick);
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen w-full items-center gap-10 p-4 bg-black text-white">
-      <h1 className="text-yellow-300 text-6xl">{audioMetadata.title}</h1>
-      {audioMetadata.fileUrl && (
-        <AudioVisualizer audioUrl={audioMetadata.fileUrl} />
-      )}
-      {/* {audioMetadata.thumbnailUrl && (
-        <Image
-          src={audioMetadata.thumbnailUrl}
-          alt="Song Thumbnail"
-          width={300}
-          height={300}
-          className="rounded-lg shadow-lg"
-        />
-      )} */}
+    <div className="flex flex-col min-h-screen w-full items-center gap-10 p-4 bg-black text-white relative z-0">
+      <h1 className="text-[#d8f14f] text-6xl z-0">{audioMetadata.title}</h1>
+
+      {audioMetadata.fileUrl && <AudioVisualizer audioRef={audioRef} />}
 
       {audioMetadata.fileUrl && (
-        <audio controls autoPlay className="mt-5">
+        <audio ref={audioRef} className="hidden">
           <source src={audioMetadata.fileUrl} type="audio/mp3" />
-          Your browser does not support the audio element.
         </audio>
       )}
 
-      <DescriptionOverlay
-        description={audioMetadata.markdownDescription}
-        credits={audioMetadata.credits}
-        image={audioMetadata.thumbnailUrl}
-      />
+      <div className="absolute bottom-0 left-0 w-full pointer-events-none">
+        <DescriptionOverlay
+          description={audioMetadata.markdownDescription}
+          credits={audioMetadata.credits}
+          image={audioMetadata.thumbnailUrl}
+          className="z-10 pointer-events-auto"
+        />
+      </div>
     </div>
   );
 }

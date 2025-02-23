@@ -7,10 +7,12 @@ export default function DescriptionOverlay({
   credits,
   image,
   description,
+  className,
 }: {
   credits: string;
   image: string;
   description: string;
+  className?: string;
 }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -18,7 +20,7 @@ export default function DescriptionOverlay({
     "This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work.";
   return (
     <div
-      className={`fixed bottom-0 left-0 w-full z-10 ${
+      className={`${className} fixed bottom-0 left-0 w-full z-10 ${
         expanded ? "h-[40vh]" : "h-[15vh]"
       } bg-transparent transition-all duration-300 ease-in-out flex flex-col items-start px-6 py-4 cursor-pointer`}
       onClick={() => setExpanded(!expanded)}
