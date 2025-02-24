@@ -49,7 +49,7 @@ export default function Home() {
       </Head>
 
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full text-black flex justify-between items-center pt-4 px-20 z-20">
+      <nav className="fixed top-0 left-0 w-full text-white flex justify-between items-center pt-4 px-20 z-20">
         <div className="flex space-x-12 text-2xl bold">
           <a href="#about" className="hover:text-gray-400">
             About
@@ -261,7 +261,7 @@ export default function Home() {
               landscapes of the Mississippi Delta. With a background as a
               producer at Refinery29 working in New York City and Los Angeles,
               Jacki has pioneered groundbreaking feminist and body-positive
-              video content that continues to shape the media industry's
+              video content that continues to shape the media industry&#39;s
               aesthetic. Jacki has worked as a producer, editor, and composer
               for a variety of podcasts including The City of the Rails, Under
               the Influence with Jo Piazza and Really Good Shares. These days,
@@ -332,16 +332,17 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex flex-col bg-gray-500 text-white p-10 gap-10"
+        className="min-h-screen flex flex-col justify-center w-full bg-gray-500 text-white p-10 gap-10"
       >
         <h2 className="flex justify-center text-5xl font-bold">
           LET&#39;S TALK
         </h2>
-        <div className="flex items-center">
-          <div>IMAGE</div>
-          <div className="flex flex-col gap-4 items-center mx-auto p-6 text-white">
-            <form className="space-y-4 w-[450px]">
-              <div>
+        <div className="flex items-center w-full justify-evenly">
+          <div className="flex-1 flex justify-center">IMAGE</div>
+
+          <div className="flex-1 flex flex-col max-w-[600px] w-full items-center p-6 text-white">
+            <form className="space-y-4 mb-10 w-full flex flex-col items-center">
+              <div className="w-full">
                 <label
                   className="text-sm font-medium mb-1 hidden"
                   htmlFor="fullName"
@@ -357,7 +358,7 @@ export default function Home() {
                 />
               </div>
 
-              <div>
+              <div className="w-full">
                 <label
                   className="text-sm font-medium mb-1 hidden"
                   htmlFor="email"
@@ -373,7 +374,7 @@ export default function Home() {
                 />
               </div>
 
-              <div>
+              <div className="w-full">
                 <label
                   className="text-sm font-medium mb-1 hidden"
                   htmlFor="description"
@@ -388,10 +389,9 @@ export default function Home() {
                 />
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md"
+                className="w-40 h-16 bg-gray-700 hover:bg-gray-600 text-2xl text-gray-200 py-2 px-4 rounded-lg shadow-md"
               >
                 SEND
               </button>
@@ -399,7 +399,7 @@ export default function Home() {
             <p>hi@strangeluck.com</p>
           </div>
 
-          <div className="flex flex-col items-center gap-10 text-2xl">
+          <div className="flex-1 flex flex-col items-center gap-10 text-2xl">
             <a>INSTAGRAM</a>
             <a>VIMEO</a>
           </div>
@@ -408,7 +408,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-black text-white text-center py-4">
-        <div className="space-x-4 flex justify-center">
+        <div className="space-x-20 flex justify-center items-center h-16">
           <p>© 2025 STRANGE LUCK. All rights reserved.</p>
           <a href="#" className="hover:text-gray-400">
             Privacy Policy
