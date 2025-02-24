@@ -10,7 +10,7 @@ const PortfolioThumbnail = ({
   imgURL: string;
 }) => {
   return (
-    <div className="flex flex-col gap-4 max-w-[400px] mb-2">
+    <div className="flex flex-col gap-4  mb-2">
       <Image
         alt="SL thumbnail"
         src={imgURL || "/SL.png"}

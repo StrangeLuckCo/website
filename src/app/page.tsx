@@ -5,6 +5,11 @@ import Head from "next/head";
 import Image from "next/image";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import { getEntities } from "../pages/api/entities";
+import {
+  JEN_HEADSHOT,
+  JACKI_HEADSHOT,
+  JESS_HEADSHOT,
+} from "./utility/constants";
 
 export default function Home() {
   const [imageEntity, setImageEntity] = useState<{ URL: string } | null>(null);
@@ -12,7 +17,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const videoUrl =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/DRAFT-REEL-SLSTUDIO-20250102_v2.mp4";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/DRAFT-REEL-SLSTUDIO-20250130_JLH.mp4";
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
@@ -44,8 +49,8 @@ export default function Home() {
       </Head>
 
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-70 text-white flex justify-between items-center p-4 z-20">
-        <div className="flex space-x-6">
+      <nav className="fixed top-0 left-0 w-full text-black flex justify-between items-center pt-4 px-20 z-20">
+        <div className="flex space-x-12 text-2xl bold">
           <a href="#about" className="hover:text-gray-400">
             About
           </a>
@@ -58,7 +63,7 @@ export default function Home() {
         </div>
         <a
           href="#contact"
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+          className="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded"
         >
           Contact
         </a>
@@ -141,7 +146,7 @@ export default function Home() {
         <div className="relative z-10">
           <h2 className="text-4xl font-bold mb-4">CHOOSE YOUR PATH</h2>
           <nav className="flex justify-between p-1 mb-6">
-            <div className="flex space-x-6">
+            <div className="flex space-x-6 text-xl">
               <a className="hover:text-gray-400">Cinematography</a>
               <span>|</span>
               <a className="hover:text-gray-400">Editing</a>
@@ -153,7 +158,7 @@ export default function Home() {
               <a className="hover:text-gray-400">Art Direction</a>
             </div>
           </nav>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-5">
             {imageEntity?.URL && (
               <PortfolioThumbnail
                 title={"TITLE"}
@@ -243,10 +248,10 @@ export default function Home() {
               Jacki <br /> Huntington
             </h3>
             <Image
-              src="/SL.png"
+              src={JACKI_HEADSHOT}
               width={200}
               height={350}
-              alt="Jackie Huntington"
+              alt="Jacki Huntington"
             />
             <h4>CO-FOUNDER</h4>
             <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
@@ -273,7 +278,7 @@ export default function Home() {
                 OBERT
               </h3>
               <Image
-                src="/SL.png"
+                src={JESS_HEADSHOT}
                 width={200}
                 height={350}
                 alt="Jess DiPierro Obert"
@@ -301,7 +306,7 @@ export default function Home() {
               <h3 className="text-4xl">
                 JEN <br /> NG
               </h3>
-              <Image src="/SL.png" width={200} height={350} alt="Jen Ng" />
+              <Image src={JEN_HEADSHOT} width={200} height={350} alt="Jen Ng" />
               <h4>CO-FOUNDER</h4>
               <p>
                 ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
