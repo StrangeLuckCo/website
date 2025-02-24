@@ -7,7 +7,8 @@ import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import { getEntities } from "../pages/api/entities";
 
 export default function Home() {
-  const [imageEntity, setImageEntity] = useState({ URL: "" });
+  const [imageEntity, setImageEntity] = useState<{ URL: string } | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const videoUrl =
@@ -19,7 +20,6 @@ export default function Home() {
     const fetchEntities = async () => {
       try {
         const res = await getEntities();
-        console.log("app res: ", res);
         if (!res) {
           setError("Entity not found.");
         } else {
@@ -28,6 +28,8 @@ export default function Home() {
       } catch (err) {
         console.error("Error fetching entities:", err);
         setError("Failed to fetch entities. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -75,14 +77,31 @@ export default function Home() {
         />
 
         {/* Content Overlay */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center text-white">
-          <Image
-            alt="demo"
-            src={logoUrl}
-            height={300}
-            width={500}
-            className="max-w-[500px] drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+        <div className="relative h-screen overflow-hidden">
+          {/* Background Video */}
+          <video
+            src={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover z-[-1]"
           />
+
+          {/* ✅ Only render logo when `loading` is false to prevent SSR/CSR mismatch */}
+          {!loading && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center text-white">
+              <Image
+                alt="demo"
+                priority
+                src={logoUrl}
+                height={300}
+                width={500}
+                style={{ width: "auto", height: "auto" }} // ✅ Fix aspect ratio warning
+                className="drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+              />
+            </div>
+          )}
         </div>
       </div>
 
