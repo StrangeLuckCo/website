@@ -126,7 +126,7 @@ export default function Home() {
       {/* Work Section */}
       <section
         id="work"
-        className="relative min-h-screen flex flex-col text-white py-10 px-32 pb-20"
+        className="relative flex flex-col text-white py-10 px-10 sm:px-32 pb-20"
       >
         {/* Video Background */}
         <video
@@ -143,9 +143,11 @@ export default function Home() {
 
         {/* Content Overlay */}
         <div className="relative z-10">
-          <h2 className="text-4xl font-bold mb-4">CHOOSE YOUR PATH</h2>
-          <nav className="flex justify-between p-1 mb-6">
-            <div className="flex space-x-6 text-xl">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-4">
+            CHOOSE YOUR PATH
+          </h2>
+          <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
+            <div className="flex flex-wrap gap-2 sm:gap-6 text-md sm:text-xl">
               <a className="hover:text-gray-400">Cinematography</a>
               <span>|</span>
               <a className="hover:text-gray-400">Editing</a>
