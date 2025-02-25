@@ -204,7 +204,7 @@ export default function Home() {
         className="min-h-screen flex flex-col p-20 gap-10 bg-gray-700 text-white"
       >
         <h2 className="text-6xl font-bold">Services</h2>
-        <div className="flex gap-40 text-xl">
+        <div className="flex flex-col sm:flex-row gap-40 text-xl">
           <div>
             <h3 className="text-3xl underline mb-5">Consulting</h3>
             <ul>
@@ -241,20 +241,21 @@ export default function Home() {
         id="staff"
         className="min-h-screen flex items-center justify-center bg-gray-600 text-white p-10"
       >
-        <div className="flex gap-10">
-          <div className="flex flex-col gap-3">
-            <h3 className="text-4xl mb-4">
+        <div className="flex flex-col sm:flex-row gap-10">
+          <div className="flex flex-col items-center sm:items-start gap-3">
+            <h3 className="hidden sm:block text-4xl mb-4">
               Jacki <br /> Huntington
             </h3>
+            <h3 className="sm:hidden text-2xl mb-4">Jacki Huntington</h3>
             <Image
               src={JACKI_HEADSHOT}
               width={200}
               height={350}
               alt="Jacki Huntington"
             />
-            <h4>CO-FOUNDER</h4>
+            <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
             <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
-            <p>
+            <p className="text-xs sm:text-base">
               Storytelling work has taken Jacki across continents and cultures,
               from the bustling streets of Port-au-Prince, Haiti, to the serene
               landscapes of the Mississippi Delta. With a background as a
@@ -270,21 +271,22 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <div className="flex flex-col gap-3">
-              <h3 className="text-4xl mb-4">
+            <div className="flex flex-col items-center sm:items-start gap-3">
+              <h3 className="hidden sm:block text-4xl mb-4">
                 JESS DIPIERRO
                 <br />
                 OBERT
               </h3>
+              <h3 className="sm:hidden text-2xl mb-4">JESS DIPIERRO OBERT</h3>
               <Image
                 src={JESS_HEADSHOT}
                 width={200}
                 height={350}
                 alt="Jess DiPierro Obert"
               />
-              <h4>CO-FOUNDER</h4>
+              <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
               <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR</p>
-              <p>
+              <p className="text-xs sm:text-base">
                 Jess is an award-winning investigative visual journalist,
                 producer and filmmaker. She is focused on solution-based
                 storytelling, and has worked globally in countries like Haiti
@@ -301,16 +303,17 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-3">
-              <h3 className="text-4xl">
+            <div className="flex flex-col items-center sm:items-start gap-3">
+              <h3 className="hidden sm:block text-4xl">
                 JEN <br /> NG
               </h3>
+              <h3 className="sm:hidden text-2xl">JEN NG</h3>
               <Image src={JEN_HEADSHOT} width={200} height={350} alt="Jen Ng" />
-              <h4>CO-FOUNDER</h4>
+              <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
               <p>
                 ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
               </p>
-              <p>
+              <p className="text-xs sm:text-base">
                 Jen’s world is a playground for human connection. Her lifelong
                 interest in art, media, and psychology has led her to work as an
                 art director, brand strategist, and experience designer for

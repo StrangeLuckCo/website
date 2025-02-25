@@ -19,7 +19,7 @@ const PortfolioThumbnail = ({
         className="w-full max-h-[250px]"
       />
       <h3 className="text-2xl">{title}</h3>
-      <p>{description}</p>
+      <p className="hidden sm:block">{description}</p>
     </div>
   );
 };
