@@ -21,8 +21,15 @@
   font-style: normal;
 }
 
+html,
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: "VCR OSD Mono", monospace;
+
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  min-height: 100vh;
 }

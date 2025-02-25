@@ -45,11 +45,11 @@ export default function Home() {
     <>
       {/* Preload the video */}
       <Head>
-        <link rel="preload" as="video" href={videoUrl} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full text-white flex justify-between items-center pt-4 px-20 z-20">
+      <nav className="hidden sm:flex fixed top-0 left-0 w-full text-white justify-between items-center pt-4 px-20 z-20">
         <div className="flex space-x-12 text-2xl bold">
           <a href="#about" className="hover:text-gray-400">
             About
@@ -70,29 +70,28 @@ export default function Home() {
       </nav>
 
       {/* Wrapper for full-screen video */}
-      <div className="relative h-screen overflow-hidden">
-        {/* Background Video */}
+      <div className="relative h-[80%] sm:h-screen overflow-hidden">
         <video
           src={videoUrl}
           autoPlay
           loop
           muted
           playsInline
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover z-[-1]"
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full sm:min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
         />
 
-        {/* Content Overlay */}
-        <div className="relative h-screen overflow-hidden">
-          {/* Background Video */}
-          <video
-            src={videoUrl}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover z-[-1]"
-          />
+        <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-black z-10 transform -translate-x-1/2">
+          <p>
+            Strange Luck helps your audience fall in love with the world — its
+            sounds, its stories, its textures, its contradictions, its
+            juxtapositions, its surprises. We approach our work through a
+            documentary lens, crafting stories through art, design, and
+            cinematic storytelling.
+          </p>
+        </div>
 
+        {/* Content Overlay */}
+        <div className="relative h-[700px] sm:h-screen overflow-hidden">
           {/* ✅ Only render logo when `loading` is false to prevent SSR/CSR mismatch */}
           {!loading && (
             <div className="absolute inset-0 z-10 flex items-center justify-center text-white">
@@ -103,7 +102,7 @@ export default function Home() {
                 height={300}
                 width={500}
                 style={{ width: "auto", height: "auto" }} // ✅ Fix aspect ratio warning
-                className="drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+                className="hidden sm:block drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
               />
             </div>
           )}
@@ -113,7 +112,7 @@ export default function Home() {
       {/* About Section */}
       <section
         id="about"
-        className="min-h-24 text-xl flex items-center justify-center bg-gray-900 text-white p-60"
+        className="hidden sm:flex min-h-24 text-xl items-center justify-center bg-gray-900 text-white p-60"
       >
         <p>
           Strange Luck helps your audience fall in love with the world — its
