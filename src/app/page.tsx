@@ -147,7 +147,7 @@ export default function Home() {
             CHOOSE YOUR PATH
           </h2>
           <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
-            <div className="flex flex-wrap gap-2 sm:gap-6 text-md sm:text-xl">
+            <div className="flex flex-wrap gap-3 gap-y-0 leading-none sm:gap-6 text-md sm:text-xl">
               <a className="hover:text-gray-400">Cinematography</a>
               <span>|</span>
               <a className="hover:text-gray-400">Editing</a>
@@ -200,24 +200,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section
         id="services"
-        className="min-h-screen flex flex-col p-20 gap-10 bg-gray-700 text-white"
+        className="sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 bg-gray-700 text-white"
       >
-        <h2 className="text-6xl font-bold">Services</h2>
-        <div className="flex flex-col sm:flex-row gap-40 text-xl">
+        <h2 className="text-3xl self-center sm:text-6xl font-bold">Services</h2>
+        <div className="flex flex-col sm:flex-row gap-10 sm:gap-40 text-xl">
           <div>
-            <h3 className="text-3xl underline mb-5">Consulting</h3>
-            <ul>
+            <h3 className="text-2xl mb-5">Consulting</h3>
+            <ul className="text-sm sm:text-base">
               <li>Brand Strategy</li>
               <li>Creative Development and Direction</li>
               <li>Research and Insight</li>
             </ul>
           </div>
           <div>
-            <h3 className="text-3xl underline mb-5">Production</h3>
-            <ul>
+            <h3 className="text-2xl mb-5">Production</h3>
+            <ul className="text-sm sm:text-base">
               <li>Audio Podcast</li>
               <li>Production</li>
               <li>Brand Identity and Graphic Design</li>
@@ -228,8 +227,8 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <h3 className="text-3xl underline mb-5">Experiences</h3>
-            <ul>
+            <h3 className="text-2xl mb-5">Experiences</h3>
+            <ul className="text-sm sm:text-base">
               <li>Curation and Exhibition</li>
               <li>Immersive Media</li>
               <li>Social and Cultural Campaigns</li>
@@ -248,14 +247,16 @@ export default function Home() {
             <h3 className="hidden sm:block text-4xl mb-4">
               Jacki <br /> Huntington
             </h3>
-            <h3 className="sm:hidden text-2xl mb-4">Jacki Huntington</h3>
+            <h3 className="sm:hidden text-3xl mb-4">Jacki Huntington</h3>
             <Image
               src={JACKI_HEADSHOT}
               width={200}
               height={350}
               alt="Jacki Huntington"
             />
-            <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
+            <h4 className="self-start text-2xl sm:text-base sm:self-auto">
+              CO-FOUNDER
+            </h4>
             <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
             <p className="text-xs sm:text-base">
               Storytelling work has taken Jacki across continents and cultures,
@@ -279,14 +280,18 @@ export default function Home() {
                 <br />
                 OBERT
               </h3>
-              <h3 className="sm:hidden text-2xl mb-4">JESS DIPIERRO OBERT</h3>
+              <h3 className="sm:hidden text-2xl text-[28px] mb-4">
+                JESS DIPIERRO OBERT
+              </h3>
               <Image
                 src={JESS_HEADSHOT}
                 width={200}
                 height={350}
                 alt="Jess DiPierro Obert"
               />
-              <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
+              <h4 className="self-start text-2xl sm:text-base sm:self-auto">
+                CO-FOUNDER
+              </h4>
               <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR</p>
               <p className="text-xs sm:text-base">
                 Jess is an award-winning investigative visual journalist,
@@ -309,9 +314,11 @@ export default function Home() {
               <h3 className="hidden sm:block text-4xl">
                 JEN <br /> NG
               </h3>
-              <h3 className="sm:hidden text-2xl">JEN NG</h3>
+              <h3 className="sm:hidden text-3xl">JEN NG</h3>
               <Image src={JEN_HEADSHOT} width={200} height={350} alt="Jen Ng" />
-              <h4 className="self-start sm:self-auto">CO-FOUNDER</h4>
+              <h4 className="self-start text-2xl sm:text-base sm:self-auto">
+                CO-FOUNDER
+              </h4>
               <p>
                 ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
               </p>
@@ -336,15 +343,15 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex flex-col justify-center w-full bg-gray-500 text-white p-10 gap-10"
+        className="sm:min-h-screen flex flex-col justify-center w-full bg-gray-500 text-white p-4 py-20 sm:p-10 gap-10"
       >
-        <h2 className="flex justify-center text-5xl font-bold">
+        <h2 className="flex justify-center text-3xl sm:text-5xl font-bold">
           LET&#39;S TALK
         </h2>
-        <div className="flex items-center w-full justify-evenly">
-          <div className="flex-1 flex justify-center">IMAGE</div>
+        <div className="flex flex-col sm:flex-row items-center w-full justify-evenly gap-12 sm:gap-auto">
+          <div className="hidden sm:flex flex-1 justify-center">IMAGE</div>
 
-          <div className="flex-1 flex flex-col max-w-[600px] w-full items-center p-6 text-white">
+          <div className="flex-1 flex flex-col max-w-[600px] w-full items-center px-6 text-white gap-12 sm:gap-auto">
             <form className="space-y-4 mb-10 w-full flex flex-col items-center">
               <div className="w-full">
                 <label
@@ -403,7 +410,7 @@ export default function Home() {
             <p>hi@strangeluck.com</p>
           </div>
 
-          <div className="flex-1 flex flex-col items-center gap-10 text-2xl">
+          <div className="flex-1 flex flex-col items-center gap-12 sm:gap-10 text-2xl">
             <a>INSTAGRAM</a>
             <a>VIMEO</a>
           </div>
@@ -411,7 +418,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white text-center py-4">
+      <footer className="hidden sm:block bg-black text-white text-center py-4">
         <div className="space-x-20 flex justify-center items-center h-16">
           <p>© 2025 STRANGE LUCK. All rights reserved.</p>
           <a href="#" className="hover:text-gray-400">

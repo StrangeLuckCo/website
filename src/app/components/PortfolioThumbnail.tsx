@@ -16,7 +16,7 @@ const PortfolioThumbnail = ({
         src={imgURL || "/SL.png"}
         height={300}
         width={300}
-        className="w-full max-h-[250px]"
+        className="w-full max-h-[180px] sm:max-h-[250px]"
       />
       <h3 className="text-2xl">{title}</h3>
       <p className="hidden sm:block">{description}</p>
