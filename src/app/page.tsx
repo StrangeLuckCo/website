@@ -11,9 +11,38 @@ import {
   JESS_HEADSHOT,
 } from "./utility/constants";
 
+// ✅ Define TypeScript interfaces
+interface Tag {
+  sys: {
+    id: string;
+  };
+}
+
+interface Project {
+  fields: {
+    title: string;
+    description: string;
+    thumbnailUrl: string;
+    slug: string;
+  };
+  metadata?: {
+    tags?: Tag[];
+  };
+}
+
+const CATEGORY_TO_TAG: Record<string, string> = {
+  Cinematography: "cinematography",
+  Editing: "editing",
+  Directing: "directing",
+  "Sound Design": "soundDesign",
+  "Art Direction": "artDirection",
+};
+
 export default function Home() {
-  const [imageEntity, setImageEntity] = useState<{ URL: string } | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Record<string, Project[]>>({});
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [filteredItems, setFilteredItems] = useState<Project[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const videoUrl =
@@ -21,15 +50,37 @@ export default function Home() {
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
+  // ✅ Group projects by tags (limit to 4 per tag)
+  const groupByTags = (items: Project[]): Record<string, Project[]> => {
+    return items.reduce((acc: Record<string, Project[]>, item: Project) => {
+      const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
+
+      tags.forEach((tag) => {
+        if (!acc[tag]) acc[tag] = [];
+        if (acc[tag].length < 4) acc[tag].push(item); // Keep only latest 4 per tag
+      });
+
+      return acc;
+    }, {});
+  };
+
   useEffect(() => {
     const fetchEntities = async () => {
       try {
-        const res = await getEntities();
+        const res: Project[] = await getEntities();
         if (!res) {
           setError("Entity not found.");
-        } else {
-          setImageEntity(res);
+          return;
         }
+        console.log("Fetched projects:", res);
+
+        const groupedProjects = groupByTags(res);
+        setProjects(groupedProjects);
+
+        // ✅ Set default tag to first available tag
+        const firstTag = Object.keys(groupedProjects)[0] || null;
+        setSelectedTag(firstTag);
+        setFilteredItems(groupedProjects[firstTag] || []);
       } catch (err) {
         console.error("Error fetching entities:", err);
         setError("Failed to fetch entities. Please try again later.");
@@ -40,6 +91,12 @@ export default function Home() {
 
     fetchEntities();
   }, []);
+
+  const handleTagClick = (category: string) => {
+    const tag = CATEGORY_TO_TAG[category];
+    setSelectedTag(tag);
+    setFilteredItems(projects[tag] || []);
+  };
 
   return (
     <>
@@ -80,6 +137,7 @@ export default function Home() {
           className="absolute top-1/2 left-1/2 min-w-full min-h-full sm:min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
         />
 
+        {/* Mobile Content */}
         <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-black z-10 transform -translate-x-1/2">
           <p>
             Strange Luck helps your audience fall in love with the world — its
@@ -92,7 +150,6 @@ export default function Home() {
 
         {/* Content Overlay */}
         <div className="relative h-[700px] sm:h-screen overflow-hidden">
-          {/* ✅ Only render logo when `loading` is false to prevent SSR/CSR mismatch */}
           {!loading && (
             <div className="absolute inset-0 z-10 flex items-center justify-center text-white">
               <Image
@@ -101,7 +158,7 @@ export default function Home() {
                 src={logoUrl}
                 height={300}
                 width={500}
-                style={{ width: "auto", height: "auto" }} // ✅ Fix aspect ratio warning
+                style={{ width: "auto", height: "auto" }}
                 className="hidden sm:block drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
               />
             </div>
@@ -146,56 +203,39 @@ export default function Home() {
           <h2 className="text-2xl sm:text-4xl font-bold mb-4">
             CHOOSE YOUR PATH
           </h2>
+
+          {/* Filter Navigation */}
           <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
             <div className="flex flex-wrap gap-3 gap-y-0 leading-none sm:gap-6 text-md sm:text-xl">
-              <a className="hover:text-gray-400">Cinematography</a>
-              <span>|</span>
-              <a className="hover:text-gray-400">Editing</a>
-              <span>|</span>
-              <a className="hover:text-gray-400">Directing</a>
-              <span>|</span>
-              <a className="hover:text-gray-400">Sound Design</a>
-              <span>|</span>
-              <a className="hover:text-gray-400">Art Direction</a>
+              {Object.keys(CATEGORY_TO_TAG).map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleTagClick(category)}
+                  className={`hover:text-gray-400 ${
+                    selectedTag === CATEGORY_TO_TAG[category]
+                      ? "font-bold underline"
+                      : ""
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </nav>
+
+          {/* Render Filtered Projects */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-5">
-            {imageEntity?.URL && (
-              <PortfolioThumbnail
-                title={"TITLE"}
-                description={
-                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-                }
-                imgURL={imageEntity.URL}
-              />
-            )}
-            {imageEntity?.URL && (
-              <PortfolioThumbnail
-                title={"TITLE"}
-                description={
-                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-                }
-                imgURL={imageEntity.URL}
-              />
-            )}
-            {imageEntity?.URL && (
-              <PortfolioThumbnail
-                title={"TITLE"}
-                description={
-                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-                }
-                imgURL={imageEntity.URL}
-              />
-            )}
-            {imageEntity?.URL && (
-              <PortfolioThumbnail
-                title={"TITLE"}
-                description={
-                  "Lena migrated with her family to Boston from Sudan, where she was born. She has since found her voice and a supportive community that allows her to be who she is in the summer camp programs put on by Crossroads. This series highlights young leaders on track for the C5 program at Crossroads Development."
-                }
-                imgURL={imageEntity.URL}
-              />
-            )}
+            {filteredItems.map((entity) => {
+              const asset = entity.fields;
+              return (
+                <PortfolioThumbnail
+                  key={asset.slug}
+                  title={asset.title}
+                  description={asset.description}
+                  imgURL={asset.thumbnailUrl}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

@@ -5,7 +5,7 @@ export const getEntities = async (): Promise<any> => {
     return null;
   }
 
-  const contenfulAPIURL = `${process.env.NEXT_PUBLIC_CONTENTFUL_API_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENTFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`;
+  const contenfulAPIURL = `${process.env.NEXT_PUBLIC_CONTENTFUL_API_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENTFUL_ENV}/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}&order=-sys.createdAt&limit=100`;
   try {
     const res = await fetch(`/api/proxy`, {
       method: "POST",
@@ -27,16 +27,13 @@ export const getEntities = async (): Promise<any> => {
     const data = await res.json();
 
     // Parse the first asset and return the required structure
-    const firstAsset = data?.includes?.Asset?.[0];
-    if (!firstAsset) {
+    // const firstAsset = data?.includes?.Asset?.[0];
+    if (!data || !data.items) {
       console.warn("No assets found in the response.");
       return null;
     }
 
-    return {
-      fields: firstAsset.fields,
-      URL: `https:${firstAsset.fields?.file?.url}` || "",
-    };
+    return data.items;
   } catch (error) {
     console.error("Something went wrong fetching entities:", error);
     return null;
