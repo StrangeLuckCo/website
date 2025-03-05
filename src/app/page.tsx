@@ -169,15 +169,28 @@ export default function Home() {
       {/* About Section */}
       <section
         id="about"
-        className="hidden sm:flex min-h-24 text-xl items-center justify-center bg-gray-900 text-white p-60"
+        className="hidden sm:flex min-h-24 text-xl items-center justify-center relative overflow-hidden"
       >
-        <p>
-          Strange Luck helps your audience fall in love with the world — its
-          sounds, its stories, its textures, its contradictions, its
-          juxtapositions, its surprises. We approach our work through a
-          documentary lens, crafting stories through art, design, and cinematic
-          storytelling.
-        </p>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/VHSEdit.mp4" type="video/mp4" />
+          <source src="/VHSEdit.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="relative z-10 p-60">
+          <p>
+            Strange Luck helps your audience fall in love with the world — its
+            sounds, its stories, its textures, its contradictions, its
+            juxtapositions, its surprises. We approach our work through a
+            documentary lens, crafting stories through art, design, and
+            cinematic storytelling.
+          </p>
+        </div>
       </section>
 
       {/* Work Section */}
@@ -233,6 +246,8 @@ export default function Home() {
                   title={asset.title}
                   description={asset.description}
                   imgURL={asset.thumbnailUrl}
+                  slug={asset.slug}
+                  tag={selectedTag}
                 />
               );
             })}
