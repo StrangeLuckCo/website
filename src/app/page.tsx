@@ -11,7 +11,6 @@ import {
   JESS_HEADSHOT,
 } from "./utility/constants";
 
-// ✅ Define TypeScript interfaces
 interface Tag {
   sys: {
     id: string;
@@ -46,7 +45,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const videoUrl =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/DRAFT-REEL-SLSTUDIO-20250130_JLH.mp4";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
