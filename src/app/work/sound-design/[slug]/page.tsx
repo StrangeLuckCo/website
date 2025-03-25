@@ -4,10 +4,14 @@ import { useParams } from "next/navigation";
 import { getAudioEntityBySlug } from "../../../../pages/api/audio";
 import DescriptionOverlay from "../../../components/DescriptionOverlay";
 import AudioVisualizer from "../../../components/AudioVisualizer";
-import Image from "next/image";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 export default function SoundDesign() {
-  const { slug } = useParams();
+  const params = useParams();
+  const slug = params?.slug as string;
+
   const [audioMetadata, setAudioMetadata] = useState({
     markdownDescription: "",
     credits: "",
@@ -16,7 +20,7 @@ export default function SoundDesign() {
     title: "",
   });
   const [error, setError] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
@@ -48,6 +52,7 @@ export default function SoundDesign() {
     audioRef.current.addEventListener("canplaythrough", () => {});
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       audioRef.current?.removeEventListener("canplaythrough", () => {});
     };
   }, [audioMetadata.fileUrl]);
@@ -65,7 +70,7 @@ export default function SoundDesign() {
         if (!audioCtxRef.current) {
           // ✅ Create AudioContext inside user interaction
           audioCtxRef.current = new (window.AudioContext ||
-            window.webkitAudioContext)();
+            (window as any).webkitAudioContext)();
         }
 
         if (audioCtxRef.current.state === "suspended") {

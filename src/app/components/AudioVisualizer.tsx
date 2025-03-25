@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 interface AudioVisualizerProps {
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
 export default function AudioVisualizer({ audioRef }: AudioVisualizerProps) {
@@ -20,7 +20,8 @@ export default function AudioVisualizer({ audioRef }: AudioVisualizerProps) {
 
       // ✅ Create AudioContext inside user interaction
       audioCtxRef.current = new (window.AudioContext ||
-        window.webkitAudioContext)();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (window as any).webkitAudioContext)();
       analyserRef.current = audioCtxRef.current.createAnalyser();
       analyserRef.current.fftSize = 2048;
 
@@ -38,6 +39,7 @@ export default function AudioVisualizer({ audioRef }: AudioVisualizerProps) {
     };
 
     audioRef.current?.addEventListener("play", handleAudioPlay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => audioRef.current?.removeEventListener("play", handleAudioPlay);
   }, [audioRef]);
 

@@ -6,13 +6,11 @@ const PortfolioThumbnail = ({
   description,
   imgURL,
   slug,
-  tag,
 }: {
   title: string;
   description: string;
   imgURL: string;
   slug: string;
-  tag: string;
 }) => {
   return (
     <Link href={`/work/sound-design/${slug}`}>

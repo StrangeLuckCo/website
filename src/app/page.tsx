@@ -50,6 +50,7 @@ export default function Home() {
   const logoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/VHS+TEXT-StrangeLuck-Transparent-9-glow.png";
 
+  console.log(error);
   // ✅ Group projects by tags (limit to 4 per tag)
   const groupByTags = (items: Project[]): Record<string, Project[]> => {
     return items.reduce((acc: Record<string, Project[]>, item: Project) => {
@@ -78,7 +79,7 @@ export default function Home() {
         setProjects(groupedProjects);
 
         // ✅ Set default tag to first available tag
-        const firstTag = Object.keys(groupedProjects)[0] || null;
+        const firstTag = Object.keys(groupedProjects)[0];
         setSelectedTag(firstTag);
         setFilteredItems(groupedProjects[firstTag] || []);
       } catch (err) {
@@ -247,7 +248,6 @@ export default function Home() {
                   description={asset.description}
                   imgURL={asset.thumbnailUrl}
                   slug={asset.slug}
-                  tag={selectedTag}
                 />
               );
             })}

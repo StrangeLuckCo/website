@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const getEntities = async (): Promise<any> => {
   const url = process.env.NEXT_PUBLIC_CONTENTFUL_API_URL;
   if (!url) {
