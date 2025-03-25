@@ -15,17 +15,18 @@
 }
 
 @font-face {
-  font-family: "VCR OSD Mono";
-  src: url("/fonts/VCR_OSD_MONO.ttf") format("truetype");
+  font-family: "VT323";
+  src: url("/fonts/VT323-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 html,
 body {
+  overscroll-behavior: none;
   color: var(--foreground);
   background: var(--background);
-  font-family: "VCR OSD Mono", monospace;
+  font-family: "VT323", monospace;
 
   width: 100vw;
   max-width: 100vw;
