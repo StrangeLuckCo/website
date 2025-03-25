@@ -2,15 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
+import StaffSection from "./components/StaffSection";
 import { getEntities } from "../pages/api/entities";
-import {
-  JEN_HEADSHOT,
-  JACKI_HEADSHOT,
-  JESS_HEADSHOT,
-} from "./utility/constants";
 
 interface Tag {
   sys: {
@@ -42,7 +37,7 @@ export default function Home() {
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const videoUrl =
@@ -85,8 +80,6 @@ export default function Home() {
       } catch (err) {
         console.error("Error fetching entities:", err);
         setError("Failed to fetch entities. Please try again later.");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -262,113 +255,7 @@ export default function Home() {
         </section>
 
         {/* Staff Section */}
-        <section
-          id="staff"
-          className="min-h-screen flex items-center justify-center text-white p-10"
-        >
-          <div className="flex flex-col sm:flex-row gap-10">
-            <div className="flex flex-col items-center sm:items-start gap-3">
-              <h3 className="hidden sm:block text-4xl mb-4">
-                Jacki <br /> Huntington
-              </h3>
-              <h3 className="sm:hidden text-3xl mb-4">Jacki Huntington</h3>
-              <Image
-                src={JACKI_HEADSHOT}
-                width={200}
-                height={350}
-                alt="Jacki Huntington"
-              />
-              <h4 className="self-start text-2xl sm:text-base sm:self-auto">
-                CO-FOUNDER
-              </h4>
-              <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER</p>
-              <p className="text-xs sm:text-base">
-                Storytelling work has taken Jacki across continents and
-                cultures, from the bustling streets of Port-au-Prince, Haiti, to
-                the serene landscapes of the Mississippi Delta. With a
-                background as a producer at Refinery29 working in New York City
-                and Los Angeles, Jacki has pioneered groundbreaking feminist and
-                body-positive video content that continues to shape the media
-                industry&#39;s aesthetic. Jacki has worked as a producer,
-                editor, and composer for a variety of podcasts including The
-                City of the Rails, Under the Influence with Jo Piazza and Really
-                Good Shares. These days, she is managing communications for the
-                Center for Global Health at Mass General Brigham as she forges
-                ahead with a handful of independent documentary film projects.
-              </p>
-            </div>
-            <div>
-              <div className="flex flex-col items-center sm:items-start gap-3">
-                <h3 className="hidden sm:block text-4xl mb-4">
-                  JESS DIPIERRO
-                  <br />
-                  OBERT
-                </h3>
-                <h3 className="sm:hidden text-2xl text-[28px] mb-4">
-                  JESS DIPIERRO OBERT
-                </h3>
-                <Image
-                  src={JESS_HEADSHOT}
-                  width={200}
-                  height={350}
-                  alt="Jess DiPierro Obert"
-                />
-                <h4 className="self-start text-2xl sm:text-base sm:self-auto">
-                  CO-FOUNDER
-                </h4>
-                <p>DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR</p>
-                <p className="text-xs sm:text-base">
-                  Jess is an award-winning investigative visual journalist,
-                  producer and filmmaker. She is focused on solution-based
-                  storytelling, and has worked globally in countries like Haiti
-                  since 2016. From 2018 to 2020, Jess led a series of workshops
-                  for Girls Voices, a nonprofit organization that empowers young
-                  girls globally to develop their media storytelling skills. She
-                  received a ‘Still I Rise’ Visual Arts Grant to work on a film
-                  about women peace builders in conflict zones within Port Au
-                  Prince, Haiti, which premiered at FESPACO in Burkina Faso.
-                  Jess’ work has been exhibited at Prix Bayeux
-                  Calvados-Normandie and has received a Radio Television Digital
-                  News Association (RTDNA) Murrow award and Vimeo Staff Pick.
-                </p>
-              </div>
-            </div>
-            <div>
-              <div className="flex flex-col items-center sm:items-start gap-3">
-                <h3 className="hidden sm:block text-4xl">
-                  JEN <br /> NG
-                </h3>
-                <h3 className="sm:hidden text-3xl">JEN NG</h3>
-                <Image
-                  src={JEN_HEADSHOT}
-                  width={200}
-                  height={350}
-                  alt="Jen Ng"
-                />
-                <h4 className="self-start text-2xl sm:text-base sm:self-auto">
-                  CO-FOUNDER
-                </h4>
-                <p>
-                  ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT
-                </p>
-                <p className="text-xs sm:text-base">
-                  Jen’s world is a playground for human connection. Her lifelong
-                  interest in art, media, and psychology has led her to work as
-                  an art director, brand strategist, and experience designer for
-                  clients with a story to tell. Projects range from design for
-                  an oral history program to research and design for an
-                  augmented reality immersive news app. She works on social
-                  justice projects rooted in LGBTQIA+ issues, race, and youth
-                  empowerment. Workshop design and facilitation create a nice
-                  break from the screen, allowing her to take her digital skills
-                  offline. Her ongoing work explores ways that story, identity,
-                  and self-expression can work together to strengthen
-                  communities.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <StaffSection />
 
         {/* Contact Section */}
         <section
