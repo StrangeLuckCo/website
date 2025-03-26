@@ -70,9 +70,9 @@ export default function StaffSection() {
   return (
     <section
       id="staff"
-      className="min-h-screen flex items-center justify-center text-white p-10"
+      className="min-h-screen flex items-center justify-center text-white p-10 mb-20"
     >
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-40">
         {staffData.map((staff, index) => (
           <StaffHeadshot
             key={index}

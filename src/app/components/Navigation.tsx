@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Navigation() {
   const logo =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/StrangeLuck-Logo-Wide.png";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.png";
   return (
-    <nav className="hidden sm:flex fixed top-0 left-0 w-full text-#b6b7b9 justify-between items-center px-4 z-20">
+    <nav className="hidden sm:flex fixed top-0 left-0 w-full text-#b6b7b9 justify-between items-center px-12 py-10 z-20">
       <Image
         alt="demo"
         priority

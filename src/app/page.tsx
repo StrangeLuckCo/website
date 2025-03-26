@@ -5,6 +5,8 @@ import Head from "next/head";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
+import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
 
 interface Tag {
@@ -158,7 +160,7 @@ export default function Home() {
             <source src="/VHSEdit.mov" type="video/quicktime" />
             Your browser does not support the video tag.
           </video> */}
-          <div className="relative h-screen z-10 p-60">
+          <div className="relative h-screen z-10 p-60 text-3xl">
             <p>
               Strange Luck helps your audience fall in love with the world — its
               sounds, its stories, its textures, its contradictions, its
@@ -254,98 +256,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Staff Section */}
         <StaffSection />
 
-        {/* Contact Section */}
-        <section
-          id="contact"
-          className="sm:min-h-screen flex flex-col justify-center w-full text-white p-4 py-20 sm:p-10 gap-10"
-        >
-          <h2 className="flex justify-center text-3xl sm:text-5xl font-bold">
-            LET&#39;S TALK
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center w-full justify-evenly gap-12 sm:gap-auto">
-            <div className="hidden sm:flex flex-1 justify-center">IMAGE</div>
-
-            <div className="flex-1 flex flex-col max-w-[600px] w-full items-center px-6 text-white gap-12 sm:gap-auto">
-              <form className="space-y-4 mb-10 w-full flex flex-col items-center">
-                <div className="w-full">
-                  <label
-                    className="text-sm font-medium mb-1 hidden"
-                    htmlFor="fullName"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    placeholder="Full Name"
-                    className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div className="w-full">
-                  <label
-                    className="text-sm font-medium mb-1 hidden"
-                    htmlFor="email"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Email Address"
-                    className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div className="w-full">
-                  <label
-                    className="text-sm font-medium mb-1 hidden"
-                    htmlFor="description"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    placeholder="Tell us a bit about your dream project"
-                    className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-40 h-16 bg-gray-700 hover:bg-gray-600 text-2xl text-gray-200 py-2 px-4 rounded-lg shadow-md"
-                >
-                  SEND
-                </button>
-              </form>
-              <p>hi@strangeluck.com</p>
-            </div>
-
-            <div className="flex-1 flex flex-col items-center gap-12 sm:gap-10 text-2xl">
-              <a>INSTAGRAM</a>
-              <a>VIMEO</a>
-            </div>
-          </div>
-        </section>
+        <ContactSection />
 
         {/* Footer */}
-        <footer className="hidden sm:block bg-black text-white text-center py-4">
-          <div className="space-x-20 flex justify-center items-center h-16">
-            <p>© 2025 STRANGE LUCK. All rights reserved.</p>
-            <a href="#" className="hover:text-gray-400">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-gray-400">
-              Terms of Use
-            </a>
-          </div>
-        </footer>
+        <Footer />
       </div>
       {/* Single Parallax Background Layer */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
@@ -361,8 +277,6 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
       </div>
-
-      {/* About Section */}
     </>
   );
 }
