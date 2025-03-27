@@ -8,6 +8,7 @@ import StaffSection from "./components/StaffSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
+import dynamic from "next/dynamic";
 
 interface Tag {
   sys: {
@@ -41,7 +42,10 @@ export default function Home() {
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   // const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const IntroVideo = dynamic(() => import("./components/IntroVideo"), {
+    ssr: false,
+    loading: () => null, // Optional fallback
+  });
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
   // const logoUrl =
@@ -99,8 +103,14 @@ export default function Home() {
       {/* Preload the video */}
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="preload"
+          as="video"
+          href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline.mp4"
+          type="video/mp4"
+        />
       </Head>
-
+      <IntroVideo />
       {/* Navigation Bar */}
       <Navigation />
 
