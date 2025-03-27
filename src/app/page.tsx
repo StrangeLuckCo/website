@@ -25,11 +25,11 @@ interface Project {
 }
 
 const CATEGORY_TO_TAG: Record<string, string> = {
-  Cinematography: "cinematography",
-  Editing: "editing",
-  Directing: "directing",
-  "Sound Design": "soundDesign",
-  "Art Direction": "artDirection",
+  Design: "design",
+  Film: "film",
+  Photo: "photo",
+  Sound: "sound",
+  Writing: "writing",
 };
 
 const IntroVideo = dynamic(() => import("./components/IntroVideo"), {
