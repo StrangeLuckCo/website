@@ -27,6 +27,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: "VT323", monospace;
+  cursor: url("/hand_cursor.png"), auto;
 
   width: 100vw;
   max-width: 100vw;

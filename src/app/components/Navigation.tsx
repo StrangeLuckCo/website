@@ -5,26 +5,40 @@ export default function Navigation() {
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.png";
   return (
     <nav className="hidden sm:flex fixed top-0 left-0 w-full text-#b6b7b9 justify-between items-center px-12 py-10 z-20">
-      <Image
-        alt="demo"
-        priority
-        src={logo}
-        height={51}
-        width={267}
-        style={{ width: "267px", height: "auto" }}
-        className="hidden sm:block "
-      />
+      <a href="#" className="cursor-[url('/hand_cursor.png'),_pointer]">
+        <Image
+          alt="demo"
+          priority
+          src={logo}
+          height={51}
+          width={267}
+          style={{ width: "267px", height: "auto" }}
+          className="hidden sm:block "
+        />
+      </a>
       <div className="flex space-x-4 text-2xl bold">
-        <a href="#work" className="hover:text-gray-400">
+        <a
+          href="#work"
+          className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
+        >
           Work
         </a>
-        <a href="#services" className="hover:text-gray-400">
+        <a
+          href="#services"
+          className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
+        >
           Services
         </a>
-        <a href="#about" className="hover:text-gray-400">
+        <a
+          href="#about"
+          className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
+        >
           About
         </a>
-        <a href="#contact" className="hover:text-gray-400">
+        <a
+          href="#contact"
+          className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
+        >
           Contact
         </a>
       </div>

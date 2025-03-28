@@ -5,7 +5,27 @@ import { useEffect, useState, useRef } from "react";
 export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
   const [hasStarted, setHasStarted] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
+  const [hide, setHide] = useState(false); // ✅ add this
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    // Don't show video on localhost
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname === "localhost"
+    ) {
+      setHide(true);
+      onIntroEnd(); // still notify the main app
+      return;
+    }
+
+    // If user has already seen the video, skip it
+    const alreadyPlayed = localStorage.getItem("introPlayed");
+    if (alreadyPlayed) {
+      setHide(true);
+      onIntroEnd();
+    }
+  }, []);
 
   const handlePlay = () => {
     setHasStarted(true);
@@ -13,22 +33,24 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
 
   const handleEnded = () => {
     setHasFinished(true);
-    onIntroEnd(); // Inform parent that intro is done
+    setHide(true);
+    localStorage.setItem("introPlayed", "true");
+    onIntroEnd(); // Notify parent that intro is done
   };
 
   useEffect(() => {
-    // As an extra safety: pause the video and remove its source after ending
+    // Extra safety: pause and unload video on finish
     if (hasFinished && videoRef.current) {
       videoRef.current.pause();
       videoRef.current.src = "";
     }
   }, [hasFinished]);
 
-  if (hasFinished) return null; // ⛔ remove the component from the DOM completely
+  if (hide || hasFinished) return null;
 
   return (
     <>
-      {/* Full-screen black screen while intro loads */}
+      {/* Fullscreen video container */}
       <div className="fixed inset-0 bg-black z-[9998]">
         <video
           ref={videoRef}
@@ -47,7 +69,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
         </video>
       </div>
 
-      {/* Fade-out overlay when video starts */}
+      {/* Black overlay that fades out on play */}
       <div
         className={`fixed inset-0 bg-black z-[9999] transition-opacity duration-700 ease-in-out ${
           hasStarted ? "opacity-0 pointer-events-none" : "opacity-100"

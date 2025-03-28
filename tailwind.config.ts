@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      cursor: {
+        hand: 'url("/hand_cursor.png"), auto',
+      },
     },
   },
   plugins: [],

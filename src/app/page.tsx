@@ -25,10 +25,10 @@ interface Project {
 }
 
 const CATEGORY_TO_TAG: Record<string, string> = {
-  Design: "design",
   Film: "film",
-  Photo: "photo",
   Sound: "sound",
+  Design: "design",
+  Photo: "photo",
   Writing: "writing",
 };
 
@@ -144,9 +144,9 @@ export default function Home() {
               className="relative flex flex-col text-white py-10 px-10 sm:px-32 pb-20"
             >
               <div className="relative z-10">
-                <h2 className="text-2xl sm:text-4xl font-bold mb-4">
+                <h1 className="text-2xl sm:text-4xl font-bold mb-4">
                   CHOOSE YOUR PATH
-                </h2>
+                </h1>
 
                 <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
                   <div className="flex flex-wrap gap-3 sm:gap-6 text-md sm:text-xl">
@@ -154,9 +154,9 @@ export default function Home() {
                       <button
                         key={category}
                         onClick={() => handleTagClick(category)}
-                        className={`hover:text-gray-400 ${
+                        className={`focus:text-[#FF23CB]  hover:text-gray-400  cursor-[url('/hand_cursor.png'),_pointer] ${
                           selectedTag === CATEGORY_TO_TAG[category]
-                            ? "font-bold underline"
+                            ? "text-[#FF23CB] font-bold underline"
                             : ""
                         }`}
                       >
@@ -186,7 +186,7 @@ export default function Home() {
               id="services"
               className="sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-white"
             >
-              <h2 className="text-3xl sm:text-6xl font-bold">Services</h2>
+              <h1 className="text-3xl sm:text-6xl font-bold">Services</h1>
               <div className="flex flex-col justify-between sm:flex-row gap-10 sm:gap-40 text-xl">
                 <div>
                   <h3 className="text-5xl mb-5">Consulting</h3>

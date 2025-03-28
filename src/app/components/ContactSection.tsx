@@ -19,14 +19,16 @@ export default function ContactSection() {
       id="contact"
       className="sm:min-h-screen flex flex-col sm:flex-row items-center justify-center w-full text-white p-4 py-20 sm:p-10 gap-20"
     >
-      <Image
-        height={250}
-        width={474}
-        src="/psychic_hands.jpeg"
-        alt="Hands of a fortune teller"
-        className="hidden sm:block"
-        priority
-      />
+      <div className="hidden sm:block flex-grow-0">
+        <Image
+          height={400}
+          width={600}
+          src="/psychic_hand.gif"
+          alt="Hand of a fortune teller"
+          className="max-w-[250px] sm:max-w-[500px]"
+          priority
+        />
+      </div>
 
       <div className="flex-1 flex flex-col max-w-[600px] w-full items-center px-6 text-white gap-12 sm:gap-auto">
         <form
@@ -48,7 +50,7 @@ export default function ContactSection() {
             //   alert("Something went wrong. Please try again.");
             // }
           }}
-          className="space-y-4 mb-10 w-full flex flex-col"
+          className="space-y-4 w-full flex flex-col"
         >
           <div className="flex w-full gap-x-3">
             <div className="w-1/2">
@@ -75,28 +77,24 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="w-full">
-            <input
-              type="text"
-              id="subject"
-              placeholder="SUBJECT"
-              value={formData.subject}
-              onChange={handleChange}
-              className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <input
+            type="text"
+            id="subject"
+            placeholder="SUBJECT"
+            value={formData.subject}
+            onChange={handleChange}
+            className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
 
-          <div className="w-full">
-            <textarea
-              id="description"
-              placeholder="Could a dream collaboration be in our future? Tell us more."
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full h-60 p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <textarea
+            id="description"
+            placeholder="Could a dream collaboration be in our future? Tell us more."
+            value={formData.description}
+            onChange={handleChange}
+            className="w-full h-60 p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
 
           <button
             type="submit"
