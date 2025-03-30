@@ -30,7 +30,7 @@ export default function Navigation() {
           Services
         </a>
         <a
-          href="#about"
+          href="#staff"
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           About

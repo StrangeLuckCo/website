@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
+import ServicesSection from "./components/ServicesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
@@ -47,6 +48,17 @@ export default function Home() {
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
 
+  const sortProjectsAlphabetically = (
+    groupedProjects: Record<string, Project[]>
+  ) => {
+    Object.entries(groupedProjects).forEach((group) => {
+      const [, projects] = group;
+      projects.sort((a, b) => {
+        return a.fields.title.localeCompare(b.fields.title);
+      });
+    });
+  };
+
   useEffect(() => {
     if (!introDone) return;
 
@@ -69,8 +81,13 @@ export default function Home() {
           {} as Record<string, Project[]>
         );
 
+        sortProjectsAlphabetically(groupedProjects);
+
         setProjects(groupedProjects);
-        const firstTag = Object.keys(groupedProjects)[0];
+        const firstTag = Object.keys(groupedProjects).includes("film")
+          ? "film"
+          : Object.keys(groupedProjects)[0];
+
         setSelectedTag(firstTag);
         setFilteredItems(groupedProjects[firstTag] || []);
       } catch (err) {
@@ -115,7 +132,7 @@ export default function Home() {
               playsInline
               className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
             />
-            <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-black z-10 transform -translate-x-1/2">
+            <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white z-10 transform -translate-x-1/2">
               <p>
                 Strange Luck helps your audience fall in love with the world —
                 its sounds, its stories, its textures, its contradictions, its
@@ -182,43 +199,7 @@ export default function Home() {
               </div>
             </section>
 
-            <section
-              id="services"
-              className="sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-white"
-            >
-              <h1 className="text-3xl sm:text-6xl font-bold">Services</h1>
-              <div className="flex flex-col justify-between sm:flex-row gap-10 sm:gap-40 text-xl">
-                <div>
-                  <h3 className="text-5xl mb-5">Consulting</h3>
-                  <ul className="text-sm sm:text-xl">
-                    <li>Brand Strategy</li>
-                    <li>Creative Development and Direction</li>
-                    <li>Research and Insight</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-5xl mb-5">Production</h3>
-                  <ul className="text-sm sm:text-xl">
-                    <li>Audio Podcast</li>
-                    <li>Production</li>
-                    <li>Brand Identity and Graphic Design</li>
-                    <li>Commercial Content Creation Documentary</li>
-                    <li>Music Videos</li>
-                    <li>Photography</li>
-                    <li>Post-Production</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-5xl mb-5">Experiences</h3>
-                  <ul className="text-sm sm:text-xl">
-                    <li>Curation and Exhibition</li>
-                    <li>Immersive Media</li>
-                    <li>Social and Cultural Campaigns</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
+            <ServicesSection />
             <StaffSection />
             <ContactSection />
             <Footer />
