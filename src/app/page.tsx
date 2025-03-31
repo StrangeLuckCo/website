@@ -145,9 +145,9 @@ export default function Home() {
           <div className="relative z-10">
             <section
               id="about"
-              className="hidden sm:flex min-h-24 text-xl items-center justify-center relative overflow-hidden"
+              className="hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
-              <div className="relative h-screen z-10 p-60 text-3xl">
+              <div className="relative z-10 p-60 text-3xl">
                 <p>
                   Strange Luck helps your audience fall in love with the world —
                   its sounds, its stories, its textures, its contradictions, its

@@ -1,5 +1,16 @@
 Notes for Documentation:
 
+ReSend -- email verification
+*API Key
+*MX and TXT records (in Porkbun)
+
+DNS -- handled in Porkbun
+* ALIAS and CNAME -- these point to the Netlify website/URL/IP Address
+*MX and 2 TXT records -- these point to Resend for email verification (for the contact form)
+
+Site Hosting -- Netlify
+HTTPS certificate issued here. auto-renews every 3 months.
+
 Contentful :: metadata
 (Sound Design, etc.)
 — description
