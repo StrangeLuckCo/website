@@ -74,7 +74,7 @@ export default function Home() {
             const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
             tags.forEach((tag) => {
               if (!acc[tag]) acc[tag] = [];
-              if (acc[tag].length < 4) acc[tag].push(item);
+              acc[tag].push(item);
             });
             return acc;
           },

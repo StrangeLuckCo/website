@@ -15,8 +15,8 @@ export default async function handler(
 
   try {
     const data = await resend.emails.send({
-      from: `${email}`,
-      to: "michael.chrupcala@gmail.com",
+      from: `<${email}>`,
+      to: ["michael.chrupcala@gmail.com"],
       subject: `${subject}`,
       text: `
 New Message from Strange Luck Contact Form
@@ -30,8 +30,15 @@ ${description}
       `,
     });
 
+    if (data?.error?.name) {
+      return res.status(500).json({ success: false, data });
+    }
+
+    // console.log("data res: ", data);
+
     return res.status(200).json({ success: true, data });
   } catch (error) {
+    // console.log("error res: ", error);
     console.error("Error sending email:", error);
     return res.status(500).json({ success: false, error });
   }

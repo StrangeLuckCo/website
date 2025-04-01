@@ -33,6 +33,7 @@ export default function ContactSection() {
       <div className="flex-1 flex flex-col max-w-[600px] w-full items-center px-6 text-white gap-12 sm:gap-auto">
         <form
           onSubmit={async (e) => {
+            console.log("submitting...");
             e.preventDefault();
 
             // TODO -- add ENS records and re-enable email contact form submissions
@@ -45,7 +46,8 @@ export default function ContactSection() {
             // const result = await res.json();
             // console.log("res: ", result);
             // if (result.success) {
-            //   e.currentTarget.reset();
+            //   console.log("success!");
+            //   // e.currentTarget.reset();
             // } else {
             //   alert("Something went wrong. Please try again.");
             // }
@@ -96,12 +98,11 @@ export default function ContactSection() {
             required
           />
 
-          <button
+          <input
             type="submit"
+            value="SUBMIT"
             className="self-center w-40 h-16 hover:bg-gray-600 text-2xl text-gray-200 py-2 px-4"
-          >
-            SUBMIT
-          </button>
+          />
         </form>
       </div>
     </section>
