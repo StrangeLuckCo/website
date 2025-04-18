@@ -158,7 +158,7 @@ export default function Home() {
 
             <section
               id="work"
-              className="relative flex flex-col text-white py-10 px-10 sm:px-32 pb-20"
+              className="relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
             >
               <div className="relative z-10">
                 <h1 className="text-2xl sm:text-4xl font-bold mb-4">
