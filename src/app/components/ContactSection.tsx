@@ -33,24 +33,20 @@ export default function ContactSection() {
       <div className="flex-1 flex flex-col max-w-[600px] w-full items-center px-6 text-white gap-12 sm:gap-auto">
         <form
           onSubmit={async (e) => {
-            console.log("submitting...");
             e.preventDefault();
 
-            // TODO -- add ENS records and re-enable email contact form submissions
-            // const res = await fetch("/api/contact", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify(formData),
-            // });
+            const res = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
 
-            // const result = await res.json();
-            // console.log("res: ", result);
-            // if (result.success) {
-            //   console.log("success!");
-            //   // e.currentTarget.reset();
-            // } else {
-            //   alert("Something went wrong. Please try again.");
-            // }
+            const result = await res.json();
+            if (result.success) {
+              console.log("Message sent successfully");
+            } else {
+              alert("Something went wrong. Please try again.");
+            }
           }}
           className="space-y-4 w-full flex flex-col"
         >

@@ -15,18 +15,18 @@ export default async function handler(
 
   try {
     const data = await resend.emails.send({
-      from: `<${email}>`,
-      to: ["michael.chrupcala@gmail.com"],
+      from: `${process.env.NEXT_PUBLIC_VERIFIED_EMAIL_ADDRESS}`,
+      to: [`${process.env.NEXT_PUBLIC_VERIFIED_EMAIL_ADDRESS}`],
       subject: `${subject}`,
       text: `
-New Message from Strange Luck Contact Form
+        New Message from Strange Luck Website (Contact Form)
 
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
+        Name: ${name}
+        Email: ${email}
+        Subject: ${subject}
 
-Message:
-${description}
+        Message:
+        ${description}
       `,
     });
 
