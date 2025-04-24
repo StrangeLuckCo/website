@@ -16,7 +16,7 @@ export default function Navigation() {
           className="hidden sm:block "
         />
       </a>
-      <div className="flex space-x-4 text-2xl bold">
+      <div className="flex space-x-4 text-2xl bold text-glow-extra-small">
         <a
           href="#work"
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"

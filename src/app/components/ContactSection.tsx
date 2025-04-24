@@ -16,7 +16,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="sm:min-h-screen text-white">
-      <h1 className="pl-4 sm:pl-20 text-3xl sm:text-6xl font-bold">Contact</h1>
+      <h1 className="pl-4 sm:pl-20 text-3xl sm:text-5xl text-glow">Contact</h1>
       <div className="sm:min-h-screen flex flex-col sm:flex-row items-center justify-center w-full p-4 py-20 sm:p-10 gap-20">
         <div className="hidden sm:block flex-grow-0">
           <Image

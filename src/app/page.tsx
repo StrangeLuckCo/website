@@ -133,7 +133,7 @@ export default function Home() {
               playsInline
               className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
             />
-            <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white z-10 transform -translate-x-1/2">
+            <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
               <p>
                 Strange Luck helps your audience fall in love with the world —
                 its sounds, its stories, its textures, its contradictions, its
@@ -148,7 +148,7 @@ export default function Home() {
               id="about"
               className="hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
-              <div className="relative z-10 p-60 text-3xl">
+              <div className="relative z-10 p-60 text-3xl text-glow-small">
                 <p>
                   Strange Luck helps your audience fall in love with the world —
                   its sounds, its stories, its textures, its contradictions, its
@@ -162,24 +162,33 @@ export default function Home() {
               className="relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
             >
               <div className="relative z-10">
-                <h1 className="text-2xl sm:text-4xl font-bold mb-4">
+                <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow">
                   CHOOSE YOUR PATH
                 </h1>
 
                 <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
-                  <div className="flex flex-wrap gap-3 sm:gap-6 text-md sm:text-xl">
-                    {Object.keys(CATEGORY_TO_TAG).map((category) => (
-                      <button
+                  <div className="flex flex-wrap text-md gap-3 sm:gap-4 sm:text-[32px]">
+                    {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
+                      <div
                         key={category}
-                        onClick={() => handleTagClick(category)}
-                        className={`focus:text-[#FF23CB]  hover:text-gray-400  cursor-[url('/hand_cursor.png'),_pointer] ${
-                          selectedTag === CATEGORY_TO_TAG[category]
-                            ? "text-[#FF23CB] font-bold underline"
-                            : ""
-                        }`}
+                        className="flex items-center gap-3 sm:gap-4"
                       >
-                        {category}
-                      </button>
+                        <button
+                          onClick={() => handleTagClick(category)}
+                          className={`focus:text-[#FF23CB]  hover:text-gray-400 text-glow-small cursor-[url('/hand_cursor.png'),_pointer] ${
+                            selectedTag === CATEGORY_TO_TAG[category]
+                              ? "text-[#FF23CB]"
+                              : ""
+                          }`}
+                        >
+                          {category}
+                        </button>
+                        {idx !== arr.length - 1 && (
+                          <span className="text-gray-400 text-glow-small">
+                            |
+                          </span>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </nav>
