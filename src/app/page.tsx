@@ -162,7 +162,7 @@ export default function Home() {
               className="relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
             >
               <div className="relative z-10">
-                <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow">
+                <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow-extra-small sm:text-glow">
                   CHOOSE YOUR PATH
                 </h1>
 

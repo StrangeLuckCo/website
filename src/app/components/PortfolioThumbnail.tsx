@@ -23,7 +23,9 @@ const PortfolioThumbnail = ({
           className="object-cover "
         />
       </div>
-      <h3 className="text-2xl sm:text-5xl text-glow">{title}</h3>
+      <h3 className="text-2xl sm:text-5xl text-glow-extra-small sm:text-glow">
+        {title}
+      </h3>
       <p className="hidden text-glow-extra-small sm:block">{description}</p>
     </div>
     // </Link>
