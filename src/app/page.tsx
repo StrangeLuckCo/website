@@ -201,7 +201,7 @@ export default function Home() {
                         key={asset.slug}
                         title={asset.title}
                         description={asset.description}
-                        imgURL={asset.thumbnailUrl}
+                        url={asset.thumbnailUrl}
                       />
                     );
                   })}
