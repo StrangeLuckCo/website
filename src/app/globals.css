@@ -173,3 +173,17 @@ body {
     0px 4px 8px rgb(0 0 0 / 0.2);
   filter: blur(0.3px);
 }
+
+/* Snap-To effect with GSAP */
+
+.container-main {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.section-snap {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}

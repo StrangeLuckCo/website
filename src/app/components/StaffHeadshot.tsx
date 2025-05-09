@@ -26,7 +26,7 @@ export default function StaffHeadshot({
         </div>
         <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 gap-x-4 items-center">
           <Image src={imageSrc} width={200} height={350} alt={altText} />
-          <div className="flex flex-col gap-y-4 text-2xl leading-none text-glow-extra-small">
+          <div className="flex flex-col gap-y-4 px-8 sm:px-0 text-2xl leading-none text-glow-extra-small">
             <p>{credits}</p>
             <p className="text-xs sm:text-[22px] font-normal leading-none">
               {bio}

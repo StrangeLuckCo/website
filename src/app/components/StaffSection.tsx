@@ -68,11 +68,14 @@ const staffData = [
 
 export default function StaffSection() {
   return (
-    <section id="staff" className="min-h-screen text-white">
-      <h1 className="pl-4 sm:pl-20 text-3xl sm:text-5xl text-glow-small">
+    <section
+      id="staff"
+      className="flex flex-col section-snap min-h-screen sm:p-20 gap-y-10 text-white"
+    >
+      <h1 className="pl-4 sm:pl-0 text-3xl sm:text-5xl text-glow-small">
         About
       </h1>
-      <div className="min-h-screen flex items-center justify-center p-10 mb-20">
+      <div className="min-h-screen flex items-center justify-center mb-20">
         <div className="flex flex-col gap-40">
           {staffData.map((staff, index) => (
             <StaffHeadshot

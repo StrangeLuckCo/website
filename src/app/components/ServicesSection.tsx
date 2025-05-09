@@ -2,7 +2,7 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-white"
+      className="section-snap sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-white"
     >
       <h1 className="text-3xl sm:text-5xl sm:leading-none text-glow-extra-small sm:text-glow">
         Services

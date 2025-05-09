@@ -10,6 +10,10 @@ import ServicesSection from "./components/ServicesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Tag {
   sys: { id: string };
@@ -60,7 +64,34 @@ export default function Home() {
   };
 
   useEffect(() => {
+    ScrollTrigger.defaults({
+      scroller: ".container-main",
+      snap: {
+        snapTo: 1, // snaps to every full panel (1 = whole number scroll)
+        duration: 4.5, // how long it takes to snap (increase for more resistance)
+        delay: 0.4, // how long to wait before snapping
+        ease: "power3.inOut", // easing curve for natural deceleration
+      },
+    });
+  }, []);
+
+  useEffect(() => {
     if (!introDone) return;
+
+    gsap.utils.toArray<HTMLElement>(".section-snap").forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        scroller: ".container-main", // <—— This is the fix!
+        start: "top top",
+        end: "bottom bottom",
+        snap: {
+          snapTo: 1,
+          duration: 1.5,
+          delay: 0.1,
+          ease: "power1.inOut",
+        },
+      });
+    });
 
     const fetchEntities = async () => {
       try {
@@ -123,30 +154,34 @@ export default function Home() {
         <>
           <Navigation />
 
-          {/* HERO VIDEO */}
-          <div className="relative z-10 h-screen overflow-hidden">
-            <video
-              src={videoUrl}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
-            />
-            <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
-              <p>
-                Strange Luck helps your audience fall in love with the world —
-                its sounds, its stories, its textures, its contradictions, its
-                juxtapositions, its surprises.
-              </p>
-            </div>
-          </div>
-
           {/* CONTENT */}
-          <div className="relative z-10">
+          <div className="container-main relative z-10">
+            {/* HERO VIDEO */}
+            <div className="section-snap relative z-10 h-screen overflow-hidden">
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
+              />
+              <div
+                id="unicorn-hero"
+                className="absolute top-0 left-0 w-full h-full z-20 unicorn-embed"
+              />
+              <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
+                <p>
+                  Strange Luck helps your audience fall in love with the world —
+                  its sounds, its stories, its textures, its contradictions, its
+                  juxtapositions, its surprises.
+                </p>
+              </div>
+            </div>
+
             <section
               id="about"
-              className="hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
+              className="section-snap hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
               <div className="relative z-10 p-60 text-3xl text-glow-small">
                 <p>
@@ -159,7 +194,7 @@ export default function Home() {
 
             <section
               id="work"
-              className="relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
+              className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
             >
               <div className="relative z-10">
                 <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow-extra-small sm:text-glow">
@@ -211,8 +246,10 @@ export default function Home() {
 
             <ServicesSection />
             <StaffSection />
-            <ContactSection />
-            <Footer />
+            <section className="section-snap relative py-10 sm:py-0">
+              <ContactSection />
+              <Footer />
+            </section>
           </div>
 
           {/* Parallax Background */}
