@@ -194,7 +194,7 @@ export default function Home() {
 
             <section
               id="work"
-              className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 pb-20"
+              className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 sm:pt-24 pb-20"
             >
               <div className="relative z-10">
                 <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow-extra-small sm:text-glow">
