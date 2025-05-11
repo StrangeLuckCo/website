@@ -4,14 +4,17 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { getProjectBySlug } from "@/pages/api/project";
 import { ProjectSummary } from "../components/Project/ProjectSummary";
+import type { Document } from "@contentful/rich-text-types";
 
 type ProjectFields = {
   description: string;
   fileUrl: string;
-  markdownDescription: string;
+  markdownDescription: Document;
   slug: string;
   thumbnailUrl: string;
+  filmPoster: string;
   title: string;
+  credits: string;
 };
 
 export type Project = {
@@ -26,7 +29,6 @@ export default function Project() {
   useEffect(() => {
     const getProject = async () => {
       const res = await getProjectBySlug(slug);
-      console.log("browser res: ", res);
 
       setProject(res);
     };
