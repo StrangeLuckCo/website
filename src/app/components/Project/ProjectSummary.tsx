@@ -1,12 +1,18 @@
 import { Project } from "../../[slug]/page";
 import FilmThumbnail from "./FilmThumbnail";
 
-export const ProjectSummary = ({ project }: { project: Project }) => {
+export const ProjectSummary = ({
+  project,
+  className = "",
+}: {
+  project: Project;
+  className?: string;
+}) => {
   const { title, filmPoster, description, releaseDate, productionCredits } =
     project.fields;
   console.log(project);
   return (
-    <div className="flex flex-col gap-y-12">
+    <div className={`flex flex-col gap-y-12  ${className}`}>
       <h1 className="font-bold text-[64px] leading-[0.9]">{title}</h1>
       <div className="flex gap-x-10">
         {filmPoster && <FilmThumbnail src={filmPoster} />}

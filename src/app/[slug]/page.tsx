@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { getProjectBySlug } from "@/pages/api/project";
 import { ProjectSummary } from "../components/Project/ProjectSummary";
+import Carousel from "../components/Project/Carousel";
 import Footer from "../components/Footer";
 import type { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -39,6 +40,7 @@ type ProjectFields = {
   filmPoster?: string;
   releaseDate?: string;
   displayType: string;
+  projectImages?: string[];
 };
 
 export type Project = {
@@ -59,6 +61,7 @@ export default function Project() {
 
       setProject(res);
       setDisplayType(res.fields.displayType.toLowerCase());
+      console.log(project);
     };
 
     getProject();
@@ -88,13 +91,17 @@ export default function Project() {
           />
         </div>
       )}
-      <div className="h-full relative z-10 pt-28 px-10 text-white text-2xl">
+      <div className="h-full relative z-10 pt-28 text-white text-2xl">
         {project && (
-          <div>
-            <ProjectSummary project={project} />
-            {/* <Carousel /> */}
+          <div className="flex flex-col gap-y-10">
+            <ProjectSummary project={project} className="px-20" />
+            <Carousel
+              height="342px"
+              images={project.fields.projectImages || []}
+            />
+
             {project.fields.markdownDescription && (
-              <div className="font-medium text-[28px]">
+              <div className="font-medium text-[28px] px-10">
                 {documentToReactComponents(
                   project.fields.markdownDescription as Document,
                   options
