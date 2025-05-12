@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { getProjectBySlug } from "@/pages/api/project";
 import { ProjectSummary } from "../components/Project/ProjectSummary";
@@ -46,6 +47,9 @@ export type Project = {
 
 export default function Project() {
   const [project, setProject] = useState<Project | null>(null);
+  const [displayType, setDisplayType] = useState<
+    "video" | "audio" | "art" | null
+  >(null);
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -54,14 +58,15 @@ export default function Project() {
       const res = await getProjectBySlug(slug);
 
       setProject(res);
+      setDisplayType(res.fields.displayType.toLowerCase());
     };
 
     getProject();
   }, [slug]);
 
   return (
-    <>
-      {project && (
+    <div className="flex flex-col">
+      {project && displayType === "video" && (
         <div className="relative z-10 h-screen overflow-hidden">
           <video
             src={project.fields.thumbnailUrl}
@@ -73,9 +78,19 @@ export default function Project() {
           />
         </div>
       )}
+      {project && (displayType === "audio" || displayType === "art") && (
+        <div className="relative z-10 flex pt-32 justify-center">
+          <Image
+            src={project.fields.thumbnailUrl || ""}
+            width={721}
+            height={541}
+            alt="Thumbnail image"
+          />
+        </div>
+      )}
       <div className="h-full relative z-10 pt-28 px-10 text-white text-2xl">
         {project && (
-          <div className="">
+          <div>
             <ProjectSummary project={project} />
             {/* <Carousel /> */}
             {project.fields.markdownDescription && (
@@ -105,6 +120,6 @@ export default function Project() {
           Your browser does not support the video tag.
         </video>
       </div>
-    </>
+    </div>
   );
 }

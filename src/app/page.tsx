@@ -237,6 +237,7 @@ export default function Home() {
                         title={asset.title}
                         shortDescription={asset.shortDescription}
                         url={asset.thumbnailUrl}
+                        slug={asset.slug}
                       />
                     );
                   })}
