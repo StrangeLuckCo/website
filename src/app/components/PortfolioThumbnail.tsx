@@ -2,11 +2,11 @@ import Image from "next/image";
 
 const PortfolioThumbnail = ({
   title,
-  description,
+  shortDescription,
   url,
 }: {
   title: string;
-  description: string;
+  shortDescription: string;
   url: string;
 }) => {
   const isVideo = url?.toLowerCase().endsWith(".mp4");
@@ -36,7 +36,9 @@ const PortfolioThumbnail = ({
       <h3 className="text-2xl sm:text-5xl text-glow-extra-small sm:text-glow">
         {title}
       </h3>
-      <p className="hidden text-glow-extra-small sm:block">{description}</p>
+      <p className="hidden text-glow-extra-small sm:block">
+        {shortDescription}
+      </p>
     </div>
   );
 };

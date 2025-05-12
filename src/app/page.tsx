@@ -22,7 +22,7 @@ interface Tag {
 interface Project {
   fields: {
     title: string;
-    description: string;
+    shortDescription: string;
     thumbnailUrl: string;
     slug: string;
   };
@@ -235,7 +235,7 @@ export default function Home() {
                       <PortfolioThumbnail
                         key={asset.slug}
                         title={asset.title}
-                        description={asset.description}
+                        shortDescription={asset.shortDescription}
                         url={asset.thumbnailUrl}
                       />
                     );

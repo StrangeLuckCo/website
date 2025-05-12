@@ -4,7 +4,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types";
 
 export const ProjectSummary = ({ project }: { project: Project }) => {
-  const { title, filmPoster, markdownDescription, releaseDate, credits } =
+  const { title, filmPoster, description, releaseDate, productionCredits } =
     project.fields;
   console.log(project);
   return (
@@ -19,11 +19,9 @@ export const ProjectSummary = ({ project }: { project: Project }) => {
           </div>
           <div>
             <h3 className="font-medium text-[32px]">Production Credits</h3>
-            <h4 className="font-medium text-[28px]">{credits}</h4>
+            <h4 className="font-medium text-[28px]">{productionCredits}</h4>
           </div>
-          <p className="font-normal text-xl">
-            {documentToReactComponents(markdownDescription as Document)}
-          </p>
+          <p className="font-normal text-xl">{description}</p>
         </div>
       </div>
     </div>

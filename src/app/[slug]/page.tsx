@@ -5,16 +5,38 @@ import { useParams } from "next/navigation";
 import { getProjectBySlug } from "@/pages/api/project";
 import { ProjectSummary } from "../components/Project/ProjectSummary";
 import type { Document } from "@contentful/rich-text-types";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
+import type { Options } from "@contentful/rich-text-react-renderer";
+
+const options: Options = {
+  renderText: (text) => {
+    return text
+      .split("\n")
+      .flatMap((part, index, arr) => [
+        part,
+        index < arr.length - 1 ? <br key={index} /> : null,
+      ]);
+  },
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node, children) => {
+      return <p className="mb-4">{children}</p>;
+    },
+  },
+};
 
 type ProjectFields = {
-  description: string;
-  fileUrl: string;
-  markdownDescription: Document;
-  slug: string;
-  thumbnailUrl: string;
-  filmPoster: string;
   title: string;
-  credits: string;
+  shortDescription: string;
+  description?: string;
+  markdownDescription?: Document;
+  slug: string;
+  fileUrl: string;
+  thumbnailUrl?: string;
+  productionCredits?: string;
+  filmPoster?: string;
+  releaseDate?: string;
+  displayType: string;
 };
 
 export type Project = {
@@ -22,7 +44,7 @@ export type Project = {
 };
 
 export default function Project() {
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<Project | null>(null);
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -41,6 +63,14 @@ export default function Project() {
       {project && (
         <div className="">
           <ProjectSummary project={project} />
+          {/* <Carousel /> */}
+          <p className="font-normal text-xl">
+            {documentToReactComponents(
+              project.fields.markdownDescription as Document,
+              options
+            )}
+          </p>
+          {/* {project.fields.markdownDescription && <div>{project.fields.markdownDescription}</div>} */}
         </div>
       )}
     </div>
