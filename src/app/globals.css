@@ -57,6 +57,28 @@ body {
   letter-spacing: 1.6px;
 }
 
+/* Mobile/Mobile H2 */
+.sl-h2-mobile {
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #000;
+  font-family: "Helvetica Neue";
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.36px;
+}
+
+/* Mobile/Mobile H3 */
+.sl-h3-mobile {
+  font-family: "Helvetica Neue";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -1.12px;
+}
+
 /* Desktop/P1 */
 .sl-p {
   font-family: "Helvetica Neue";
@@ -71,6 +93,22 @@ body {
 .desktop-title {
   text-shadow:
     -5px 4px 5px #000,
+    -1px 0px 1px #d5a251,
+    0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Helvetica Mobile Title */
+.mobile-title {
+  text-shadow:
+    -4px 3px 4px #000,
+    -1px 0px 1px #d5a251,
+    0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Helvetica Mobile Subtitle */
+.mobile-subtitle {
+  text-shadow:
+    -3px 2px 5px rgba(0, 0, 0, 0.8),
     -1px 0px 1px #d5a251,
     0px 0px 4px rgba(255, 255, 255, 0.2);
 }

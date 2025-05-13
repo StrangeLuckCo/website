@@ -3,5 +3,5 @@ export default function WelcomeLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="min-h-screen w-full">{children}</div>;
+  return <div className="min-h-screen w-full bg-black">{children}</div>;
 }
