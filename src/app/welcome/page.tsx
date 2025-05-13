@@ -67,7 +67,7 @@ export default function Welcome() {
                 alert("Something went wrong. Please try again.");
               }
             }}
-            className="w-full border-2 border-[#D9D9D9] flex justify-between max-w-[850px] h-full items-stretch"
+            className="w-full border-2 border-[#D9D9D9] flex justify-between max-w-[650px] h-full items-stretch"
           >
             <input
               type="email"
