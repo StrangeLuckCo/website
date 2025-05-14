@@ -73,7 +73,7 @@ export default function Welcome() {
           </div>
         </div>
         {isReady && !shouldShowUnicorn && (
-          <div className="flex flex-col gap-y-[53px] sm:gap-y-0 mb-16">
+          <div className="flex flex-col gap-y-[10px] sm:gap-y-0 mb-32 sm:mb-16">
             <Image
               src={"/StrangeLuck-Logo-VHS-Wide.svg"}
               alt="Black background with 'Strange Luck: A Storytelling Studio' text"
