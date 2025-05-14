@@ -37,7 +37,7 @@ export default function Welcome() {
 
   return (
     <div className="flex flex-col justify-center items-center h-full">
-      <div className="relative pt-[117px] sm:pt-[90px] flex flex-col z-20 sm:gap-y-[100px] w-4/5 items-center justify-between h-screen">
+      <div className="relative pt-[117px] sm:pt-[90px] flex flex-col z-20 gap-y-12 sm:gap-y-[100px] w-4/5 items-center justify-between">
         <div>
           <h2 className="sl-h2-mobile text-center mb-[50px] sm:sl-h2 eighties-glow text-5xl">
             A new, strange future is coming soon.

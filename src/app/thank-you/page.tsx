@@ -39,8 +39,8 @@ export default function ThankYou() {
   return (
     <div className="flex flex-col h-screen">
       <div
-        className={`flex flex-col h-screen  items-center gap-24 sm:gap-12 z-20 ${
-          shouldShowUnicorn ? "pt-[200px]" : "justify-evenly sm:pt-[200px]"
+        className={`flex flex-col flex-grow items-center gap-24 sm:gap-12 z-20 ${
+          shouldShowUnicorn ? "pt-[100px]" : "justify-evenly sm:pt-[200px]"
         }`}
       >
         <h2 className="sl-h2 thank-you-glow text-center text-[40px]">
