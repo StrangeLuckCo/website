@@ -82,10 +82,8 @@ export default function Welcome() {
         />
       ) : isReady ? (
         <div
-          className="absolute top-0 left-0 w-full z-0 overflow-hidden"
+          className="fixed inset-0 z-0 overflow-hidden"
           style={{
-            height: "100svh",
-            inset: 0,
             pointerEvents: "none",
           }}
         >
@@ -96,8 +94,10 @@ export default function Welcome() {
                 : "/coming_soon_fallback.svg"
             }
             alt="Black background with 'Strange Luck: A Storytelling Studio' text"
-            fill
-            className="object-cover"
+            className="w-full h-[100svh] object-cover"
+            width={0}
+            height={0}
+            sizes="100vw"
             priority
           />
         </div>
