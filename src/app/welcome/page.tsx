@@ -82,10 +82,9 @@ export default function Welcome() {
         />
       ) : isReady ? (
         <div
-          className="absolute top-0 left-0 w-full h-full z-0"
+          className="absolute top-0 left-0 w-full z-0 overflow-hidden"
           style={{
-            minHeight: "100%",
-            height: "100%",
+            height: "100svh",
             inset: 0,
             pointerEvents: "none",
           }}
@@ -99,7 +98,6 @@ export default function Welcome() {
             alt="Black background with 'Strange Luck: A Storytelling Studio' text"
             fill
             className="object-cover"
-            sizes="100vw"
             priority
           />
         </div>
