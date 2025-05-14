@@ -82,8 +82,13 @@ export default function Welcome() {
         />
       ) : isReady ? (
         <div
-          className="fixed top-0 left-0 w-screen h-[100dvh] z-0"
-          style={{ pointerEvents: "none" }} // optional: prevents accidental blocking
+          className="absolute top-0 left-0 w-full h-full z-0"
+          style={{
+            minHeight: "100%",
+            height: "100%",
+            inset: 0,
+            pointerEvents: "none",
+          }}
         >
           <Image
             src={
