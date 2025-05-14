@@ -81,16 +81,23 @@ export default function Welcome() {
           }}
         />
       ) : isReady ? (
-        <Image
-          src={
-            isMobile
-              ? "/coming_soon_mobile_fallback.svg"
-              : "/coming_soon_fallback.svg"
-          }
-          fill
-          alt="Black background with 'Strange Luck: A Storytelling Studio' text"
-          className="object-cover"
-        />
+        <div
+          className="fixed top-0 left-0 w-screen h-[100dvh] z-0"
+          style={{ pointerEvents: "none" }} // optional: prevents accidental blocking
+        >
+          <Image
+            src={
+              isMobile
+                ? "/coming_soon_mobile_fallback.svg"
+                : "/coming_soon_fallback.svg"
+            }
+            alt="Black background with 'Strange Luck: A Storytelling Studio' text"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
       ) : null}
     </div>
   );
