@@ -7,6 +7,7 @@ export function middleware(request: NextRequest) {
   // Allow requests to /welcome and static assets (e.g. _next, images, fonts, etc.)
   const isAllowedPath =
     pathname === "/welcome" ||
+    pathname === "/thank-you" ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/favicon") ||

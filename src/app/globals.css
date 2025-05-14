@@ -292,6 +292,19 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.thank-you-glow {
+  background: var(
+    --Text-Gradient,
+    linear-gradient(180deg, #f2f3ea 0%, #e3e4cb 100%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Helvetica Desktop Title */
+  filter: blur(1.5px);
+}
+
 /* Menu Glow */
 .menu-glow {
   text-shadow:
