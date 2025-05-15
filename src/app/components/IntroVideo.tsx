@@ -25,7 +25,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
       setHide(true);
       onIntroEnd();
     }
-  }, []);
+  }, [onIntroEnd]);
 
   const handlePlay = () => {
     setHasStarted(true);
