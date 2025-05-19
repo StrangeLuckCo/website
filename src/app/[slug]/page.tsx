@@ -61,7 +61,6 @@ export default function Project() {
 
       setProject(res);
       setDisplayType(res.fields.displayType.toLowerCase());
-      console.log(project);
     };
 
     getProject();
@@ -98,7 +97,7 @@ export default function Project() {
             <Carousel images={project.fields.projectImages || []} />
 
             {project.fields.markdownDescription && (
-              <div className="font-medium text-[28px] px-10">
+              <div className="sl-h4 eighties-glow blur-xs px-10">
                 {documentToReactComponents(
                   project.fields.markdownDescription as Document,
                   options
@@ -110,20 +109,8 @@ export default function Project() {
         <Footer />
       </div>
 
-      {/* Parallax Background */}
-      <div className="fixed top-0 left-0 w-full h-full z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/BlueVHS.mp4" type="video/mp4" />
-          <source src="/BlueVHS.mov" type="video/quicktime" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      {/* Background Gradient */}
+      <div className="fixed bg-custom-gradient top-0 left-0 w-full h-full z-0"></div>
     </div>
   );
 }

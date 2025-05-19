@@ -15,6 +15,16 @@ export default {
       cursor: {
         hand: 'url("/hand_cursor.png"), auto',
       },
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(to bottom, rgba(13, 8, 136, 1), rgba(13, 8, 136, 0.6), rgba(54, 56, 99, 0))",
+      },
+      blur: {
+        xxs: "0.5px",
+        xs: "0.75px",
+        sm: "1px",
+        md: "1.5px",
+      },
     },
   },
   plugins: [],
