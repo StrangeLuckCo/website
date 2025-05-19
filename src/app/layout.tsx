@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "./components/Navigation";
+import UnicornScript from "./components/UnicornScript";
 
 export const metadata: Metadata = {
   title: "Strange Luck",
@@ -14,8 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={"antialiased"}>
-        <Navigation />
+      <body>
+        <UnicornScript />
         {children}
       </body>
     </html>

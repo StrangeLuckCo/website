@@ -7,7 +7,7 @@ import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
-import ContactSection from "./components/ContactSection";
+// import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
@@ -166,10 +166,10 @@ export default function Home() {
                 playsInline
                 className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
               />
-              <div
+              {/* <div
                 id="unicorn-hero"
                 className="absolute top-0 left-0 w-full h-full z-20 unicorn-embed"
-              />
+              /> */}
               <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
                 <p>
                   Strange Luck helps your audience fall in love with the world —
@@ -272,3 +272,7 @@ export default function Home() {
     </>
   );
 }
+
+const ContactSection = dynamic(() => import("./components/ContactSection"), {
+  ssr: false,
+});
