@@ -57,35 +57,34 @@ export function useUnicornEmbedding({
   elementId,
   filePath,
   altText = "Welcome to Unicorn Studio",
-  ariaLabel = "This is a canvas scene",
+  ariaLabel = "Canvas animation scene",
 }: UnicornConfig) {
   useEffect(() => {
     if (!isModernChrome()) return;
 
     const scriptId = "unicornstudio-script";
+    const scriptAlreadyExists = document.getElementById(scriptId);
 
-    const loadAndInit = () => {
-      const initScene = () => {
-        if (window.UnicornStudio) {
-          window.UnicornStudio.addScene({
-            elementId,
-            filePath,
-            lazyLoad: false,
-            scale: 1,
-            dpi: 1.5,
-            altText,
-            ariaLabel,
-            interactivity: {
-              mouse: {
-                disableMobile: true,
-              },
+    const initScene = () => {
+      if (window.UnicornStudio) {
+        window.UnicornStudio.addScene({
+          elementId,
+          filePath,
+          lazyLoad: false,
+          scale: 1,
+          dpi: 1.5,
+          altText,
+          ariaLabel,
+          interactivity: {
+            mouse: {
+              disableMobile: true,
             },
-          }).catch((err) => {
-            console.error("UnicornStudio error:", err);
-          });
-        }
-      };
+          },
+        }).catch((err) => console.error("❌ UnicornStudio error:", err));
+      }
+    };
 
+    const whenReady = () => {
       if ("requestIdleCallback" in window) {
         requestIdleCallback(initScene);
       } else {
@@ -93,7 +92,9 @@ export function useUnicornEmbedding({
       }
     };
 
-    if (!document.getElementById(scriptId)) {
+    if (window.UnicornStudio) {
+      whenReady();
+    } else if (!scriptAlreadyExists) {
       const script = document.createElement("script");
       script.id = scriptId;
       script.src =
@@ -101,11 +102,23 @@ export function useUnicornEmbedding({
       script.async = true;
       script.onload = () => {
         console.log("✅ UnicornStudio script loaded");
-        loadAndInit();
+        whenReady();
       };
       document.body.appendChild(script);
     } else {
-      loadAndInit();
+      // Script exists but UnicornStudio isn't yet available
+      const waitForScript = setInterval(() => {
+        if (window.UnicornStudio) {
+          clearInterval(waitForScript);
+          whenReady();
+        }
+      }, 50);
     }
+
+    return () => {
+      if (window.UnicornStudio?.destroy) {
+        window.UnicornStudio.destroy();
+      }
+    };
   }, [elementId, filePath, altText, ariaLabel]);
 }
