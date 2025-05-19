@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {
-  Carousel,
+  Carousel as CarouselShad,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -13,9 +13,9 @@ const CAROUSEL_MIN_HEIGHT = 208;
 // const CAROUSEL_MAX_HEIGHT = 343;
 const IMAGE_MIN_WIDTH = 421;
 
-export default function CarouselShad({ images }: { images: string[] }) {
+export default function Carousel({ images }: { images: string[] }) {
   return (
-    <Carousel className="w-full max-w-screen">
+    <CarouselShad className="w-full max-w-screen">
       <div className="relative">
         <CarouselContent className="flex">
           {images.map((src, index) => (
@@ -47,6 +47,6 @@ export default function CarouselShad({ images }: { images: string[] }) {
         <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 z-10" />
         <CarouselNext className="right-4 top-1/2 -translate-y-1/2 z-10" />
       </div>
-    </Carousel>
+    </CarouselShad>
   );
 }

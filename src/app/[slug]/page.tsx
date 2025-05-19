@@ -70,7 +70,7 @@ export default function Project() {
   return (
     <div className="flex flex-col">
       {project && displayType === "video" && (
-        <div className="relative  h-screen overflow-hidden">
+        <div className="relative z-10 h-screen overflow-hidden">
           <video
             src={project.fields.thumbnailUrl}
             autoPlay
@@ -82,7 +82,7 @@ export default function Project() {
         </div>
       )}
       {project && (displayType === "audio" || displayType === "art") && (
-        <div className="relative flex pt-32 justify-center">
+        <div className="relative z-10 flex pt-32 justify-center">
           <Image
             src={project.fields.thumbnailUrl || ""}
             width={721}
@@ -91,7 +91,7 @@ export default function Project() {
           />
         </div>
       )}
-      <div className="h-full relative pt-28 text-white text-2xl">
+      <div className="h-full relative z-10 pt-28 text-white text-2xl">
         {project && (
           <div className="flex flex-col gap-y-10">
             <ProjectSummary project={project} className="px-20" />
@@ -111,7 +111,7 @@ export default function Project() {
       </div>
 
       {/* Parallax Background */}
-      <div className="fixed top-0 left-0 w-full h-full z-[-50]">
+      <div className="fixed top-0 left-0 w-full h-full z-0">
         <video
           autoPlay
           loop
