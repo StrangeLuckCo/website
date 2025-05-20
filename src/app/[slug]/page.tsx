@@ -80,6 +80,7 @@ export default function Project() {
           />
         </div>
       )}
+
       {project && (displayType === "audio" || displayType === "art") && (
         <div className="relative z-10 flex pt-32 justify-center">
           <Image
@@ -90,14 +91,15 @@ export default function Project() {
           />
         </div>
       )}
+
       <div className="h-full relative z-10 pt-28 text-white text-2xl">
         {project && (
-          <div className="flex flex-col gap-y-10">
-            <ProjectSummary project={project} className="px-20" />
+          <div className="flex flex-col gap-y-[77px]">
+            <ProjectSummary project={project} className="px-4 sm:px-20" />
             <Carousel images={project.fields.projectImages || []} />
 
             {project.fields.markdownDescription && (
-              <div className="sl-h4 blur-xs px-10">
+              <div className="sl-h4 sl-p2-mobile blur-xs px-10 mb-24">
                 {documentToReactComponents(
                   project.fields.markdownDescription as Document,
                   options
