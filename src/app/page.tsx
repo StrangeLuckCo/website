@@ -7,7 +7,7 @@ import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
-// import ContactSection from "./components/ContactSection";
+import UpdatedContactSection from "./components/UpdatedContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
@@ -319,8 +319,8 @@ export default function Home() {
 
             <ServicesSection />
             <StaffSection />
-            <section className="section-snap relative py-10 sm:py-0">
-              <ContactSection />
+            <section className="section-snap relative  sm:py-0">
+              <UpdatedContactSection />
               <Footer />
             </section>
           </div>
@@ -345,6 +345,6 @@ export default function Home() {
   );
 }
 
-const ContactSection = dynamic(() => import("./components/ContactSection"), {
-  ssr: false,
-});
+// const ContactSection = dynamic(() => import("./components/ContactSection"), {
+//   ssr: false,
+// });
