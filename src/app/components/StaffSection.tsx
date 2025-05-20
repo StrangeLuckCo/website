@@ -11,8 +11,8 @@ const staffData = [
     imageSrc: JACKI_HEADSHOT,
     altText: "Jacki Huntington",
     name: "Jacki Huntington",
-    title: "CO-FOUNDER",
-    credits: "DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER",
+    title: "Co-Founder",
+    credits: "Director • Cinematographer • Producer • Writer",
     bio: `Storytelling work has taken Jacki across continents and
       cultures, from the bustling streets of Port-au-Prince, Haiti, to
       the serene landscapes of the Mississippi Delta. With a
@@ -30,8 +30,8 @@ const staffData = [
     imageSrc: JESS_HEADSHOT,
     altText: "Jess DiPierro Obert",
     name: "JESS DIPIERRO OBERT",
-    title: "CO-FOUNDER",
-    credits: "DIRECTOR • CINEMATOGRAPHER • PRODUCER • WRITER • EDITOR",
+    title: "Co-Founder",
+    credits: "Director • Cinematographer • Producer • Writer • Editor",
     bio: `Jess is an award-winning investigative visual journalist,
       producer and filmmaker. She is focused on solution-based
       storytelling, and has worked globally in countries like Haiti
@@ -49,8 +49,8 @@ const staffData = [
     imageSrc: JEN_HEADSHOT,
     altText: "Jen Ng",
     name: "JEN NG",
-    title: "CO-FOUNDER",
-    credits: "ART DIRECTOR • BRAND STRATEGIST • DESIGNER • STORY CONSULTANT",
+    title: "Co-Founder",
+    credits: "Art Director • Brand Strategist • Designer • Story Consultant",
     bio: `Jen’s world is a playground for human connection. Her lifelong
       interest in art, media, and psychology has led her to work as
       an art director, brand strategist, and experience designer for
@@ -70,11 +70,9 @@ export default function StaffSection() {
   return (
     <section
       id="staff"
-      className="flex flex-col section-snap min-h-screen sm:p-20 gap-y-10 text-white"
+      className="flex flex-col section-snap min-h-screen sm:p-20 gap-y-10"
     >
-      <h1 className="pl-4 sm:pl-0 text-3xl sm:text-5xl text-glow-small">
-        About
-      </h1>
+      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title blur-md">About</h1>
       <div className="min-h-screen flex items-center justify-center mb-20">
         <div className="flex flex-col gap-40">
           {staffData.map((staff, index) => (

@@ -34,51 +34,68 @@ body {
 .sl-h1 {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #000;
-  font-family: "Helvetica Neue";
+  -webkit-text-fill-color: #e3e4cb;
   font-size: 64px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: -2.56px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: #e3e4cb;
+  text-shadow: -5px 4px 4px #000;
 }
 
 /* Desktop/H2 */
 .sl-h2 {
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: #000;
-  font-family: "Helvetica Neue";
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: -1.6px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #e3e4cb;
+  text-shadow: -5px 4px 4px #000;
 }
 
 /* Desktop/H3 */
 .sl-h3 {
-  font-family: "Helvetica Neue";
+  -webkit-text-fill-color: #e3e4cb;
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1.6px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+
+  -webkit-text-fill-color: #e3e4cb;
+  text-shadow: -5px 4px 4px #000;
 }
 
 /* Desktop/H4 */
 .sl-h4 {
-  font-family: "Helvetica Neue";
+  -webkit-text-fill-color: #e3e4cb;
   font-size: 28px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1.4px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: -5px 4px 4px #000;
 }
 
 /* Mobile/Mobile H2 */
 .sl-h2-mobile {
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: #000;
-  font-family: "Helvetica Neue";
+  -webkit-text-fill-color: #e3e4cb;
   font-size: 34px;
   font-style: normal;
   font-weight: 700;
@@ -88,7 +105,7 @@ body {
 
 /* Mobile/Mobile H3 */
 .sl-h3-mobile {
-  font-family: "Helvetica Neue";
+  -webkit-text-fill-color: #e3e4cb;
   font-size: 28px;
   font-style: normal;
   font-weight: 500;
@@ -98,16 +115,43 @@ body {
 
 /* Desktop/P1 */
 .sl-p {
-  font-family: "Helvetica Neue";
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1px;
+  background-clip: text;
+  -webkit-text-fill-color: #e3e4cb;
+  -webkit-background-clip: text;
+  text-shadow: -5px 4px 4px #000;
+}
+/*
+-webkit-text-fill-color: #e3e4cb;
+   TODO: this fill-color for everything */
+
+.sl-list-item {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: #e3e4cb;
+
+  text-shadow: -5px 4px 5px #000;
+  -webkit-text-stroke-width: 1.1px;
+  -webkit-text-stroke-color: #000;
 }
 
 .text-stroke-lg {
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #000;
 }
 
@@ -118,10 +162,18 @@ body {
 
 /* Helvetica Desktop Title */
 .desktop-title {
-  text-shadow:
-    -5px 4px 5px #000,
-    -1px 0px 1px #d5a251,
-    0px 0px 4px rgba(255, 255, 255, 0.2);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -2.56px;
+
+  -webkit-text-fill-color: #e3e4cb;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: -5px 4px 4px #000;
 }
 
 /* Helvetica Mobile Title */
@@ -350,4 +402,26 @@ body {
 
 .input-border-stroke {
   border: var(--sds-size-stroke-focus-ring) solid var(--Text-Gradient, #f2f3ea);
+}
+
+.gradient-text {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -2.56px;
+  line-height: normal;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000;
+
+  /* background: linear-gradient(
+    180deg,
+    #f2f3ea 0%,
+    #e3e4cb 100%
+  ); background: linear-gradient(180deg, #F2F3EA 0%, #E3E4CB 100%); */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: #e3e4cb;
+  /* TODO: this fill-color for everything */
+
+  text-shadow: -5px 4px 4px #000;
 }

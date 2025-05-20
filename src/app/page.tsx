@@ -198,9 +198,9 @@ export default function Home() {
               className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 sm:pt-24 pb-20"
             >
               <div className="relative z-10">
-                <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow-extra-small sm:text-glow">
-                  CHOOSE YOUR PATH
-                </h1>
+                <span className="">
+                  <h1 className="gradient-text blur-sm">Choose your path</h1>
+                </span>
 
                 <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
                   <div className="flex flex-wrap text-md gap-3 sm:gap-4 sm:text-[32px]">
@@ -211,11 +211,21 @@ export default function Home() {
                       >
                         <button
                           onClick={() => handleTagClick(category)}
-                          className={`focus:text-[#FF23CB]  hover:text-gray-400 text-glow-small cursor-[url('/hand_cursor.png'),_pointer] ${
-                            selectedTag === CATEGORY_TO_TAG[category]
-                              ? "text-[#FF23CB]"
-                              : ""
-                          }`}
+                          className={`sl-list-item focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
+                          style={{
+                            WebkitTextFillColor:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "#DFFC3C"
+                                : "",
+                            textDecoration:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "underline"
+                                : "none",
+                            textDecorationColor:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "#DFFC3C"
+                                : "inherit",
+                          }}
                         >
                           {category}
                         </button>
@@ -229,7 +239,7 @@ export default function Home() {
                   </div>
                 </nav>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[42px] gap-y-[120px]">
                   {filteredItems.map((entity) => {
                     const asset = entity.fields;
                     return (

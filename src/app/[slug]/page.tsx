@@ -97,7 +97,7 @@ export default function Project() {
             <Carousel images={project.fields.projectImages || []} />
 
             {project.fields.markdownDescription && (
-              <div className="sl-h4 eighties-glow blur-xs px-10">
+              <div className="sl-h4 blur-xs px-10">
                 {documentToReactComponents(
                   project.fields.markdownDescription as Document,
                   options
