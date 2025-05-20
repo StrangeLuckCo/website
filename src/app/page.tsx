@@ -129,6 +129,37 @@ export default function Home() {
     fetchEntities();
   }, [introDone]);
 
+  useEffect(() => {
+    if (!introDone) return;
+
+    const aboutVideo = document.getElementById(
+      "about-video"
+    ) as HTMLVideoElement;
+    const about2Video = document.getElementById(
+      "about2-video"
+    ) as HTMLVideoElement;
+
+    ScrollTrigger.create({
+      trigger: "#about",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => aboutVideo?.play(),
+      onLeave: () => aboutVideo?.pause(),
+      onEnterBack: () => aboutVideo?.play(),
+      onLeaveBack: () => aboutVideo?.pause(),
+    });
+
+    ScrollTrigger.create({
+      trigger: "#about-2",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => about2Video?.play(),
+      onLeave: () => about2Video?.pause(),
+      onEnterBack: () => about2Video?.play(),
+      onLeaveBack: () => about2Video?.pause(),
+    });
+  }, [introDone]);
+
   const handleTagClick = (category: string) => {
     const tag = CATEGORY_TO_TAG[category];
     setSelectedTag(tag);
@@ -182,14 +213,44 @@ export default function Home() {
 
             <section
               id="about"
-              className="section-snap hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
+              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
-              <div className="relative z-10 p-60 text-3xl text-glow-small">
-                <p>
-                  Strange Luck helps your audience fall in love with the world —
-                  its sounds, its stories, its textures, its contradictions, its
-                  juxtapositions, its surprises.
-                </p>
+              <video
+                id="about-video"
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
+                <source src="/about_background.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] left-[clamp(1rem,5vw,5rem)] bottom-[clamp(2rem,8vh,6rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] sl-h2 blur-md">
+                <h2>
+                  Strange Luck is a storytelling studio for the human spirit.
+                </h2>
+              </div>
+            </section>
+
+            <section
+              id="about-2"
+              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
+            >
+              <video
+                id="about2-video"
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
+                <source src="/about2_background.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute z-10 text-right max-w-[min(80vw,600px)] right-[clamp(1rem,5vw,5rem)] bottom-[clamp(2rem,8vh,6rem)] sm:right-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] sl-h2 blur-md">
+                <h2>
+                  We work with brands, nonprofits, and media companies to tell
+                  stories that generate empathy and drive engagement.
+                </h2>
               </div>
             </section>
 

@@ -5,19 +5,8 @@ export default function Navigation() {
   const logo =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.png";
   return (
-    <nav className="hidden sm:flex fixed top-0 left-0 w-full text-#b6b7b9 justify-between items-center px-12 py-10 z-20">
-      <Link href="/" className="cursor-[url('/hand_cursor.png'),_pointer]">
-        <Image
-          alt="demo"
-          priority
-          src={logo}
-          height={51}
-          width={267}
-          style={{ width: "267px", height: "auto" }}
-          className="hidden sm:block "
-        />
-      </Link>
-      <div className="flex space-x-4 text-2xl bold text-glow-extra-small">
+    <nav className="hidden sm:flex h-[127px] absolute w-full text-#b6b7b9 justify-center items-center px-[94px] pt-[22px] pb-[62px] z-20 bg-nav-gradient backdrop-blur-sm">
+      <div className="flex gap-x-[156px] shrink-0 items-start sl-p2 blur-xs">
         <a
           href="#work"
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
@@ -30,8 +19,19 @@ export default function Navigation() {
         >
           Services
         </a>
+        <Link href="/" className="cursor-[url('/hand_cursor.png'),_pointer]">
+          <Image
+            alt="demo"
+            priority
+            src={logo}
+            height={51}
+            width={267}
+            style={{ width: "267px", height: "auto" }}
+            className="hidden sm:block "
+          />
+        </Link>
         <a
-          href="#staff"
+          href="#about"
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           About
