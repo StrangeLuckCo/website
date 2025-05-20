@@ -29,7 +29,7 @@ const staffData = [
   {
     imageSrc: JESS_HEADSHOT,
     altText: "Jess DiPierro Obert",
-    name: "JESS DIPIERRO OBERT",
+    name: "Jess DiPierro Obert",
     title: "Co-Founder",
     credits: "Director • Cinematographer • Producer • Writer • Editor",
     bio: `Jess is an award-winning investigative visual journalist,
@@ -48,7 +48,7 @@ const staffData = [
   {
     imageSrc: JEN_HEADSHOT,
     altText: "Jen Ng",
-    name: "JEN NG",
+    name: "Jen Ng",
     title: "Co-Founder",
     credits: "Art Director • Brand Strategist • Designer • Story Consultant",
     bio: `Jen’s world is a playground for human connection. Her lifelong
@@ -70,11 +70,13 @@ export default function StaffSection() {
   return (
     <section
       id="staff"
-      className="flex flex-col section-snap min-h-screen sm:p-20 gap-y-10"
+      className="flex flex-col section-snap min-h-screen sm:p-20 pt-20 gap-y-10 text-center sm:text-left"
     >
-      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title blur-md">About</h1>
+      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title sl-h1-mobile blur-md">
+        About
+      </h1>
       <div className="min-h-screen flex items-center justify-center mb-20">
-        <div className="flex flex-col gap-40">
+        <div className="flex flex-col gap-32 sm:gap-40">
           {staffData.map((staff, index) => (
             <StaffHeadshot
               key={index}

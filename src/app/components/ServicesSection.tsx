@@ -2,25 +2,25 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="section-snap sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10"
+      className="section-snap sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-center sm:text-left"
     >
-      <h1 className="text-3xl desktop-title blur-md">Services</h1>
+      <h1 className="text-3xl desktop-title sl-h1-mobile blur-md">Services</h1>
       <div className="flex flex-col justify-between sm:flex-row sm:font-normal gap-10 sm:gap-20 text-xl">
         <div>
-          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 blur-sm">
+          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 sl-h2-mobile blur-sm">
             Consulting
           </h2>
-          <ul className="text-sm sl-list-item">
+          <ul className="text-sm sl-list-item sl-h5-mobile blur-xxs">
             <li>Brand Strategy</li>
             <li>Creative Development and Direction</li>
             <li>Research and Insight</li>
           </ul>
         </div>
         <div>
-          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 blur-sm">
+          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 sl-h2-mobile blur-sm">
             Production
           </h2>
-          <ul className="text-sm sl-list-item">
+          <ul className="text-sm sl-list-item sl-h5-mobile blur-xxs">
             <li>Audio Podcast Production</li>
             <li>Brand Identity and Graphic Design</li>
             <li>Commercial</li>
@@ -32,10 +32,10 @@ const ServicesSection = () => {
           </ul>
         </div>
         <div>
-          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 blur-sm">
+          <h2 className="text-4xl sm:leading-none mb-5 sl-h2 sl-h2-mobile blur-sm">
             Experiences
           </h2>
-          <ul className="text-sm sl-list-item">
+          <ul className="text-sm sl-list-item sl-h5-mobile blur-xxs">
             <li>Curation and Exhibition</li>
             <li>Immersive Media</li>
             <li>Social and Cultural Campaigns</li>

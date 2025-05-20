@@ -78,19 +78,31 @@ export default function Home() {
   useEffect(() => {
     if (!introDone) return;
 
-    gsap.utils.toArray<HTMLElement>(".section-snap").forEach((section) => {
-      ScrollTrigger.create({
-        trigger: section,
-        scroller: ".container-main", // <—— This is the fix!
-        start: "top top",
-        end: "bottom bottom",
-        snap: {
-          snapTo: 1,
-          duration: 1.5,
-          delay: 0.1,
-          ease: "power1.inOut",
+    const sections = gsap.utils.toArray<HTMLElement>(".section-snap");
+
+    ScrollTrigger.create({
+      scroller: ".container-main",
+      snap: {
+        snapTo: (progress) => {
+          // Map progress [0–1] to index of sections
+          const sectionIndex = Math.round(progress * (sections.length - 1));
+          const targetSection = sections[sectionIndex];
+
+          // Only snap if the section height <= viewport height
+          if (
+            targetSection &&
+            targetSection.offsetHeight <= window.innerHeight
+          ) {
+            return sectionIndex / (sections.length - 1);
+          }
+
+          // Otherwise, don’t snap at all
+          return gsap.utils.snap(0.001, progress); // effectively a no-op
         },
-      });
+        duration: 1,
+        delay: 0.1,
+        ease: "power1.inOut",
+      },
     });
 
     const fetchEntities = async () => {
@@ -187,7 +199,7 @@ export default function Home() {
           <Navigation />
 
           {/* CONTENT */}
-          <div className="container-main relative z-10">
+          <div className="container-main relative z-10 max-w-screen overflow-hidden">
             {/* HERO VIDEO */}
             <div className="section-snap relative z-10 h-screen overflow-hidden">
               <video
@@ -202,13 +214,6 @@ export default function Home() {
                 id="unicorn-hero"
                 className="absolute top-0 left-0 w-full h-full z-20 unicorn-embed"
               /> */}
-              <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
-                <p>
-                  Strange Luck helps your audience fall in love with the world —
-                  its sounds, its stories, its textures, its contradictions, its
-                  juxtapositions, its surprises.
-                </p>
-              </div>
             </div>
 
             <section
@@ -225,7 +230,7 @@ export default function Home() {
               >
                 <source src="/about_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] left-[clamp(1rem,5vw,5rem)] bottom-[clamp(2rem,8vh,6rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] sl-h2 blur-md">
+              <div className="absolute z-10 text-left max-w-[min(60vw,600px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(2rem,12vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
                 <h2>
                   Strange Luck is a storytelling studio for the human spirit.
                 </h2>
@@ -246,7 +251,7 @@ export default function Home() {
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-right max-w-[min(80vw,600px)] right-[clamp(1rem,5vw,5rem)] bottom-[clamp(2rem,8vh,6rem)] sm:right-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] sl-h2 blur-md">
+              <div className="absolute z-10 text-left sm:text-right max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(2rem,12vh,8rem)] sm:right-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
                 <h2>
                   We work with brands, nonprofits, and media companies to tell
                   stories that generate empathy and drive engagement.
@@ -256,15 +261,17 @@ export default function Home() {
 
             <section
               id="work"
-              className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 sm:pt-24 pb-20"
+              className="section-snap relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
             >
-              <div className="relative z-10">
-                <span className="">
-                  <h1 className="gradient-text blur-sm">Choose your path</h1>
-                </span>
+              <div className="relative z-10 mb-8">
+                <div className="flex flex-col items-center sm:items-start mb-6 sm:mb-0">
+                  <h1 className="sl-h1-mobile gradient-text sm:blur-sm blur-md text-center sm:text-left w-3/4">
+                    Choose your path
+                  </h1>
+                </div>
 
-                <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
-                  <div className="flex flex-wrap text-md gap-3 sm:gap-4 sm:text-[32px]">
+                <nav className="justify-center sm:justify-between p-1 mb-[70px] sm:mb-0">
+                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-3 sm:gap-4 sm:text-[32px]">
                     {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
                       <div
                         key={category}
@@ -272,7 +279,7 @@ export default function Home() {
                       >
                         <button
                           onClick={() => handleTagClick(category)}
-                          className={`sl-list-item focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
+                          className={`sl-list-item mobile-subtitle blur-sm focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
                           style={{
                             WebkitTextFillColor:
                               selectedTag === CATEGORY_TO_TAG[category]
@@ -300,7 +307,7 @@ export default function Home() {
                   </div>
                 </nav>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[42px] gap-y-[120px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[42px] gap-y-[115px] sm:gap-y-[120px]">
                   {filteredItems.map((entity) => {
                     const asset = entity.fields;
                     return (
@@ -319,7 +326,7 @@ export default function Home() {
 
             <ServicesSection />
             <StaffSection />
-            <section className="section-snap relative  sm:py-0">
+            <section className="section-snap relative sm:py-0">
               <UpdatedContactSection />
               <Footer />
             </section>

@@ -39,8 +39,10 @@ const PortfolioThumbnail = ({
           />
         )}
       </div>
-      <h2 className="text-2xl sl-h2 blur-xs mb-[12px]">{title}</h2>
-      <p className="hidden sl-p  blur-xs sm:block">{shortDescription}</p>
+      <h2 className="text-2xl sl-h2 sl-h2-mobile blur-sm sm:blur-xs mb-[12px]">
+        {title}
+      </h2>
+      <p className="sl-p sl-p-mobile blur-xs">{shortDescription}</p>
     </div>
   );
 };
