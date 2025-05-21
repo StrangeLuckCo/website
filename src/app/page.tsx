@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
-// import ContactSection from "./components/ContactSection";
+import MobileNav from "./components/MobileNav";
+import UpdatedContactSection from "./components/UpdatedContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollHandler from "./components/ScrollHandler";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +24,7 @@ interface Tag {
 interface Project {
   fields: {
     title: string;
-    description: string;
+    shortDescription: string;
     thumbnailUrl: string;
     slug: string;
   };
@@ -46,7 +48,6 @@ export default function Home() {
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
-  // const [error, setError] = useState<string | null>(null);
   const [introDone, setIntroDone] = useState(false);
 
   const videoUrl =
@@ -67,10 +68,10 @@ export default function Home() {
     ScrollTrigger.defaults({
       scroller: ".container-main",
       snap: {
-        snapTo: 1, // snaps to every full panel (1 = whole number scroll)
-        duration: 4.5, // how long it takes to snap (increase for more resistance)
-        delay: 0.4, // how long to wait before snapping
-        ease: "power3.inOut", // easing curve for natural deceleration
+        snapTo: 1,
+        duration: 4.5,
+        delay: 0.4,
+        ease: "power3.inOut",
       },
     });
   }, []);
@@ -78,27 +79,33 @@ export default function Home() {
   useEffect(() => {
     if (!introDone) return;
 
-    gsap.utils.toArray<HTMLElement>(".section-snap").forEach((section) => {
-      ScrollTrigger.create({
-        trigger: section,
-        scroller: ".container-main", // <—— This is the fix!
-        start: "top top",
-        end: "bottom bottom",
-        snap: {
-          snapTo: 1,
-          duration: 1.5,
-          delay: 0.1,
-          ease: "power1.inOut",
+    const sections = gsap.utils.toArray<HTMLElement>(".section-snap");
+
+    ScrollTrigger.create({
+      scroller: ".container-main",
+      // @ts-expect-error: false is valid and disables snapping
+      snap: {
+        snapTo: (progress) => {
+          const sectionIndex = Math.round(progress * (sections.length - 1));
+          const section = sections[sectionIndex];
+          if (!section) return false;
+          if (section.id === "work") return false;
+
+          if (section.offsetHeight <= window.innerHeight) {
+            return sectionIndex / (sections.length - 1);
+          }
+          return false;
         },
-      });
+        duration: 1,
+        delay: 0.1,
+        ease: "power1.inOut",
+      },
     });
 
     const fetchEntities = async () => {
       try {
         const res: Project[] = await getEntities();
-        if (!res) {
-          return;
-        }
+        if (!res) return;
 
         const groupedProjects = res.reduce(
           (acc, item) => {
@@ -129,6 +136,37 @@ export default function Home() {
     fetchEntities();
   }, [introDone]);
 
+  useEffect(() => {
+    if (!introDone) return;
+
+    const aboutVideo = document.getElementById(
+      "about-video"
+    ) as HTMLVideoElement;
+    const about2Video = document.getElementById(
+      "about2-video"
+    ) as HTMLVideoElement;
+
+    ScrollTrigger.create({
+      trigger: "#about",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => aboutVideo?.play(),
+      onLeave: () => aboutVideo?.pause(),
+      onEnterBack: () => aboutVideo?.play(),
+      onLeaveBack: () => aboutVideo?.pause(),
+    });
+
+    ScrollTrigger.create({
+      trigger: "#about-2",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => about2Video?.play(),
+      onLeave: () => about2Video?.pause(),
+      onEnterBack: () => about2Video?.play(),
+      onLeaveBack: () => about2Video?.pause(),
+    });
+  }, [introDone]);
+
   const handleTagClick = (category: string) => {
     const tag = CATEGORY_TO_TAG[category];
     setSelectedTag(tag);
@@ -139,6 +177,7 @@ export default function Home() {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://use.typekit.net/hqi1rdb.css" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="preload"
@@ -148,14 +187,19 @@ export default function Home() {
         />
       </Head>
 
+      <Suspense fallback={null}>
+        <ScrollHandler introDone={introDone} />
+      </Suspense>
+
       {!introDone ? (
         <IntroVideo onIntroEnd={() => setIntroDone(true)} />
       ) : (
         <>
           <Navigation />
+          <MobileNav />
 
           {/* CONTENT */}
-          <div className="container-main relative z-10">
+          <div className="container-main relative z-10 max-w-screen overflow-hidden">
             {/* HERO VIDEO */}
             <div className="section-snap relative z-10 h-screen overflow-hidden">
               <video
@@ -170,39 +214,64 @@ export default function Home() {
                 id="unicorn-hero"
                 className="absolute top-0 left-0 w-full h-full z-20 unicorn-embed"
               /> */}
-              <div className="block sm:hidden leading-none absolute top-1/2 left-1/2 w-3/4 text-md text-white text-glow-extra-small z-10 transform -translate-x-1/2">
-                <p>
-                  Strange Luck helps your audience fall in love with the world —
-                  its sounds, its stories, its textures, its contradictions, its
-                  juxtapositions, its surprises.
-                </p>
-              </div>
             </div>
 
             <section
               id="about"
-              className="section-snap hidden sm:flex h-screen text-xl items-center justify-center relative overflow-hidden"
+              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
-              <div className="relative z-10 p-60 text-3xl text-glow-small">
-                <p>
-                  Strange Luck helps your audience fall in love with the world —
-                  its sounds, its stories, its textures, its contradictions, its
-                  juxtapositions, its surprises.
-                </p>
+              <video
+                id="about-video"
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
+                <source src="/about_background.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
+                <h2>
+                  Strange Luck is a storytelling studio for the human spirit.
+                </h2>
+              </div>
+            </section>
+
+            <section
+              id="about-2"
+              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
+            >
+              <video
+                id="about2-video"
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
+                <source src="/about2_background.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute z-10 text-left sm:text-right max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
+                <h2>
+                  We work with brands, nonprofits, and media companies to tell
+                  stories that generate empathy and drive engagement.
+                </h2>
               </div>
             </section>
 
             <section
               id="work"
-              className="section-snap relative flex flex-col text-white py-10 px-10 sm:px-20 sm:pt-24 pb-20"
+              className="section-snap relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
             >
-              <div className="relative z-10">
-                <h1 className="text-2xl font-normal sm:text-5xl tracking-normal leading-none mb-4 text-glow-extra-small sm:text-glow">
-                  CHOOSE YOUR PATH
-                </h1>
+              <div className="relative z-10 mb-8">
+                <div className="flex flex-col items-center sm:items-start mb-6 sm:mt-20 sm:mb-0">
+                  <h1 className="sl-h1-mobile gradient-text sm:blur-sm blur-md text-center sm:text-left w-3/4">
+                    Choose your path
+                  </h1>
+                </div>
 
-                <nav className="flex flex-wrap justify-center sm:justify-between p-1 mb-6">
-                  <div className="flex flex-wrap text-md gap-3 sm:gap-4 sm:text-[32px]">
+                <nav className="justify-center sm:justify-between p-1 mb-[70px] sm:mb-0">
+                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-3 sm:mb-8 sm:gap-4 sm:text-[32px]">
                     {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
                       <div
                         key={category}
@@ -210,11 +279,21 @@ export default function Home() {
                       >
                         <button
                           onClick={() => handleTagClick(category)}
-                          className={`focus:text-[#FF23CB]  hover:text-gray-400 text-glow-small cursor-[url('/hand_cursor.png'),_pointer] ${
-                            selectedTag === CATEGORY_TO_TAG[category]
-                              ? "text-[#FF23CB]"
-                              : ""
-                          }`}
+                          className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
+                          style={{
+                            WebkitTextFillColor:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "#DFFC3C"
+                                : "",
+                            textDecoration:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "underline"
+                                : "none",
+                            textDecorationColor:
+                              selectedTag === CATEGORY_TO_TAG[category]
+                                ? "#DFFC3C"
+                                : "inherit",
+                          }}
                         >
                           {category}
                         </button>
@@ -228,15 +307,16 @@ export default function Home() {
                   </div>
                 </nav>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[42px] gap-y-[115px] sm:gap-y-[120px]">
                   {filteredItems.map((entity) => {
                     const asset = entity.fields;
                     return (
                       <PortfolioThumbnail
                         key={asset.slug}
                         title={asset.title}
-                        description={asset.description}
+                        shortDescription={asset.shortDescription}
                         url={asset.thumbnailUrl}
+                        slug={asset.slug}
                       />
                     );
                   })}
@@ -246,8 +326,8 @@ export default function Home() {
 
             <ServicesSection />
             <StaffSection />
-            <section className="section-snap relative py-10 sm:py-0">
-              <ContactSection />
+            <section className="section-snap relative sm:py-0 min-h-screen">
+              <UpdatedContactSection />
               <Footer />
             </section>
           </div>
@@ -272,6 +352,6 @@ export default function Home() {
   );
 }
 
-const ContactSection = dynamic(() => import("./components/ContactSection"), {
-  ssr: false,
-});
+// const ContactSection = dynamic(() => import("./components/ContactSection"), {
+//   ssr: false,
+// });
