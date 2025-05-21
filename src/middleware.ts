@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function middleware() {
   //TODO: restore the re-direct before I merge this branch with /main
   // const { pathname } = request.nextUrl;
 
