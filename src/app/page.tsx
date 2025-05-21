@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
+import { useSearchParams } from "next/navigation";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
@@ -49,6 +50,47 @@ export default function Home() {
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   // const [error, setError] = useState<string | null>(null);
   const [introDone, setIntroDone] = useState(false);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const scrollTo = searchParams?.get("scrollTo");
+    if (!introDone || !scrollTo) return;
+
+    const container = document.querySelector(".container-main");
+
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    const tryScroll = () => {
+      const el = document.getElementById(scrollTo);
+      if (!container || !el) {
+        if (attempts < maxAttempts) {
+          attempts++;
+          setTimeout(tryScroll, 50);
+        } else {
+          // console.warn("❌ Failed to scroll to:", scrollTo);
+        }
+        return;
+      }
+
+      ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
+
+      container.scrollTo({
+        top: el.offsetTop,
+        behavior: "smooth",
+      });
+
+      setTimeout(() => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.enable());
+        window.history.replaceState({}, "", "/");
+      }, 800);
+    };
+
+    // Schedule after paint
+    requestAnimationFrame(() => {
+      setTimeout(tryScroll, 100);
+    });
+  }, [introDone, searchParams]);
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
@@ -83,22 +125,23 @@ export default function Home() {
 
     ScrollTrigger.create({
       scroller: ".container-main",
+      // @ts-expect-error: false is valid and disables snapping
       snap: {
         snapTo: (progress) => {
-          // Map progress [0–1] to index of sections
           const sectionIndex = Math.round(progress * (sections.length - 1));
-          const targetSection = sections[sectionIndex];
+          const section = sections[sectionIndex];
 
-          // Only snap if the section height <= viewport height
-          if (
-            targetSection &&
-            targetSection.offsetHeight <= window.innerHeight
-          ) {
+          if (!section) return false;
+
+          if (section.id === "work") {
+            return false; // <- 🧠 this disables snapping entirely
+          }
+
+          if (section.offsetHeight <= window.innerHeight) {
             return sectionIndex / (sections.length - 1);
           }
 
-          // Otherwise, don’t snap at all
-          return gsap.utils.snap(0.001, progress); // effectively a no-op
+          return false;
         },
         duration: 1,
         delay: 0.1,
@@ -232,7 +275,7 @@ export default function Home() {
               >
                 <source src="/about_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(60vw,600px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(2rem,12vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
+              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
                 <h2>
                   Strange Luck is a storytelling studio for the human spirit.
                 </h2>
@@ -253,7 +296,7 @@ export default function Home() {
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left sm:text-right max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(2rem,12vh,8rem)] sm:right-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
+              <div className="absolute z-10 text-left sm:text-right max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-xs">
                 <h2>
                   We work with brands, nonprofits, and media companies to tell
                   stories that generate empathy and drive engagement.
@@ -328,7 +371,7 @@ export default function Home() {
 
             <ServicesSection />
             <StaffSection />
-            <section className="section-snap relative sm:py-0">
+            <section className="section-snap relative sm:py-0 min-h-screen">
               <UpdatedContactSection />
               <Footer />
             </section>

@@ -7,7 +7,7 @@ export default function Footer() {
   const isMobile = useIsMobile();
 
   return (
-    <footer className="w-full flex flex-col items-center justify-center mt-[45px] mb-[18px] px-[24px] sm:m-0">
+    <footer className="w-full flex flex-col items-center justify-center mt-[45px] px-[24px] sm:m-0">
       <div className="flex flex-col items-center justify-center gap-y-[53px] sm:gap-y-0 sm:mb-16 sm:mx-12">
         <Image
           src={"/StrangeLuck-Logo-VHS-Wide.svg"}

@@ -6,15 +6,23 @@ export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    hash?: string
+  ) => {
     e.preventDefault();
 
     if (pathname === "/") {
-      document
-        .querySelector(".container-main")
-        ?.scrollTo({ top: 0, behavior: "smooth" });
+      if (hash) {
+        const el = document.querySelector(`#${hash}`);
+        el?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        document
+          .querySelector(".container-main")
+          ?.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
-      router.push("/");
+      router.push(`/?scrollTo=${hash}`);
     }
   };
 
@@ -25,19 +33,21 @@ export default function Navigation() {
       <div className="flex gap-x-[156px] shrink-0 items-start sl-p2 blur-xs">
         <a
           href="#work"
+          onClick={(e) => handleLogoClick(e, "work")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           Work
         </a>
         <a
           href="#services"
+          onClick={(e) => handleLogoClick(e, "services")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           Services
         </a>
         <Link
           href="/"
-          onClick={handleLogoClick}
+          onClick={(e) => handleLogoClick(e)}
           className="cursor-[url('/hand_cursor.png'),_pointer]"
         >
           <Image
@@ -52,12 +62,14 @@ export default function Navigation() {
         </Link>
         <a
           href="#about"
+          onClick={(e) => handleLogoClick(e, "about")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           About
         </a>
         <a
           href="#contact"
+          onClick={(e) => handleLogoClick(e, "contact")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
           Contact

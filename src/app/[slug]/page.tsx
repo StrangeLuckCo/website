@@ -114,10 +114,13 @@ export default function Project() {
               </h1>
             )}
             <ProjectSummary project={project} className="px-4 sm:px-20" />
-            <Carousel
-              images={project.fields.projectImages || []}
-              className={displayType !== "video" ? "mb-[300px]" : ""}
-            />
+            {project.fields.projectImages &&
+              project.fields.projectImages.length > 0 && (
+                <Carousel
+                  images={project.fields.projectImages || []}
+                  className={displayType !== "video" ? "mb-[300px]" : ""}
+                />
+              )}
 
             {project.fields.markdownDescription && (
               <div className="sl-h4 sl-p2-mobile blur-xs px-10 mb-24">

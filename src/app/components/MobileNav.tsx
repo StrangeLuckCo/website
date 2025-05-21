@@ -5,10 +5,13 @@ import { gsap } from "gsap";
 import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (!menuRef.current) return;
@@ -16,9 +19,7 @@ export default function MobileNav() {
     const el = menuRef.current;
 
     if (isOpen) {
-      // Make it visible *before* animating
       el.style.display = "flex";
-
       gsap.fromTo(
         el,
         { x: "100%" },
@@ -40,12 +41,36 @@ export default function MobileNav() {
     }
   }, [isOpen]);
 
+  const handleNavClick = (e, hash) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (pathname === "/") {
+      const el = document.querySelector(`#${hash}`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        // fallback to scrolling top if element not found
+        document
+          .querySelector(".container-main")
+          ?.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      router.push(`/?scrollTo=${hash}`);
+    }
+  };
+
   const scrollToTop = (e) => {
     e.preventDefault();
-    document
-      .querySelector(".container-main")
-      ?.scrollTo({ top: 0, behavior: "smooth" });
     setIsOpen(false);
+
+    if (pathname === "/") {
+      document
+        .querySelector(".container-main")
+        ?.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/?scrollTo=");
+    }
   };
 
   return (
@@ -108,7 +133,7 @@ export default function MobileNav() {
               href="#work"
               className="sl-h4-mobile blur-xs"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, "work")}
             >
               Work
             </Link>
@@ -118,7 +143,7 @@ export default function MobileNav() {
               href="#services"
               className="sl-h4-mobile blur-xs"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, "services")}
             >
               Services
             </Link>
@@ -128,7 +153,7 @@ export default function MobileNav() {
               href="#about"
               className="sl-h4-mobile blur-xs"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, "about")}
             >
               About
             </Link>
@@ -138,7 +163,7 @@ export default function MobileNav() {
               href="#contact"
               className="sl-h4-mobile blur-xs"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, "contact")}
             >
               Contact
             </Link>
