@@ -11,6 +11,9 @@ import type { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Options } from "@contentful/rich-text-react-renderer";
+import { useIsMobile } from "../utility/hooks";
+import Navigation from "../components/Navigation";
+import MobileNav from "../components/MobileNav";
 
 const options: Options = {
   renderText: (text) => {
@@ -54,6 +57,7 @@ export default function Project() {
   >(null);
   const params = useParams();
   const slug = params?.slug as string;
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const getProject = async () => {
@@ -68,6 +72,8 @@ export default function Project() {
 
   return (
     <div className="flex flex-col">
+      <Navigation />
+      <MobileNav />
       {project && displayType === "video" && (
         <div className="relative z-10 h-screen overflow-hidden">
           <video
@@ -82,21 +88,36 @@ export default function Project() {
       )}
 
       {project && (displayType === "audio" || displayType === "art") && (
-        <div className="relative z-10 flex pt-32 justify-center">
-          <Image
-            src={project.fields.thumbnailUrl || ""}
-            width={721}
-            height={541}
-            alt="Thumbnail image"
-          />
+        <div className="flex flex-col">
+          {isMobile && (
+            <h1 className="sl-h1 sl-h1-mobile blur-xs z-20 text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+              {project?.fields.title}
+            </h1>
+          )}
+          <div className="relative z-10 flex pt-32 justify-center">
+            <Image
+              src={project.fields.thumbnailUrl || ""}
+              width={721}
+              height={541}
+              alt="Thumbnail image"
+            />
+          </div>
         </div>
       )}
 
       <div className="h-full relative z-10 pt-28 text-white text-2xl">
         {project && (
           <div className="flex flex-col gap-y-[77px]">
+            {isMobile && displayType === "video" && (
+              <h1 className="sl-h1 sl-h1-mobile blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+                {project?.fields.title}
+              </h1>
+            )}
             <ProjectSummary project={project} className="px-4 sm:px-20" />
-            <Carousel images={project.fields.projectImages || []} />
+            <Carousel
+              images={project.fields.projectImages || []}
+              className={displayType !== "video" ? "mb-[300px]" : ""}
+            />
 
             {project.fields.markdownDescription && (
               <div className="sl-h4 sl-p2-mobile blur-xs px-10 mb-24">

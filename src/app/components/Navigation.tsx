@@ -1,7 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navigation() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (pathname === "/") {
+      document
+        .querySelector(".container-main")
+        ?.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
+  };
+
   const logo =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.png";
   return (
@@ -19,7 +35,11 @@ export default function Navigation() {
         >
           Services
         </a>
-        <Link href="/" className="cursor-[url('/hand_cursor.png'),_pointer]">
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="cursor-[url('/hand_cursor.png'),_pointer]"
+        >
           <Image
             alt="demo"
             priority

@@ -2,9 +2,11 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="section-snap sm:min-h-screen flex flex-col p-12 py-6 pb-20 sm:pb-auto sm:p-20 gap-10 text-center sm:text-left"
+      className="section-snap sm:min-h-screen flex flex-col p-12 py-20 sm:pb-auto sm:p-20 gap-10 text-center sm:text-left"
     >
-      <h1 className="text-3xl desktop-title sl-h1-mobile blur-md">Services</h1>
+      <h1 className="text-3xl desktop-title sl-h1-mobile blur-md sm:mt-20">
+        Services
+      </h1>
       <div className="flex flex-col justify-between sm:flex-row sm:font-normal gap-10 sm:gap-20 text-xl">
         <div>
           <h2 className="text-4xl sm:leading-none mb-5 sl-h2 sl-h2-mobile blur-sm">

@@ -1,5 +1,8 @@
+"use client";
+
 import { Project } from "../../[slug]/page";
 import FilmThumbnail from "./FilmThumbnail";
+import { useIsMobile } from "../../utility/hooks";
 
 export const ProjectSummary = ({
   project,
@@ -10,11 +13,14 @@ export const ProjectSummary = ({
 }) => {
   const { title, filmPoster, description, releaseDate, productionCredits } =
     project.fields;
+  const isMobile = useIsMobile();
   return (
     <div className={`flex flex-col sm:gap-y-12 ${className}`}>
-      <h1 className="sl-h1 sl-h1-mobile blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
-        {title}
-      </h1>
+      {!isMobile && (
+        <h1 className="sl-h1 sl-h1-mobile blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+          {title}
+        </h1>
+      )}
       <div className="flex flex-col sm:flex-row sm:gap-x-10">
         {filmPoster && (
           <div className="mb-[58px] sm:mb-0  w-full sm:min-w-[340px]">

@@ -7,6 +7,7 @@ import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
+import MobileNav from "./components/MobileNav";
 import UpdatedContactSection from "./components/UpdatedContactSection";
 import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
@@ -197,6 +198,7 @@ export default function Home() {
       ) : (
         <>
           <Navigation />
+          <MobileNav />
 
           {/* CONTENT */}
           <div className="container-main relative z-10 max-w-screen overflow-hidden">
@@ -264,14 +266,14 @@ export default function Home() {
               className="section-snap relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
             >
               <div className="relative z-10 mb-8">
-                <div className="flex flex-col items-center sm:items-start mb-6 sm:mb-0">
+                <div className="flex flex-col items-center sm:items-start mb-6 sm:mt-20 sm:mb-0">
                   <h1 className="sl-h1-mobile gradient-text sm:blur-sm blur-md text-center sm:text-left w-3/4">
                     Choose your path
                   </h1>
                 </div>
 
                 <nav className="justify-center sm:justify-between p-1 mb-[70px] sm:mb-0">
-                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-3 sm:gap-4 sm:text-[32px]">
+                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-3 sm:mb-8 sm:gap-4 sm:text-[32px]">
                     {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
                       <div
                         key={category}
@@ -279,7 +281,7 @@ export default function Home() {
                       >
                         <button
                           onClick={() => handleTagClick(category)}
-                          className={`sl-list-item mobile-subtitle blur-sm focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
+                          className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
                           style={{
                             WebkitTextFillColor:
                               selectedTag === CATEGORY_TO_TAG[category]

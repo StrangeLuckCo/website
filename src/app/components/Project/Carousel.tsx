@@ -13,9 +13,15 @@ const CAROUSEL_MIN_HEIGHT = 208;
 // const CAROUSEL_MAX_HEIGHT = 343;
 const IMAGE_MIN_WIDTH = 421;
 
-export default function Carousel({ images }: { images: string[] }) {
+export default function Carousel({
+  images,
+  className,
+}: {
+  images: string[];
+  className?: string;
+}) {
   return (
-    <CarouselShad className="w-full max-w-screen">
+    <CarouselShad className={`w-full max-w-screen ${className}`}>
       <div className="relative">
         <CarouselContent className="flex">
           {images.map((src, index) => (

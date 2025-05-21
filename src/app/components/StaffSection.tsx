@@ -72,7 +72,7 @@ export default function StaffSection() {
       id="staff"
       className="flex flex-col section-snap min-h-screen sm:p-20 pt-20 gap-y-10 text-center sm:text-left"
     >
-      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title sl-h1-mobile blur-md">
+      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title sl-h1-mobile blur-md sm:mt-20">
         About
       </h1>
       <div className="min-h-screen flex items-center justify-center mb-20">

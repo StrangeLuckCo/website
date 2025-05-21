@@ -167,7 +167,20 @@ body {
     text-shadow: -3px 2px 4px #000;
   }
 }
-
+/* Mobile/Nav Menu */
+@media (max-width: 639px) {
+  .mobile-nav-menu {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    -webkit-text-fill-color: #e3e4cb;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: -3px 2px 4px #000;
+  }
+}
 /* Helvetica Desktop Body */
 .desktop-body {
   filter: blur(0.75px);
@@ -257,7 +270,7 @@ body {
     -webkit-text-fill-color: #e3e4cb;
 
     text-shadow: -5px 4px 5px #000;
-    -webkit-text-stroke-width: 1.1px;
+    -webkit-text-stroke-width: 0.6px;
     -webkit-text-stroke-color: #000;
   }
 }

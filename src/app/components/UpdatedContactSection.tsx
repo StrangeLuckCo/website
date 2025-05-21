@@ -9,7 +9,7 @@ export default function UpdatedContactSection() {
       id="contact"
       className="z-10 sm:h-screen pt-20 sm:pt-0 mb-12 sm:mb-20 max-w-screen overflow-hidden flex flex-col items-center justify-center text-center"
     >
-      <h2 className="sl-h2 sl-h4-mobile blur-xs sm:blur-md w-4/5 mb-16 sm:mb-4 ">
+      <h2 className="sl-h2 sl-h4-mobile blur-xs sm:blur-md w-4/5 mb-16 sm:mt-20 sm:mb-4 ">
         Want to fall in love with the world — its sounds, its stories, its
         textures, its contradictions, its juxtapositions, its surprises?
       </h2>
