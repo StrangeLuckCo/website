@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
-import { useSearchParams } from "next/navigation";
 import Navigation from "./components/Navigation";
 import StaffSection from "./components/StaffSection";
 import ServicesSection from "./components/ServicesSection";
@@ -14,6 +13,7 @@ import Footer from "./components/Footer";
 import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollHandler from "./components/ScrollHandler";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,49 +48,7 @@ export default function Home() {
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
-  // const [error, setError] = useState<string | null>(null);
   const [introDone, setIntroDone] = useState(false);
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const scrollTo = searchParams?.get("scrollTo");
-    if (!introDone || !scrollTo) return;
-
-    const container = document.querySelector(".container-main");
-
-    let attempts = 0;
-    const maxAttempts = 50;
-
-    const tryScroll = () => {
-      const el = document.getElementById(scrollTo);
-      if (!container || !el) {
-        if (attempts < maxAttempts) {
-          attempts++;
-          setTimeout(tryScroll, 50);
-        } else {
-          // console.warn("❌ Failed to scroll to:", scrollTo);
-        }
-        return;
-      }
-
-      ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
-
-      container.scrollTo({
-        top: el.offsetTop,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.enable());
-        window.history.replaceState({}, "", "/");
-      }, 800);
-    };
-
-    // Schedule after paint
-    requestAnimationFrame(() => {
-      setTimeout(tryScroll, 100);
-    });
-  }, [introDone, searchParams]);
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
@@ -110,10 +68,10 @@ export default function Home() {
     ScrollTrigger.defaults({
       scroller: ".container-main",
       snap: {
-        snapTo: 1, // snaps to every full panel (1 = whole number scroll)
-        duration: 4.5, // how long it takes to snap (increase for more resistance)
-        delay: 0.4, // how long to wait before snapping
-        ease: "power3.inOut", // easing curve for natural deceleration
+        snapTo: 1,
+        duration: 4.5,
+        delay: 0.4,
+        ease: "power3.inOut",
       },
     });
   }, []);
@@ -130,17 +88,12 @@ export default function Home() {
         snapTo: (progress) => {
           const sectionIndex = Math.round(progress * (sections.length - 1));
           const section = sections[sectionIndex];
-
           if (!section) return false;
-
-          if (section.id === "work") {
-            return false; // <- 🧠 this disables snapping entirely
-          }
+          if (section.id === "work") return false;
 
           if (section.offsetHeight <= window.innerHeight) {
             return sectionIndex / (sections.length - 1);
           }
-
           return false;
         },
         duration: 1,
@@ -152,9 +105,7 @@ export default function Home() {
     const fetchEntities = async () => {
       try {
         const res: Project[] = await getEntities();
-        if (!res) {
-          return;
-        }
+        if (!res) return;
 
         const groupedProjects = res.reduce(
           (acc, item) => {
@@ -235,6 +186,10 @@ export default function Home() {
           type="video/mp4"
         />
       </Head>
+
+      <Suspense fallback={null}>
+        <ScrollHandler introDone={introDone} />
+      </Suspense>
 
       {!introDone ? (
         <IntroVideo onIntroEnd={() => setIntroDone(true)} />
