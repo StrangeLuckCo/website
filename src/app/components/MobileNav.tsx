@@ -94,7 +94,7 @@ export default function MobileNav() {
         className="mobile-nav-menu blur-xs"
         onClick={() => setIsOpen(true)}
       >
-        Menu
+        MENU
       </button>
 
       <div
@@ -135,7 +135,7 @@ export default function MobileNav() {
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "work")}
             >
-              Work
+              WORK
             </Link>
           </li>
           <li>
@@ -145,7 +145,7 @@ export default function MobileNav() {
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "services")}
             >
-              Services
+              SERVICES
             </Link>
           </li>
           <li>
@@ -155,7 +155,7 @@ export default function MobileNav() {
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "about")}
             >
-              About
+              ABOUT
             </Link>
           </li>
           <li>
@@ -165,7 +165,7 @@ export default function MobileNav() {
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "contact")}
             >
-              Contact
+              CONTACT
             </Link>
           </li>
         </ul>

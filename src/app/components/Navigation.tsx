@@ -36,14 +36,14 @@ export default function Navigation() {
           onClick={(e) => handleLogoClick(e, "work")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
-          Work
+          WORK
         </a>
         <a
           href="#services"
           onClick={(e) => handleLogoClick(e, "services")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
-          Services
+          SERVICES
         </a>
         <Link
           href="/"
@@ -65,14 +65,14 @@ export default function Navigation() {
           onClick={(e) => handleLogoClick(e, "about")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
-          About
+          ABOUT
         </a>
         <a
           href="#contact"
           onClick={(e) => handleLogoClick(e, "contact")}
           className="hover:text-black hover:bg-[#dffc3c] cursor-[url('/hand_cursor.png'),_pointer]"
         >
-          Contact
+          CONTACT
         </a>
       </div>
     </nav>
