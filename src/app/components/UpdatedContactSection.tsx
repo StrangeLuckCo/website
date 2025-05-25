@@ -7,7 +7,7 @@ export default function UpdatedContactSection() {
   return (
     <section
       id="contact"
-      className="z-10 sm:h-screen pt-20 sm:pt-0 mb-12 sm:mb-20 max-w-screen overflow-hidden flex flex-col items-center justify-center text-center"
+      className="z-10 sm:h-screen pt-20 sm:pt-0 pb-16 mb-12 sm:mb-20 max-w-screen overflow-hidden flex flex-col items-center justify-center text-center"
     >
       <h2 className="sl-h2 sl-h4-mobile blur-xs sm:blur-md w-4/5 mb-16 sm:mt-20 sm:mb-4 ">
         Want to fall in love with the world — its sounds, its stories, its
@@ -16,7 +16,10 @@ export default function UpdatedContactSection() {
       <h3 className="sl-h4-mobile sl-h3 blur-xs sm:blur-sm mb-6">
         A dream collaboration could be in your future.
       </h3>
-      <Link href="mailto:hi@yourstrangeluck.com">
+      <Link
+        href="mailto:hi@yourstrangeluck.com"
+        className="cursor-[url('/hand_cursor.png'),_pointer]"
+      >
         <h1
           className="sl-h5-mobile desktop-title blur-xs sm:blur-md mb-2 sm:mb-10 underline cursor-[url('/hand_cursor.png'),_pointer]"
           style={{

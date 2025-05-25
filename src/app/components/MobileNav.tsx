@@ -123,7 +123,7 @@ export default function MobileNav() {
           <Link
             href="#"
             onClick={(e) => scrollToTop(e)}
-            className="sl-h1-mobile blur-sm mb-10"
+            className="sl-h1-mobile blur-sm mb-10 hover-fill-neon"
             style={{ WebkitTextStrokeWidth: "0.75px" }}
           >
             Home

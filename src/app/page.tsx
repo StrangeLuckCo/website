@@ -230,7 +230,7 @@ export default function Home() {
               >
                 <source src="/about_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-sm">
+              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-md">
                 <h2>
                   Strange Luck is a storytelling studio for the human spirit.
                 </h2>
@@ -251,7 +251,7 @@ export default function Home() {
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-sm">
+              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-md">
                 <h2>
                   We work with brands, nonprofits, and media companies to tell
                   stories that generate empathy and drive engagement.

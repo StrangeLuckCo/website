@@ -353,6 +353,11 @@ body {
   -webkit-text-stroke-color: #000;
 }
 
+.hover-fill-neon:hover {
+  -webkit-text-fill-color: #e6fc6d;
+  -webkit-text-stroke-width: 0px;
+}
+
 /* VHS screen wrapper */
 .vhs-screen {
   position: relative;
