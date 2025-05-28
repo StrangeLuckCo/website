@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
+  const [hovered, setHovered] = useState(false);
 
   const handleLogoClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -27,7 +29,9 @@ export default function Navigation() {
   };
 
   const logo =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.png";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.svg";
+  const logoGlow =
+    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE-Glowing.svg";
   return (
     <nav className="hidden sm:flex h-[127px] absolute w-full text-#b6b7b9 justify-center items-center px-[94px] pt-[22px] pb-[62px] z-20 bg-nav-gradient backdrop-blur-sm">
       <div className="flex gap-x-[156px] shrink-0 items-start sl-p2 blur-xs">
@@ -53,16 +57,18 @@ export default function Navigation() {
           <Image
             alt="demo"
             priority
-            src={logo}
+            src={hovered ? logoGlow : logo}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             height={51}
             width={267}
-            style={{ width: "267px", height: "auto" }}
+            style={{ height: "auto" }}
             className="hidden sm:block "
           />
         </Link>
         <a
-          href="#about"
-          onClick={(e) => handleLogoClick(e, "about")}
+          href="#staff"
+          onClick={(e) => handleLogoClick(e, "staff")}
           className="cursor-[url('/hand_cursor.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >
           ABOUT
