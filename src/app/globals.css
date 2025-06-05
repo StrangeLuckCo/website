@@ -30,6 +30,13 @@ body {
   min-height: 100vh;
 }
 
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("/VCR_OSD_MONO.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* Helvetica Mobile Title */
 @media (max-width: 639px) {
   .mobile-title {
@@ -402,6 +409,19 @@ body {
 .vhs-text::after {
   color: rgba(80, 80, 255, 0.3);
   transform: translateX(0.5px);
+}
+
+.vhs-scrubber-text {
+  color: #fff;
+  /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #000;
+  font-family: "VCR OSD Mono";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 4.2px;
 }
 
 @keyframes flicker {

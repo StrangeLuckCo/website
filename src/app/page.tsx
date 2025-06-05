@@ -5,15 +5,17 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
-import StaffSection from "./components/StaffSection";
-import ServicesSection from "./components/ServicesSection";
 import MobileNav from "./components/MobileNav";
-import UpdatedContactSection from "./components/UpdatedContactSection";
-import Footer from "./components/Footer";
+import GradientBackgroundHomepageSections from "./components/GradientBackgroundHomepageSections";
 import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollHandler from "./components/ScrollHandler";
+import {
+  isModernChrome,
+  useUnicornEmbedding,
+  useIsMobile,
+} from "./utility/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,6 +51,9 @@ export default function Home() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   const [introDone, setIntroDone] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
+  const isMobile = useIsMobile();
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
@@ -165,6 +170,18 @@ export default function Home() {
       onEnterBack: () => about2Video?.play(),
       onLeaveBack: () => about2Video?.pause(),
     });
+
+    const workVideo = document.getElementById("work-video") as HTMLVideoElement;
+
+    ScrollTrigger.create({
+      trigger: "#work",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => workVideo?.play(),
+      onLeave: () => workVideo?.pause(),
+      onEnterBack: () => workVideo?.play(),
+      onLeaveBack: () => workVideo?.pause(),
+    });
   }, [introDone]);
 
   const handleTagClick = (category: string) => {
@@ -172,6 +189,19 @@ export default function Home() {
     setSelectedTag(tag);
     setFilteredItems(projects[tag] || []);
   };
+
+  useEffect(() => {
+    // Run client-only logic after hydration
+    setShouldShowUnicorn(isModernChrome() && !isMobile);
+    setIsReady(true);
+  }, [isMobile]);
+
+  useUnicornEmbedding({
+    elementId: "unicorn-hero",
+    filePath: "/Mouse_Shader_Background.json.txt",
+    altText: "Welcome to Strange Luck",
+    ariaLabel: "Canvas animation scene",
+  });
 
   return (
     <>
@@ -201,24 +231,28 @@ export default function Home() {
           {/* CONTENT */}
           <div className="container-main relative z-10 max-w-screen overflow-hidden">
             {/* HERO VIDEO */}
-            <div className="section-snap relative z-10 h-screen overflow-hidden">
-              <video
-                src={videoUrl}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
-              />
-              {/* <div
-                id="unicorn-hero"
-                className="absolute top-0 left-0 w-full h-full z-20 unicorn-embed"
-              /> */}
+            <div className="section-snap relative z-10 h-screen w-full overflow-hidden">
+              {!shouldShowUnicorn && (
+                <video
+                  src={videoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
+                />
+              )}
+              {isReady && shouldShowUnicorn && (
+                <div
+                  id="unicorn-hero"
+                  className="absolute top-0 left-0 w-full h-full z-10"
+                />
+              )}
             </div>
 
             <section
               id="about"
-              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
+              className="section-snap z-10 flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
               <video
                 id="about-video"
@@ -239,7 +273,7 @@ export default function Home() {
 
             <section
               id="about-2"
-              className="section-snap flex h-screen text-xl items-center justify-center relative overflow-hidden"
+              className="section-snap z-10 flex h-screen text-xl items-center justify-center relative overflow-hidden"
             >
               <video
                 id="about2-video"
@@ -261,8 +295,20 @@ export default function Home() {
 
             <section
               id="work"
-              className="section-snap relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
+              className="section-snap z-10 relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
             >
+              <video
+                id="work-video"
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
+                <source src="/BlueVHS.mp4" type="video/mp4" />
+                <source src="/BlueVHS.mov" type="video/quicktime" />
+                Your browser does not support the video tag.
+              </video>
               <div className="relative z-10 mb-8">
                 <div className="flex flex-col items-center sm:items-start mb-6 sm:mt-20 sm:mb-0">
                   <h1 className="sl-h1-mobile gradient-text sm:blur-sm blur-md text-center sm:text-left w-3/4">
@@ -323,17 +369,11 @@ export default function Home() {
                 </div>
               </div>
             </section>
-
-            <ServicesSection />
-            <StaffSection />
-            <section className="section-snap relative sm:py-0 min-h-screen">
-              <UpdatedContactSection />
-              <Footer />
-            </section>
+            <GradientBackgroundHomepageSections />
           </div>
 
           {/* Parallax Background */}
-          <div className="fixed top-0 left-0 w-full h-full z-0">
+          {/* <div className="fixed top-0 left-0 w-full h-full z-0">
             <video
               autoPlay
               loop
@@ -345,7 +385,7 @@ export default function Home() {
               <source src="/BlueVHS.mov" type="video/quicktime" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </div> */}
         </>
       )}
     </>
