@@ -13,7 +13,7 @@ export default {
         foreground: "var(--foreground)",
       },
       cursor: {
-        hand: 'url("/hand_cursor.png"), auto',
+        hand: 'url("/hand_cursor_2.png"), auto',
       },
       backdropBlur: {
         sm: "5px",

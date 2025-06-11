@@ -38,21 +38,21 @@ export default function Navigation() {
         <a
           href="#work"
           onClick={(e) => handleLogoClick(e, "work")}
-          className="cursor-[url('/hand_cursor.png'),_pointer] hover-fill-neon hover:blur-xxs"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >
           WORK
         </a>
         <a
           href="#services"
           onClick={(e) => handleLogoClick(e, "services")}
-          className="cursor-[url('/hand_cursor.png'),_pointer] hover-fill-neon hover:blur-xxs"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >
           SERVICES
         </a>
         <Link
           href="/"
           onClick={(e) => handleLogoClick(e)}
-          className="cursor-[url('/hand_cursor.png'),_pointer]"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
           <Image
             alt="demo"
@@ -69,14 +69,14 @@ export default function Navigation() {
         <a
           href="#staff"
           onClick={(e) => handleLogoClick(e, "staff")}
-          className="cursor-[url('/hand_cursor.png'),_pointer] hover-fill-neon hover:blur-xxs"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >
           ABOUT
         </a>
         <a
           href="#contact"
           onClick={(e) => handleLogoClick(e, "contact")}
-          className="cursor-[url('/hand_cursor.png'),_pointer] hover-fill-neon hover:blur-xxs"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >
           CONTACT
         </a>

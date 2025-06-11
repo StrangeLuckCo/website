@@ -18,10 +18,10 @@ export default function UpdatedContactSection() {
       </h3>
       <Link
         href="mailto:hi@yourstrangeluck.com"
-        className="cursor-[url('/hand_cursor.png'),_pointer]"
+        className="cursor-[url('/hand_cursor_2.png'),_pointer]"
       >
         <h1
-          className="sl-h5-mobile desktop-title blur-xs sm:blur-md mb-2 sm:mb-10 underline cursor-[url('/hand_cursor.png'),_pointer]"
+          className="sl-h5-mobile desktop-title blur-xs sm:blur-md mb-2 sm:mb-10 underline cursor-[url('/hand_cursor_2.png'),_pointer]"
           style={{
             WebkitTextFillColor: isMobile ? "#E6FC6D" : "#DFFC3C",
             textDecorationColor: "#DFFC3C",
@@ -41,7 +41,7 @@ export default function UpdatedContactSection() {
         <Link
           href="https://vimeo.com/strangeluck"
           target="_blank"
-          className="cursor-[url('/hand_cursor.png'),_pointer]"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
           <p
             className="sl-p text-[#E6FC6D] underline blur-xxs"
@@ -56,7 +56,7 @@ export default function UpdatedContactSection() {
         <Link
           href="https://www.instagram.com/yourstrangeluck/"
           target="_blank"
-          className="cursor-[url('/hand_cursor.png'),_pointer]"
+          className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
           <p
             className="sl-p text-[#E6FC6D] underline blur-xxs"

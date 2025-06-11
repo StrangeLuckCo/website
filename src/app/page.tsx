@@ -325,7 +325,7 @@ export default function Home() {
                       >
                         <button
                           onClick={() => handleTagClick(category)}
-                          className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor.png'),_pointer] focus:decoration-[#DFFC3C] `}
+                          className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor_2.png'),_pointer] focus:decoration-[#DFFC3C] `}
                           style={{
                             WebkitTextFillColor:
                               selectedTag === CATEGORY_TO_TAG[category]
