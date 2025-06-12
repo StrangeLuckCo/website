@@ -27,27 +27,29 @@ export const ProjectSummary = ({
             <FilmThumbnail src={filmPoster} />{" "}
           </div>
         )}
-        <div className="flex flex-col gap-y-6">
-          {releaseDate && (
-            <div>
-              <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
-                Release Date
-              </h3>
-              <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
-                {releaseDate}
-              </h4>
-            </div>
-          )}
-          {productionCredits && (
-            <div>
-              <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
-                Production Credits
-              </h3>
-              <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
-                {productionCredits}
-              </h4>
-            </div>
-          )}
+        <div className="flex flex-col gap-y-12">
+          <div className="flex flex-col gap-y-6">
+            {releaseDate && (
+              <div className="flex flex-col gap-y-[6px]">
+                <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
+                  Release Date
+                </h3>
+                <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
+                  {releaseDate}
+                </h4>
+              </div>
+            )}
+            {productionCredits && (
+              <div className="flex flex-col gap-y-[6px]">
+                <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
+                  Production Credits
+                </h3>
+                <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
+                  {productionCredits}
+                </h4>
+              </div>
+            )}
+          </div>
           <p className="sl-p sl-p-mobile blur-xxs font-normal text-xl">
             {description}
           </p>

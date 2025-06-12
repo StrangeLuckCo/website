@@ -234,7 +234,7 @@ export default function Project() {
               {project?.fields.title}
             </h1>
           )}
-          <div className="relative z-10 flex pt-32 justify-center items-center flex-col">
+          <div className="relative z-10 flex pt-32 justify-center items-center flex-col gap-y-6">
             <Image
               src={project.fields.thumbnailUrl || ""}
               width={721}
@@ -261,7 +261,10 @@ export default function Project() {
             <ProjectSummary project={project} className="px-4 sm:px-20" />
             {project.fields.projectImages &&
               project.fields.projectImages.length > 0 && (
-                <Carousel images={project.fields.projectImages || []} />
+                <Carousel
+                  images={project.fields.projectImages || []}
+                  className="mt-12"
+                />
               )}
 
             {project.fields.markdownDescription && (

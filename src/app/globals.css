@@ -34,7 +34,7 @@ body {
 
 @font-face {
   font-family: "VCR OSD Mono";
-  src: url("/VCR_OSD_MONO.ttf") format("truetype");
+  src: url("/fonts/VCR_OSD_MONO.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
@@ -329,7 +329,7 @@ body {
     font-weight: 500;
     line-height: normal;
     letter-spacing: 1.6px;
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 0.25px;
     -webkit-text-stroke-color: #000;
 
     -webkit-text-fill-color: #e3e4cb;
@@ -349,6 +349,7 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     text-shadow: -5px 4px 4px #000;
+    -webkit-text-stroke-width: 0.75px;
   }
 }
 

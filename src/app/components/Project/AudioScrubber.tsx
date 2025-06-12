@@ -80,7 +80,12 @@ export default function AudioScrubber({
 
   return (
     <div className="w-full max-w-[756px] gap-y-6 flex flex-col items-center">
-      <h2 className="sl-h2 vhs-scrubber-text">{formatTime(internalTime)}</h2>
+      <h2
+        className="sl-h2 vhs-scrubber-text !text-[40px] !tracking-[6px]"
+        style={{ WebkitTextStrokeWidth: "0.75px", WebkitTextFillColor: "#FFF" }}
+      >
+        {formatTime(internalTime)}
+      </h2>
 
       <div
         ref={scrubberRef}
@@ -99,7 +104,15 @@ export default function AudioScrubber({
       </div>
 
       {showControls && (
-        <div className="flex gap-x-4 mt-4">
+        <div className="flex  gap-x-4 mt-4 max-h-[32px]">
+          <Image
+            src="/skip.png"
+            onClick={prev}
+            width={70}
+            height={40}
+            className="rotate-180"
+            alt="Previous audio"
+          />
           <Image
             src="/forward_reverse.png"
             onClick={() => play(2, "reverse")}
@@ -131,19 +144,12 @@ export default function AudioScrubber({
             height={40}
             alt="Fast forward"
           />
-          <Image
-            src="/skip.png"
-            onClick={prev}
-            width={70}
-            height={40}
-            alt="Previous audio"
-          />
+
           <Image
             src="/skip.png"
             onClick={next}
             width={70}
             height={40}
-            className="rotate-180"
             alt="Next audio"
           />
         </div>
