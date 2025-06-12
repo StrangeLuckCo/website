@@ -1,100 +1,58 @@
+// AudioScrubber.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useAudioEngine } from "../../utility/hooks";
 import Image from "next/image";
+import { useState } from "react";
 
-export default function AudioScrubber({ audio }: { audio: string }) {
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+interface Props {
+  audioUrls: string[];
+  showControls?: boolean;
+}
+
+export default function AudioScrubber({
+  audioUrls,
+  showControls = true,
+}: Props) {
+  const {
+    currentTime,
+    duration,
+    isPlaying,
+    play,
+    pause,
+    stop,
+    goTo,
+    next,
+    prev,
+  } = useAudioEngine(audioUrls);
+
   const scrubberRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
+  const [internalTime, setInternalTime] = useState(0);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration);
-    };
-
-    const interval = setInterval(() => {
-      if (!audio.paused && !audio.ended && !isDraggingRef.current) {
-        updateTime();
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [audio]);
-
-  const togglePlayback = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.playbackRate = 1;
-    setPlaybackSpeed(1);
-
-    if (audio.paused) {
-      audio.play();
-      setIsPlaying(true);
-    } else {
-      audio.pause();
-      setIsPlaying(false);
+    if (!isDraggingRef.current) {
+      setInternalTime(currentTime);
     }
-  };
-
-  const stopAudio = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.pause();
-    audio.currentTime = 0;
-    setCurrentTime(0);
-    setIsPlaying(false);
-    setPlaybackSpeed(1);
-  };
-
-  const fastForward = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.playbackRate = 2;
-    audio.play();
-    setPlaybackSpeed(2);
-    setIsPlaying(true);
-  };
+  }, [currentTime]);
 
   const handleScrub = (e: React.PointerEvent<HTMLDivElement>) => {
     const scrubber = scrubberRef.current;
-    const audio = audioRef.current;
-    if (!scrubber || !audio || !duration) return;
-
+    if (!scrubber || !duration) return;
     const rect = scrubber.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     const percent = Math.max(0, Math.min(1, offsetX / rect.width));
     const newTime = percent * duration;
-
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
+    goTo(newTime);
   };
 
   const handlePointerMove = (e: PointerEvent) => {
-    if (!isDraggingRef.current) return;
-    const scrubber = scrubberRef.current;
-    const audio = audioRef.current;
-    if (!scrubber || !audio || !duration) return;
-
-    const rect = scrubber.getBoundingClientRect();
+    if (!isDraggingRef.current || !scrubberRef.current || !duration) return;
+    const rect = scrubberRef.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     const percent = Math.max(0, Math.min(1, offsetX / rect.width));
-    const newTime = percent * duration;
-
-    setCurrentTime(newTime); // visual feedback
+    setInternalTime(percent * duration);
   };
 
   const handlePointerUp = (e: PointerEvent) => {
@@ -121,70 +79,75 @@ export default function AudioScrubber({ audio }: { audio: string }) {
   };
 
   return (
-    <div className="gap-y-6 flex flex-col items-center">
-      <audio
-        ref={audioRef}
-        src={audio}
-        autoPlay
-        controls={false}
-        preload="auto"
-      />
-
-      <h2 className="sl-h2 vhs-scrubber-text">{formatTime(currentTime)}</h2>
+    <div className="w-full max-w-[756px] gap-y-6 flex flex-col items-center">
+      <h2 className="sl-h2 vhs-scrubber-text">{formatTime(internalTime)}</h2>
 
       <div
         ref={scrubberRef}
         onPointerDown={handlePointerDown}
-        className="w-full max-w-[250px] h-[27px] bg-[#3c3436] border-2 border-[#D9D9D9] z-40 cursor-pointer relative"
+        className="w-full h-[27px] bg-[#3c3436] border-2 border-[#D9D9D9] z-40 relative"
       >
         <div
           className="h-full bg-[#D9D9D9] absolute top-0 left-0"
           style={{
-            width: duration ? `${(currentTime / duration) * 100}%` : "0%",
+            width:
+              duration && duration > 0
+                ? `${(internalTime / duration) * 100}%`
+                : "0%",
           }}
         ></div>
       </div>
 
-      <div className="flex gap-x-4">
-        <Image
-          src={"/forward_reverse.png"}
-          onClick={() =>
-            alert("Reverse playback not supported in browsers natively")
-          }
-          width={70}
-          height={40}
-          className="rotate-180 cursor-pointer"
-          style={{ maxHeight: "29px" }}
-          alt="Reverse button"
-        />
-        <Image
-          src={"/stop_button_container.svg"}
-          onClick={stopAudio}
-          width={70}
-          height={40}
-          className="cursor-pointer"
-          style={{ maxHeight: "29px" }}
-          alt="Stop button"
-        />
-        <Image
-          src={"/play_button_container.svg"}
-          onClick={togglePlayback}
-          width={70}
-          height={40}
-          className="cursor-pointer"
-          style={{ maxHeight: "29px" }}
-          alt="Play button"
-        />
-        <Image
-          src={"/forward_reverse.png"}
-          onClick={fastForward}
-          width={70}
-          height={40}
-          className="cursor-pointer"
-          style={{ maxHeight: "29px" }}
-          alt="Fast forward button"
-        />
-      </div>
+      {showControls && (
+        <div className="flex gap-x-4 mt-4">
+          <Image
+            src="/forward_reverse.png"
+            onClick={() => play(2, "reverse")}
+            width={70}
+            height={40}
+            className="rotate-180"
+            alt="Reverse"
+          />
+          <Image
+            src="/stop_button_container.svg"
+            onClick={stop}
+            width={70}
+            height={40}
+            alt="Stop"
+          />
+          <Image
+            src="/play_button_container.svg"
+            onClick={() =>
+              duration > 0 ? (isPlaying ? pause() : play()) : null
+            }
+            width={70}
+            height={40}
+            alt="Play"
+          />
+          <Image
+            src="/forward_reverse.png"
+            onClick={() => play(2, "forward")}
+            width={70}
+            height={40}
+            alt="Fast forward"
+          />
+          <Image
+            src="/skip.png"
+            onClick={prev}
+            width={70}
+            height={40}
+            alt="Previous audio"
+          />
+          <Image
+            src="/skip.png"
+            onClick={next}
+            width={70}
+            height={40}
+            className="rotate-180"
+            alt="Next audio"
+          />
+        </div>
+      )}
     </div>
   );
 }

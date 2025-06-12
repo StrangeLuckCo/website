@@ -14,7 +14,8 @@ import type { Options } from "@contentful/rich-text-react-renderer";
 import { useIsMobile } from "../utility/hooks";
 import Navigation from "../components/Navigation";
 import MobileNav from "../components/MobileNav";
-import AudioScrubber from "../components//Project/AudioScrubber";
+import AudioScrubber from "../components/Project/AudioScrubber";
+import MediaScrubber from "../components/Project/MediaScrubber";
 
 const options: Options = {
   renderText: (text) => {
@@ -45,6 +46,7 @@ type ProjectFields = {
   releaseDate?: string;
   displayType: string;
   projectImages?: string[];
+  projectAudioFiles?: string[];
 };
 
 export type Project = {
@@ -69,6 +71,7 @@ export default function Project() {
   useEffect(() => {
     const getProject = async () => {
       const res = await getProjectBySlug(slug);
+      console.log(res);
       setProject(res);
       setDisplayType(res.fields.displayType.toLowerCase());
     };
@@ -131,6 +134,19 @@ export default function Project() {
     );
   };
 
+  const formatTime = (secs: number): string => {
+    const totalSeconds = Math.floor(secs);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const hh = hours > 0 ? `${hours.toString().padStart(2, "0")}:` : "";
+    const mm = minutes.toString().padStart(2, "0");
+    const ss = seconds.toString().padStart(2, "0");
+
+    return `${hh}${mm}:${ss}`;
+  };
+
   return (
     <div className="flex flex-col">
       <Navigation />
@@ -138,21 +154,23 @@ export default function Project() {
       {project && displayType === "video" && (
         <div className="relative z-10 h-screen overflow-hidden">
           {renderMedia()}
-          <div className="absolute vhs-scrubber-text top-0 left-0 w-full pb-20 px-20 h-full flex justify-between z-40 pointer-events-none">
+          <div className="absolute vhs-scrubber-text top-0 left-0 w-full pb-20 px-20 h-full flex justify-between z-40">
             <div className="flex flex-col justify-end w-[450px]">
               <div>
                 {/* Scrubber */}
-                <div className=" w-[250px] h-[27px] bg-[#3c3436] border-2 border-[#D9D9D9] z-40 pointer-events-none">
-                  <div
-                    className="h-full bg-[#D9D9D9]"
-                    style={{
-                      width: duration
-                        ? `${(currentTime / duration) * 100}%`
-                        : "0%",
-                    }}
-                  ></div>
-                </div>
-                <h4>SP {currentTime.toString().padStart(2, "0")}</h4>
+                <MediaScrubber
+                  currentTime={currentTime}
+                  duration={duration}
+                  onScrub={(newTime) => {
+                    if (videoRef.current) {
+                      videoRef.current.currentTime = newTime;
+                      setCurrentTime(newTime);
+                    }
+                  }}
+                />
+                <h4>
+                  <h4>SP {formatTime(currentTime)}</h4>
+                </h4>
               </div>
             </div>
             <div className="flex flex-row items-end justify-center pointer-events-auto">
@@ -224,7 +242,9 @@ export default function Project() {
               alt="Thumbnail image"
             />
             {displayType === "audio" && (
-              <AudioScrubber audio={project.fields.fileUrl} />
+              <AudioScrubber
+                audioUrls={project.fields.projectAudioFiles || []}
+              />
             )}
           </div>
         </div>
