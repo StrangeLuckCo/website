@@ -14,6 +14,7 @@ import type { Options } from "@contentful/rich-text-react-renderer";
 import { useIsMobile } from "../utility/hooks";
 import Navigation from "../components/Navigation";
 import MobileNav from "../components/MobileNav";
+import AudioScrubber from "../components//Project/AudioScrubber";
 
 const options: Options = {
   renderText: (text) => {
@@ -215,13 +216,16 @@ export default function Project() {
               {project?.fields.title}
             </h1>
           )}
-          <div className="relative z-10 flex pt-32 justify-center">
+          <div className="relative z-10 flex pt-32 justify-center items-center flex-col">
             <Image
               src={project.fields.thumbnailUrl || ""}
               width={721}
               height={541}
               alt="Thumbnail image"
             />
+            {displayType === "audio" && (
+              <AudioScrubber audio={project.fields.fileUrl} />
+            )}
           </div>
         </div>
       )}
