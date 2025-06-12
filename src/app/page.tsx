@@ -72,40 +72,11 @@ export default function Home() {
   useEffect(() => {
     ScrollTrigger.defaults({
       scroller: ".container-main",
-      snap: {
-        snapTo: 1,
-        duration: 4.5,
-        delay: 0.4,
-        ease: "power3.inOut",
-      },
     });
   }, []);
 
   useEffect(() => {
     if (!introDone) return;
-
-    const sections = gsap.utils.toArray<HTMLElement>(".section-snap");
-
-    ScrollTrigger.create({
-      scroller: ".container-main",
-      // @ts-expect-error: false is valid and disables snapping
-      snap: {
-        snapTo: (progress) => {
-          const sectionIndex = Math.round(progress * (sections.length - 1));
-          const section = sections[sectionIndex];
-          if (!section) return false;
-          if (section.id === "work") return false;
-
-          if (section.offsetHeight <= window.innerHeight) {
-            return sectionIndex / (sections.length - 1);
-          }
-          return false;
-        },
-        duration: 1,
-        delay: 0.1,
-        ease: "power1.inOut",
-      },
-    });
 
     const fetchEntities = async () => {
       try {
@@ -182,7 +153,41 @@ export default function Home() {
       onEnterBack: () => workVideo?.play(),
       onLeaveBack: () => workVideo?.pause(),
     });
-  }, [introDone]);
+
+    const waitForThumbnails = () => {
+      const videos = document.querySelectorAll(
+        ".portfolio-thumbnail"
+      ) as NodeListOf<HTMLVideoElement>;
+
+      let loadedCount = 0;
+
+      console.log("waitforthumbs", videos.length);
+
+      videos.forEach((video) => {
+        if (video.readyState >= 2) {
+          loadedCount++;
+        } else {
+          video.addEventListener("loadeddata", () => {
+            loadedCount++;
+            if (loadedCount === videos.length) {
+              setTimeout(() => {
+                ScrollTrigger.refresh();
+              }, 100); // slight delay ensures layout stabilizes
+            }
+          });
+        }
+      });
+
+      // If all already loaded
+      if (loadedCount === videos.length) {
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 100);
+      }
+    };
+
+    waitForThumbnails();
+  }, [introDone, projects]);
 
   const handleTagClick = (category: string) => {
     const tag = CATEGORY_TO_TAG[category];

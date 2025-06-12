@@ -13,7 +13,7 @@ import {
   //   useIsMobile,
 } from "../utility/hooks";
 
-export default function GradientBackground() {
+export default function GradientBackgroundHomepageSections() {
   const [isReady, setIsReady] = useState(false);
   const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
 
