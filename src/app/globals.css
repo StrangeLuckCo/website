@@ -613,14 +613,18 @@ body {
   pointer-events: none;
 }
 
-/* 🔥 Force it visible on all mobile devices */
-@media (max-width: 768px) {
-  .low-power-gradient {
-    display: block !important;
-  }
+/* Default: show animated background */
+.animated-background {
+  display: block;
 }
 
-/* ⛔ Never hide it based on motion or theme anymore */
-.animated-background {
-  display: none !important;
+/* Prefer static fallback on low-power or mobile */
+@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+  .animated-background {
+    display: none;
+  }
+
+  .low-power-gradient {
+    display: block;
+  }
 }
