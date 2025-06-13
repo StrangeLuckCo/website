@@ -16,6 +16,7 @@ import Navigation from "../components/Navigation";
 import MobileNav from "../components/MobileNav";
 import AudioScrubber from "../components/Project/AudioScrubber";
 import MediaScrubber from "../components/Project/MediaScrubber";
+import MediaControls from "../components/Project/MediaControls";
 
 const options: Options = {
   renderText: (text) => {
@@ -71,7 +72,6 @@ export default function Project() {
   useEffect(() => {
     const getProject = async () => {
       const res = await getProjectBySlug(slug);
-      console.log(res);
       setProject(res);
       setDisplayType(res.fields.displayType.toLowerCase());
     };
@@ -155,9 +155,20 @@ export default function Project() {
         <div className="relative z-10 h-screen overflow-hidden">
           {renderMedia()}
           <div className="absolute vhs-scrubber-text top-0 left-0 w-full pb-20 px-20 h-full flex justify-between z-40">
-            <div className="flex flex-col justify-end w-[450px]">
-              <div>
-                {/* Scrubber */}
+            <div className="relative flex flex-col w-full h-full items-center">
+              {isMobile && (
+                <div className="absolute top-1/2 -translate-y-1/2">
+                  <MediaControls
+                    playState={playState}
+                    setPlayState={setPlayState}
+                    isMuted={isMuted}
+                    setIsMuted={setIsMuted}
+                    videoRef={videoRef}
+                  />
+                </div>
+              )}
+
+              <div className="absolute bottom-1 sm:left-2 sm:bottom-0">
                 <MediaScrubber
                   currentTime={currentTime}
                   duration={duration}
@@ -168,73 +179,32 @@ export default function Project() {
                     }
                   }}
                 />
-                <h4>
-                  <h4>SP {formatTime(currentTime)}</h4>
+                <h4 className="vhs-scrubber-text mt-2">
+                  SP {formatTime(currentTime)}
                 </h4>
               </div>
             </div>
-            <div className="flex flex-row items-end justify-center pointer-events-auto">
-              <div className="max-h-[80px] w-full flex flex-row items-center gap-x-2">
-                <div className="w-[125px] text-center flex justify-end">
-                  <h4>{playState === "play" ? "PLAY" : "PAUSE"}</h4>
-                </div>
-                <div
-                  onClick={() => {
-                    setPlayState("play");
-                    videoRef.current?.play();
-                  }}
-                >
-                  <Image
-                    src={"/play_button.svg"}
-                    width={35}
-                    height={29}
-                    style={{ maxHeight: "29px" }}
-                    alt="Play button"
-                  />
-                </div>
-                <div
-                  className="flex gap-x-1"
-                  onClick={() => {
-                    setPlayState("pause");
-                    videoRef.current?.pause();
-                  }}
-                >
-                  <Image
-                    src={"/pause_button.svg"}
-                    width={10}
-                    height={29}
-                    alt="Pause button"
-                  />
-                  <Image
-                    src={"/pause_button.svg"}
-                    width={10}
-                    height={29}
-                    alt="Pause button"
-                  />
-                </div>
-                <div onClick={() => setIsMuted(!isMuted)}>
-                  <Image
-                    src={isMuted ? "/sound-max.svg" : "/sound-min.svg"}
-                    style={{ color: "white" }}
-                    width={32}
-                    height={32}
-                    alt="Mute button"
-                  />
-                </div>
-              </div>
-            </div>
+            {!isMobile && (
+              <MediaControls
+                playState={playState}
+                setPlayState={setPlayState}
+                isMuted={isMuted}
+                setIsMuted={setIsMuted}
+                videoRef={videoRef}
+              />
+            )}
           </div>
         </div>
       )}
 
       {project && (displayType === "audio" || displayType === "art") && (
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-[100px] sm:mt-0">
           {isMobile && (
             <h1 className="sl-h1 sl-h1-mobile blur-xs z-20 text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
               {project?.fields.title}
             </h1>
           )}
-          <div className="relative z-10 flex pt-32 justify-center items-center flex-col gap-y-6">
+          <div className="relative z-10 flex pt-12 sm:pt-32 justify-center items-center flex-col gap-y-6">
             <Image
               src={project.fields.thumbnailUrl || ""}
               width={721}
@@ -250,7 +220,7 @@ export default function Project() {
         </div>
       )}
 
-      <div className="h-full relative z-10 pt-28 text-white text-2xl">
+      <div className="h-full relative z-10 pt-16 sm:pt-28 text-white text-2xl">
         {project && (
           <div className="flex flex-col gap-y-[77px]">
             {isMobile && displayType === "video" && (
@@ -263,7 +233,7 @@ export default function Project() {
               project.fields.projectImages.length > 0 && (
                 <Carousel
                   images={project.fields.projectImages || []}
-                  className="mt-12"
+                  className="sm:mt-12"
                 />
               )}
 
@@ -277,7 +247,7 @@ export default function Project() {
             )}
           </div>
         )}
-        <div className="pt-[250px]">
+        <div className="sm:pt-[250px] pb-20 sm:pb-0">
           <Footer />
         </div>
       </div>

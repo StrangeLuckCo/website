@@ -79,7 +79,7 @@ export default function AudioScrubber({
   };
 
   return (
-    <div className="w-full max-w-[756px] gap-y-6 flex flex-col items-center">
+    <div className="w-full max-w-[342px] sm:max-w-[756px] gap-y-6 flex flex-col items-center ">
       <h2
         className="sl-h2 vhs-scrubber-text !text-[40px] !tracking-[6px]"
         style={{ WebkitTextStrokeWidth: "0.75px", WebkitTextFillColor: "#FFF" }}

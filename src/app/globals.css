@@ -587,3 +587,40 @@ body {
 .input-border-stroke {
   border: var(--sds-size-stroke-focus-ring) solid var(--Text-Gradient, #f2f3ea);
 }
+
+.low-power-gradient {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.08),
+      transparent 75%
+    ),
+    conic-gradient(
+      from 32deg,
+      #363863 0%,
+      #190230 60%,
+      #642148 120%,
+      #363863 180%,
+      #190230 360%
+    );
+  background-size: cover;
+  background-position: center center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 🔥 Force it visible on all mobile devices */
+@media (max-width: 768px) {
+  .low-power-gradient {
+    display: block !important;
+  }
+}
+
+/* ⛔ Never hide it based on motion or theme anymore */
+.animated-background {
+  display: none !important;
+}

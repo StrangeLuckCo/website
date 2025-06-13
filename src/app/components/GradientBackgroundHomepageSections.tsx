@@ -32,15 +32,20 @@ export default function GradientBackgroundHomepageSections() {
 
   return (
     <div>
-      {shouldShowUnicorn && isReady ? (
+      {/* Low-power fallback */}
+      <div className="low-power-gradient" />
+
+      {/* WebGL animation */}
+      {shouldShowUnicorn && isReady && (
         <>
           <GradientVisibilityController />
           <div
             id="purple-red-gradient"
-            className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none opacity-0"
+            className="animated-background fixed top-0 left-0 w-full h-full z-0 pointer-events-none opacity-0"
           />
         </>
-      ) : null}
+      )}
+
       <main className="section-snap relative z-0">
         <div id="gradient-trigger" className="relative top-[-35vh] h-[1px]" />
         <ServicesSection />

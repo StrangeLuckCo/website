@@ -161,8 +161,6 @@ export default function Home() {
 
       let loadedCount = 0;
 
-      console.log("waitforthumbs", videos.length);
-
       videos.forEach((video) => {
         if (video.readyState >= 2) {
           loadedCount++;
