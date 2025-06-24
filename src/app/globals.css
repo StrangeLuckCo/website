@@ -97,6 +97,7 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: #e3e4cb;
+    text-shadow: -5px 4px 4px #000;
   }
 }
 
@@ -109,6 +110,7 @@ body {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -1.12px;
+    text-shadow: -5px 4px 4px #000;
   }
 }
 

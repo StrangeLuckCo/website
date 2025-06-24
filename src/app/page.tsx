@@ -267,7 +267,7 @@ export default function Home() {
               >
                 <source src="/about_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-md">
+              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 sm:blur-md blur-sm">
                 <h2>
                   Strange Luck is a storytelling studio for the human spirit.
                 </h2>
@@ -288,7 +288,7 @@ export default function Home() {
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 blur-md">
+              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 sm:blur-md blur-sm">
                 <h2>
                   We work with brands, nonprofits, and media companies to tell
                   stories that generate empathy and drive engagement.
@@ -314,17 +314,17 @@ export default function Home() {
               </video>
               <div className="relative z-10 mb-8">
                 <div className="flex flex-col items-center sm:items-start mb-6 sm:mt-20 sm:mb-0">
-                  <h1 className="sl-h1-mobile gradient-text sm:blur-sm blur-md text-center sm:text-left w-3/4">
+                  <h1 className="sl-h1-mobile gradient-text blur-sm text-center sm:text-left w-3/4">
                     Choose your path
                   </h1>
                 </div>
 
                 <nav className="justify-center sm:justify-between p-1 mb-[70px] sm:mb-0">
-                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-3 sm:mb-8 sm:gap-4 sm:text-[32px]">
+                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-x-2 sm:mb-8 sm:gap-4 sm:text-[32px]">
                     {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
                       <div
                         key={category}
-                        className="flex items-center gap-3 sm:gap-4"
+                        className="flex items-center gap-x-2 sm:gap-4"
                       >
                         <button
                           onClick={() => handleTagClick(category)}
@@ -347,7 +347,7 @@ export default function Home() {
                           {category}
                         </button>
                         {idx !== arr.length - 1 && (
-                          <span className="text-gray-400 text-glow-small">
+                          <span className="sl-list-item mobile-subtitle blur-xs text-gray-400">
                             |
                           </span>
                         )}

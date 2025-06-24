@@ -16,9 +16,9 @@ export default function Footer() {
           width={isMobile ? 330 : 1083}
           priority
         />
-        <div className="flex flex-col sm:w-full sm:flex-row sm:justify-between gap-4 sm:gap-0 text-center sm:text-left blur-sm sl-p sl-p-mobile">
+        <div className="flex flex-col sm:w-full sm:flex-row sm:justify-between gap-4 sm:gap-0 text-center sm:text-left blur-xs sm:blur-sm sl-p sl-p-mobile">
           <p>New York City • Mexico City • Worldwide</p>
-          <p>@2025 StrangeLuck Productions</p>
+          <p>@2025 Strange Luck Studios</p>
         </div>
       </div>
     </footer>

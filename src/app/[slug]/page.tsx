@@ -247,7 +247,7 @@ export default function Project() {
             )}
           </div>
         )}
-        <div className="sm:pt-[250px] pb-20 sm:pb-0">
+        <div className="sm:pt-[250px] pt-[150px] pb-8 sm:pb-0">
           <Footer />
         </div>
       </div>
