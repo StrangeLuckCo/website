@@ -201,7 +201,7 @@ export default function Home() {
 
   useUnicornEmbedding({
     elementId: "unicorn-hero",
-    filePath: "/Mouse_Shader_Background.json.txt",
+    filePath: "/16x9Mouse_Shader_Background.json.txt",
     altText: "Welcome to Strange Luck",
     ariaLabel: "Canvas animation scene",
   });
