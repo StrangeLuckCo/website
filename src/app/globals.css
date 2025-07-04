@@ -620,6 +620,10 @@ body {
   display: block;
 }
 
+.low-power-gradient {
+  display: none;
+}
+
 /* Prefer static fallback on low-power or mobile */
 @media (prefers-reduced-motion: reduce), (max-width: 768px) {
   .animated-background {
