@@ -11,11 +11,7 @@ import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollHandler from "./components/ScrollHandler";
-import {
-  isModernChrome,
-  useUnicornEmbedding,
-  useIsMobile,
-} from "./utility/hooks";
+import { isModernChrome, useIsMobile } from "./utility/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,12 +47,12 @@ export default function Home() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   const [introDone, setIntroDone] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
   const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
   const isMobile = useIsMobile();
 
   const videoUrl =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/WEBSITE-REEL.mp4";
+    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4";
 
   const sortProjectsAlphabetically = (
     groupedProjects: Record<string, Project[]>
@@ -196,15 +192,15 @@ export default function Home() {
   useEffect(() => {
     // Run client-only logic after hydration
     setShouldShowUnicorn(isModernChrome() && !isMobile);
-    setIsReady(true);
+    // setIsReady(true);
   }, [isMobile]);
 
-  useUnicornEmbedding({
-    elementId: "unicorn-hero",
-    filePath: "/16x9Mouse_Shader_Background.json.txt",
-    altText: "Welcome to Strange Luck",
-    ariaLabel: "Canvas animation scene",
-  });
+  // useUnicornEmbedding({
+  //   elementId: "unicorn-hero",
+  //   filePath: "/16x9Mouse_Shader_Background.json.txt",
+  //   altText: "Welcome to Strange Luck",
+  //   ariaLabel: "Canvas animation scene",
+  // });
 
   return (
     <>
@@ -235,7 +231,7 @@ export default function Home() {
           <div className="container-main relative z-10 max-w-screen overflow-hidden">
             {/* HERO VIDEO */}
             <div className="section-snap relative z-10 h-screen w-full overflow-hidden">
-              {!shouldShowUnicorn && (
+              {shouldShowUnicorn && (
                 <video
                   src={videoUrl}
                   autoPlay
@@ -245,12 +241,15 @@ export default function Home() {
                   className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
                 />
               )}
-              {isReady && shouldShowUnicorn && (
+              {/* TODO: add unicorn mouse-hover effect or Three.js effect */}
+              {/* {isReady && shouldShowUnicorn && (
+                // <div className="relative w-full aspect-[16/9]">
                 <div
                   id="unicorn-hero"
                   className="absolute top-0 left-0 w-full h-full z-10"
                 />
-              )}
+                // </div>
+              )} */}
             </div>
 
             <section

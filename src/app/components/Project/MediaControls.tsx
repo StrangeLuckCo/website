@@ -69,13 +69,22 @@ export default function MediaControls({
           />
         </div>
 
-        <div onClick={() => setIsMuted(!isMuted)}>
+        <div
+          onClick={() => setIsMuted(!isMuted)}
+          className="w-[32px] min-w-[32px] h-[32px] relative!"
+        >
           <Image
-            src={isMuted ? "/sound-max.svg" : "/sound-min.svg"}
-            style={{ color: "white" }}
+            src={isMuted ? "/sound-on.svg" : "/sound-mute.svg"}
             width={32}
             height={32}
             alt="Mute button"
+            style={{
+              display: "block",
+              width: "32px",
+              height: "32px",
+              objectFit: "contain",
+              color: "white",
+            }}
           />
         </div>
       </div>
