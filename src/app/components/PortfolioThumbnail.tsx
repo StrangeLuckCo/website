@@ -1,19 +1,25 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const PortfolioThumbnail = ({
   title,
-  description,
+  shortDescription,
   url,
+  slug,
 }: {
   title: string;
-  description: string;
+  shortDescription: string;
   url: string;
+  slug: string;
 }) => {
+  const router = useRouter();
   const isVideo = url?.toLowerCase().endsWith(".mp4");
 
   return (
-    <div className="flex flex-col gap-4 mb-2">
-      <div className="w-full aspect-[4/3] relative overflow-hidden shadow-[2px_2px_13px_0px_#ffffffcc,_-2px_-2px_13px_0px_#ffffff] hover:shadow-[4px_4px_18px_1px_#E6FC6D,_-4px_-4px_18px_1px_#E6FC6D]">
+    <div className="flex flex-col mb-2" onClick={() => router.push(`/${slug}`)}>
+      <div className="w-full aspect-[4/3] mb-[32px] relative overflow-hidden shadow-[2px_2px_13px_0px_#ffffffcc,_-2px_-2px_13px_0px_#ffffff] hover:shadow-[4px_4px_18px_1px_#E6FC6D,_-4px_-4px_18px_1px_#E6FC6D]">
         {isVideo ? (
           <video
             src={url}
@@ -21,7 +27,7 @@ const PortfolioThumbnail = ({
             loop
             muted
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="portfolio-thumbnail absolute top-0 left-0 w-full h-full object-cover"
           />
         ) : (
           <Image
@@ -33,10 +39,10 @@ const PortfolioThumbnail = ({
           />
         )}
       </div>
-      <h3 className="text-2xl sm:text-5xl text-glow-extra-small sm:text-glow">
+      <h2 className="text-2xl sl-h2 sl-h2-mobile blur-sm sm:blur-xs mb-[12px]">
         {title}
-      </h3>
-      <p className="hidden text-glow-extra-small sm:block">{description}</p>
+      </h2>
+      <p className="sl-p sl-p-mobile blur-xs">{shortDescription}</p>
     </div>
   );
 };

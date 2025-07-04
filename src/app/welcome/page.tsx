@@ -61,13 +61,13 @@ export default function Welcome() {
                 name="MERGE0"
                 id="MERGE0"
                 placeholder="Enter your email"
-                className="sl-p desktop-body input-box-glow w-full sm:w-4/5 flex flex-1 bg-black p-2 border-2 border-[#D9D9D9] sm:border-0 text-center sm:text-left cursor-[url('/hand_cursor.png'),_pointer]"
+                className="sl-p desktop-body input-box-glow w-full sm:w-4/5 flex flex-1 bg-black p-2 border-2 border-[#D9D9D9] sm:border-0 text-center sm:text-left cursor-[url('/hand_cursor_2.png'),_pointer]"
                 required
               />
               <input
                 type="submit"
                 value="Submit"
-                className="bg-[#D9D9D9] menu-glow h-[48px] w-[115px] menu-glow-blur !text-md !font-medium px-[25px] text-black cursor-[url('/hand_cursor.png'),_pointer]"
+                className="bg-[#D9D9D9] menu-glow h-[48px] w-[115px] menu-glow-blur !text-md !font-medium px-[25px] text-black cursor-[url('/hand_cursor_2.png'),_pointer]"
               />
             </form>
           </div>
@@ -79,12 +79,11 @@ export default function Welcome() {
               alt="Black background with 'Strange Luck: A Storytelling Studio' text"
               height={isMobile ? 330 : 207}
               width={isMobile ? 330 : 1083}
-              className=""
               priority
             />
             <div className="flex flex-col sm:flex-row sm:justify-between text-center sl-h2-mobile !text-[15px] !font-normal !tracking-[0.75px] eighties-glow menu-glow-blur">
               <p className="">New York City • Mexico City • Worldwide</p>
-              <p>@2025 StrangeLuck Productions</p>
+              <p>@2025 Strange Luck Studios</p>
             </div>
           </div>
         )}

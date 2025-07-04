@@ -53,12 +53,11 @@ export default function ThankYou() {
               alt="Black background with 'Strange Luck: A Storytelling Studio' text"
               height={isMobile ? 63 : 207}
               width={isMobile ? 330 : 1083}
-              className=""
               priority
             />
             <div className="flex flex-col sm:flex-row sm:justify-between text-center sl-h2-mobile !text-[15px] !font-normal !tracking-[0.75px] eighties-glow menu-glow-blur">
               <p className="">New York City • Mexico City • Worldwide</p>
-              <p>@2025 StrangeLuck Productions</p>
+              <p>@2025 Strange Luck Studios</p>
             </div>
           </div>
         )}

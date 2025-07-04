@@ -59,7 +59,7 @@ export default function ContactSection() {
                   placeholder="Name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor.png'),_pointer]"
+                  className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor_2.png'),_pointer]"
                   required
                 />
               </div>
@@ -70,7 +70,7 @@ export default function ContactSection() {
                   placeholder="Email Address"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor.png'),_pointer]"
+                  className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor_2.png'),_pointer]"
                   required
                 />
               </div>
@@ -82,7 +82,7 @@ export default function ContactSection() {
               placeholder="SUBJECT"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor.png'),_pointer]"
+              className="w-full p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor_2.png'),_pointer]"
               required
             />
 
@@ -91,14 +91,14 @@ export default function ContactSection() {
               placeholder="Could a dream collaboration be in our future? Tell us more."
               value={formData.description}
               onChange={handleChange}
-              className="w-full h-60 p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor.png'),_pointer]"
+              className="w-full h-60 p-2 bg-transparent border border-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-[url('/hand_cursor_2.png'),_pointer]"
               required
             />
 
             <input
               type="submit"
               value="SUBMIT"
-              className="self-center w-40 h-16 hover:bg-gray-600 text-2xl text-gray-200 py-2 px-4  cursor-[url('/hand_cursor.png'),_pointer]"
+              className="self-center w-40 h-16 hover:bg-gray-600 text-2xl text-gray-200 py-2 px-4  cursor-[url('/hand_cursor_2.png'),_pointer]"
             />
           </form>
         </div>
