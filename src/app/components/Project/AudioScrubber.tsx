@@ -18,13 +18,11 @@ export default function AudioScrubber({
   const {
     currentTime,
     duration,
-    isPlaying,
-    play,
-    pause,
-    stop,
     goTo,
-    next,
-    prev,
+    handleStop,
+    handleRewind,
+    handleFastForward,
+    handlePlayPause,
   } = useAudioEngine(audioUrls);
 
   const scrubberRef = useRef<HTMLDivElement | null>(null);
@@ -104,53 +102,39 @@ export default function AudioScrubber({
       </div>
 
       {showControls && (
-        <div className="flex  gap-x-4 mt-4 max-h-[32px]">
-          <Image
-            src="/skip.png"
-            onClick={prev}
-            width={70}
-            height={40}
-            className="rotate-180"
-            alt="Previous audio"
-          />
-          <Image
-            src="/forward_reverse.png"
-            onClick={() => play(2, "reverse")}
-            width={70}
-            height={40}
-            className="rotate-180"
-            alt="Reverse"
-          />
+        <div className="flex gap-x-[19px] mt-4 max-h-[34px]">
           <Image
             src="/stop_button_container.svg"
-            onClick={stop}
+            onClick={handleStop}
             width={70}
             height={40}
+            style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
             alt="Stop"
           />
           <Image
-            src="/play_button_container.svg"
-            onClick={() =>
-              duration > 0 ? (isPlaying ? pause() : play()) : null
-            }
+            src="/rewind_button_container.svg"
+            onClick={handleRewind}
             width={70}
             height={40}
-            alt="Play"
-          />
-          <Image
-            src="/forward_reverse.png"
-            onClick={() => play(2, "forward")}
-            width={70}
-            height={40}
-            alt="Fast forward"
+            style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
+            alt="Reverse"
           />
 
           <Image
-            src="/skip.png"
-            onClick={next}
+            src="/play_button_container.svg"
+            onClick={handlePlayPause}
             width={70}
             height={40}
-            alt="Next audio"
+            style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
+            alt="Play"
+          />
+          <Image
+            src="/skip_button_container.svg"
+            onClick={handleFastForward}
+            width={70}
+            height={40}
+            style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
+            alt="Fast forward"
           />
         </div>
       )}

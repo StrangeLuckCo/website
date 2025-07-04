@@ -137,6 +137,48 @@ export function useAudioEngine(audioUrls: string[]) {
   const [direction, setDirection] = useState<PlaybackDirection>("forward");
   const animationFrameRef = useRef<number | null>(null);
   const preloadCache = useRef<Record<string, AudioBuffer>>({});
+  const [fastForwardClicked, setFastForwardClicked] = useState(false);
+  const [rewindClicked, setRewindClicked] = useState(false);
+
+  const handleFastForward = () => {
+    if (!fastForwardClicked) {
+      play(2, "forward");
+      setFastForwardClicked(true);
+      setRewindClicked(false); // reset other
+    } else {
+      setFastForwardClicked(false);
+      next();
+    }
+  };
+
+  const handleRewind = () => {
+    if (!rewindClicked) {
+      play(2, "reverse");
+      setRewindClicked(true);
+      setFastForwardClicked(false); // reset other
+    } else {
+      setRewindClicked(false);
+      prev();
+    }
+  };
+
+  const handleStop = () => {
+    stop();
+    setFastForwardClicked(false);
+    setRewindClicked(false);
+  };
+
+  const handlePlayPause = () => {
+    if (duration > 0) {
+      if (isPlaying) {
+        pause();
+      } else {
+        play();
+      }
+      setFastForwardClicked(false);
+      setRewindClicked(false);
+    }
+  };
 
   const stopPlayback = () => {
     sourceRef.current?.stop();
@@ -311,5 +353,9 @@ export function useAudioEngine(audioUrls: string[]) {
     prev,
     playbackRate,
     direction,
+    handleStop,
+    handleRewind,
+    handleFastForward,
+    handlePlayPause,
   };
 }
