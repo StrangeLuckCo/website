@@ -231,16 +231,16 @@ export default function Home() {
           <div className="container-main relative z-10 max-w-screen overflow-hidden">
             {/* HERO VIDEO */}
             <div className="section-snap relative z-10 h-screen w-full overflow-hidden">
-              {shouldShowUnicorn && (
-                <video
-                  src={videoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
-                />
-              )}
+              {/* {shouldShowUnicorn && ( */}
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
+              />
+              {/* )} */}
               {/* TODO: add unicorn mouse-hover effect or Three.js effect */}
               {/* {isReady && shouldShowUnicorn && (
                 // <div className="relative w-full aspect-[16/9]">
