@@ -62,6 +62,7 @@ export default function Home() {
         muted
         playsInline
         preload="auto"
+        poster="/lowres-placeholder.png"
         className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
       />
     );
