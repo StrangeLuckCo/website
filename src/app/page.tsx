@@ -53,7 +53,19 @@ export default function Home() {
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4";
-
+  const heroVideo = () => {
+    return (
+      <video
+        src={videoUrl}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
+      />
+    );
+  };
   const sortProjectsAlphabetically = (
     groupedProjects: Record<string, Project[]>
   ) => {
@@ -214,6 +226,7 @@ export default function Home() {
           href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline.mp4"
           type="video/mp4"
         />
+        <link rel="preload" as="video" href={videoUrl} type="video/mp4" />
       </Head>
 
       <Suspense fallback={null}>
@@ -232,14 +245,7 @@ export default function Home() {
             {/* HERO VIDEO */}
             <div className="section-snap relative z-10 h-screen w-full overflow-hidden">
               {/* {shouldShowUnicorn && ( */}
-              <video
-                src={videoUrl}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
-              />
+              {heroVideo()}
               {/* )} */}
               {/* TODO: add unicorn mouse-hover effect or Three.js effect */}
               {/* {isReady && shouldShowUnicorn && (
