@@ -11,7 +11,7 @@ import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollHandler from "./components/ScrollHandler";
-import { isModernChrome, useIsMobile } from "./utility/hooks";
+// import { useIsMobile } from "./utility/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,8 +48,8 @@ export default function Home() {
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   const [introDone, setIntroDone] = useState(false);
   // const [isReady, setIsReady] = useState(false);
-  const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
-  const isMobile = useIsMobile();
+  // const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
+  // const isMobile = useIsMobile();
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4";
@@ -189,11 +189,11 @@ export default function Home() {
     setFilteredItems(projects[tag] || []);
   };
 
-  useEffect(() => {
-    // Run client-only logic after hydration
-    setShouldShowUnicorn(isModernChrome() && !isMobile);
-    // setIsReady(true);
-  }, [isMobile]);
+  // useEffect(() => {
+  //   // Run client-only logic after hydration
+  //   setShouldShowUnicorn(isModernChrome() && !isMobile);
+  //   // setIsReady(true);
+  // }, [isMobile]);
 
   // useUnicornEmbedding({
   //   elementId: "unicorn-hero",
