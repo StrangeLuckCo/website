@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -7,6 +7,12 @@ export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add("safari");
+    }
+  }, []);
 
   const handleLogoClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -54,18 +60,32 @@ export default function Navigation() {
           onClick={(e) => handleLogoClick(e)}
           className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
+          {/* SVG for most browsers */}
           <Image
-            alt="demo"
+            alt="Logo"
             priority
             src={hovered ? logoGlow : logo}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             height={51}
             width={267}
+            className="logo-svg hidden sm:block"
             style={{ height: "auto" }}
-            className="hidden sm:block "
+          />
+
+          {/* PNG fallback for Safari */}
+          <Image
+            alt="Logo PNG fallback"
+            priority
+            src={hovered ? "/Logo-glow.png" : "/Logo.png"}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            height={51}
+            width={267}
+            className="logo-png hidden sm:block"
           />
         </Link>
+
         <a
           href="#staff"
           onClick={(e) => handleLogoClick(e, "staff")}

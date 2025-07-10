@@ -530,9 +530,19 @@ body {
   scroll-behavior: smooth;
 }
 
+.safari .container-main {
+  height: 100svh;
+  overscroll-behavior-y: none !important;
+  -webkit-overflow-scrolling: auto; /* disables momentum scroll on iOS */
+}
+
 .section-snap {
   scroll-snap-align: start;
   min-height: 100vh;
+}
+
+.section-snap.dummy-footer {
+  min-height: 1px !important;
 }
 
 .eighties-glow {
@@ -633,4 +643,20 @@ body {
   .low-power-gradient {
     display: block;
   }
+}
+
+/* Default: show SVG logo */
+.logo-svg {
+  display: block !important;
+}
+.logo-png {
+  display: none !important;
+}
+
+/* Safari override */
+.safari .logo-svg {
+  display: none !important;
+}
+.safari .logo-png {
+  display: block !important;
 }

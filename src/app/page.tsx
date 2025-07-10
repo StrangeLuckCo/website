@@ -379,6 +379,7 @@ export default function Home() {
               </div>
             </section>
             <GradientBackgroundHomepageSections />
+            <div className="!h-[1px] section-snap dummy-footer min-h-[1px] max-h-[1px]"></div>
           </div>
 
           {/* Parallax Background */}
