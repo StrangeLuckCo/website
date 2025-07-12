@@ -12,19 +12,8 @@ const staffData = [
     altText: "Jacki Huntington",
     name: "Jacki Huntington",
     title: "Co-Founder",
-    credits: "Director • Cinematographer • Producer • Writer",
-    bio: `Storytelling work has taken Jacki across continents and
-      cultures, from the bustling streets of Port-au-Prince, Haiti, to
-      the serene landscapes of the Mississippi Delta. With a
-      background as a producer at Refinery29 working in New York City
-      and Los Angeles, Jacki has pioneered groundbreaking feminist and
-      body-positive video content that continues to shape the media
-      industry’s aesthetic. Jacki has worked as a producer, editor,
-      and composer for a variety of podcasts including The City of the
-      Rails, Under the Influence with Jo Piazza and Really Good
-      Shares. These days, she is managing communications for the
-      Center for Global Health at Mass General Brigham as she forges
-      ahead with a handful of independent documentary film projects.`,
+    credits: "Director • Cinematographer • Producer • Writer • Editor",
+    bio: `Storytelling work has taken Jacki across continents and cultures, from the bustling streets of Port-au-Prince, Haiti, to the serene landscapes of the Mississippi Delta. With a background as a producer at Refinery29 working in New York City and Los Angeles, Jacki has pioneered groundbreaking feminist and body-positive video content that continues to shape the media industry's aesthetic. Jacki has worked as a producer, editor, and composer for a variety of podcasts including The City of the Rails, Under the Influence with Jo Piazza, and The Small Bow Podcast. She studied journalism at the University of North Carolina at Chapel Hill and earned a Master of Science degree at Harvard Medical School. She lives between Mexico City and the U.S.`,
   },
   {
     imageSrc: JESS_HEADSHOT,
