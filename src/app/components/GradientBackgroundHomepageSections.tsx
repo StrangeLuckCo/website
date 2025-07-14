@@ -23,6 +23,16 @@ export default function GradientBackgroundHomepageSections() {
     setIsReady(true);
   }, []);
 
+  useEffect(() => {
+    const isChrome =
+      /chrome/i.test(navigator.userAgent) &&
+      !/edge|edg|opr|opera/i.test(navigator.userAgent);
+
+    if (!isChrome) {
+      document.documentElement.classList.add("not-chrome");
+    }
+  }, []);
+
   useUnicornEmbedding({
     elementId: "purple-red-gradient",
     filePath: "/Purple_Red_Gradient_Background.json.txt",

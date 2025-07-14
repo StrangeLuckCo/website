@@ -645,6 +645,10 @@ body {
   }
 }
 
+.not-chrome .low-power-gradient {
+  display: block;
+}
+
 /* Default: show SVG logo */
 .logo-svg {
   display: block !important;
