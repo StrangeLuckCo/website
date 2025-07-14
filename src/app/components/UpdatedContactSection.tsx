@@ -44,7 +44,7 @@ export default function UpdatedContactSection() {
           className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
           <p
-            className="sl-p text-[#E6FC6D] underline blur-xxs"
+            className="sl-p text-[#E6FC6D] underline blur-xs"
             style={{
               WebkitTextFillColor: isMobile ? "#E6FC6D" : "#DFFC3C",
               textDecorationColor: isMobile ? "#E6FC6D" : "#DFFC3C",
@@ -59,7 +59,7 @@ export default function UpdatedContactSection() {
           className="cursor-[url('/hand_cursor_2.png'),_pointer]"
         >
           <p
-            className="sl-p text-[#E6FC6D] underline blur-xxs"
+            className="sl-p text-[#E6FC6D] underline blur-xs"
             style={{
               WebkitTextFillColor: "#DFFC3C",
               textDecorationColor: "#DFFC3C",

@@ -74,7 +74,7 @@ export default function MediaControls({
           className="w-[32px] min-w-[32px] h-[32px] relative!"
         >
           <Image
-            src={isMuted ? "/sound-on.svg" : "/sound-mute.svg"}
+            src={isMuted ? "/sound-on.png" : "/sound-mute.png"}
             width={32}
             height={32}
             alt="Mute button"
@@ -83,6 +83,7 @@ export default function MediaControls({
               width: "32px",
               height: "32px",
               objectFit: "contain",
+              marginTop: "3px",
               color: "white",
             }}
           />
