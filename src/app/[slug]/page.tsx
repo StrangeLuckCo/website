@@ -214,7 +214,6 @@ export default function Project() {
                 playsInline
                 width={721}
                 height={541}
-                // style={{ width: "100%", height: "auto" }}
               />
             ) : (
               <Image
@@ -222,7 +221,6 @@ export default function Project() {
                 width={721}
                 height={541}
                 alt="Thumbnail image"
-                style={{ objectFit: "cover", width: "100%", height: "auto" }}
               />
             )}
             {displayType === "audio" && (
