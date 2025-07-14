@@ -205,12 +205,26 @@ export default function Project() {
             </h1>
           )}
           <div className="relative z-10 flex pt-12 sm:pt-32 justify-center items-center flex-col gap-y-6">
-            <Image
-              src={project.fields.thumbnailUrl || ""}
-              width={721}
-              height={541}
-              alt="Thumbnail image"
-            />
+            {/\.(mp4|mov|webm)$/i.test(project.fields.thumbnailUrl || "") ? (
+              <video
+                src={project.fields.thumbnailUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                width={721}
+                height={541}
+                // style={{ width: "100%", height: "auto" }}
+              />
+            ) : (
+              <Image
+                src={project.fields.thumbnailUrl || ""}
+                width={721}
+                height={541}
+                alt="Thumbnail image"
+                style={{ objectFit: "cover", width: "100%", height: "auto" }}
+              />
+            )}
             {displayType === "audio" && (
               <AudioScrubber
                 audioUrls={project.fields.projectAudioFiles || []}

@@ -22,6 +22,7 @@ interface Tag {
 interface Project {
   fields: {
     title: string;
+    thumbnailRanking: number;
     shortDescription: string;
     thumbnailUrl: string;
     slug: string;
@@ -67,13 +68,15 @@ export default function Home() {
       />
     );
   };
-  const sortProjectsAlphabetically = (
-    groupedProjects: Record<string, Project[]>
-  ) => {
+  // Sort by thumbnail ranking first, then alphabetically second
+  const sortProjects = (groupedProjects: Record<string, Project[]>) => {
     Object.entries(groupedProjects).forEach((group) => {
       const [, projects] = group;
       projects.sort((a, b) => {
-        return a.fields.title.localeCompare(b.fields.title);
+        return (
+          a.fields.thumbnailRanking - b.fields.thumbnailRanking ||
+          a.fields.title.localeCompare(b.fields.title)
+        );
       });
     });
   };
@@ -104,7 +107,7 @@ export default function Home() {
           {} as Record<string, Project[]>
         );
 
-        sortProjectsAlphabetically(groupedProjects);
+        sortProjects(groupedProjects);
 
         setProjects(groupedProjects);
         const firstTag = Object.keys(groupedProjects).includes("film")
@@ -199,7 +202,24 @@ export default function Home() {
   const handleTagClick = (category: string) => {
     const tag = CATEGORY_TO_TAG[category];
     setSelectedTag(tag);
-    setFilteredItems(projects[tag] || []);
+
+    const items = projects[tag] || [];
+
+    console.log(items);
+    const sortedItems = [...items].sort((a, b) => {
+      console.log(
+        a.fields.thumbnailRanking,
+        b.fields.thumbnailRanking,
+        a.fields.title,
+        b.fields.title
+      );
+      return (
+        a.fields.thumbnailRanking - b.fields.thumbnailRanking ||
+        a.fields.title.localeCompare(b.fields.title)
+      );
+    });
+
+    setFilteredItems(sortedItems);
   };
 
   // useEffect(() => {
