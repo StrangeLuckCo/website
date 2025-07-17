@@ -23,7 +23,7 @@ export default function Navigation() {
     if (pathname === "/") {
       if (hash) {
         const el = document.querySelector(`#${hash}`);
-        el?.scrollIntoView({ behavior: "smooth" });
+        el?.scrollIntoView();
       } else {
         document
           .querySelector(".container-main")
@@ -94,7 +94,7 @@ export default function Navigation() {
           ABOUT
         </a>
         <a
-          href="#contact"
+          // href="#contact"
           onClick={(e) => handleLogoClick(e, "contact")}
           className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon hover:blur-xxs"
         >

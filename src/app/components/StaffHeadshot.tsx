@@ -24,7 +24,13 @@ export default function StaffHeadshot({
           <h2 className="sl-h2 sl-h3-mobile blur-xs sm:blur-sm">{title}</h2>
         </div>
         <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 gap-x-4 sm:gap-x-[31px] items-center sm:items-start">
-          <Image src={imageSrc} width={280} height={350} alt={altText} />
+          <Image
+            src={imageSrc}
+            width={280}
+            height={350}
+            alt={altText}
+            style={{ width: "auto" }}
+          />
           <div className="flex flex-col gap-y-4 px-8 sm:px-0 text-2xl leading-none">
             <h4 className="sl-h4 sl-h4-mobile blur-sm">{credits}</h4>
             <p className="text-xs sl-p sl-p-mobile font-normal leading-none blur-xs">

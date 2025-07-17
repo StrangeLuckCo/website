@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
@@ -44,13 +45,66 @@ const IntroVideo = dynamic(() => import("./components/IntroVideo"), {
 });
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const [scrollTarget, setScrollTarget] = useState<string | null>(null);
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   const [introDone, setIntroDone] = useState(false);
+  const hasUserScrolledRef = useRef(false);
   // const [isReady, setIsReady] = useState(false);
   // const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
   // const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const container = document.querySelector(".container-main");
+    if (!container) return;
+
+    const onScroll = () => {
+      hasUserScrolledRef.current = true;
+      container.removeEventListener("scroll", onScroll);
+    };
+
+    container.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => container.removeEventListener("scroll", onScroll);
+  }, [introDone]);
+
+  useEffect(() => {
+    const value = searchParams?.get("scrollTo");
+    if (value) setScrollTarget(value);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const played = Boolean(localStorage.getItem("introPlayed"));
+      setIntroDone(played);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!introDone || !scrollTarget) return;
+
+    const el = document.getElementById(scrollTarget);
+    if (!el) return;
+
+    // Try a layout-stable observer
+    const ro = new ResizeObserver(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    ro.observe(document.body);
+
+    const timeout = setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      ro.disconnect();
+    }, 1000);
+
+    return () => {
+      ro.disconnect();
+      clearTimeout(timeout);
+    };
+  }, [introDone, scrollTarget]);
 
   const videoUrl =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4";
@@ -138,20 +192,36 @@ export default function Home() {
       trigger: "#about",
       start: "top center",
       end: "bottom center",
-      onEnter: () => aboutVideo?.play(),
-      onLeave: () => aboutVideo?.pause(),
-      onEnterBack: () => aboutVideo?.play(),
-      onLeaveBack: () => aboutVideo?.pause(),
+      onEnter: () => {
+        if (hasUserScrolledRef.current) aboutVideo?.play();
+      },
+      onLeave: () => {
+        if (hasUserScrolledRef.current) aboutVideo?.pause();
+      },
+      onEnterBack: () => {
+        if (hasUserScrolledRef.current) aboutVideo?.play();
+      },
+      onLeaveBack: () => {
+        if (hasUserScrolledRef.current) aboutVideo?.pause();
+      },
     });
 
     ScrollTrigger.create({
       trigger: "#about-2",
       start: "top center",
       end: "bottom center",
-      onEnter: () => about2Video?.play(),
-      onLeave: () => about2Video?.pause(),
-      onEnterBack: () => about2Video?.play(),
-      onLeaveBack: () => about2Video?.pause(),
+      onEnter: () => {
+        if (hasUserScrolledRef.current) about2Video?.play();
+      },
+      onLeave: () => {
+        if (hasUserScrolledRef.current) about2Video?.pause();
+      },
+      onEnterBack: () => {
+        if (hasUserScrolledRef.current) about2Video?.play();
+      },
+      onLeaveBack: () => {
+        if (hasUserScrolledRef.current) about2Video?.pause();
+      },
     });
 
     const workVideo = document.getElementById("work-video") as HTMLVideoElement;
@@ -160,10 +230,18 @@ export default function Home() {
       trigger: "#work",
       start: "top center",
       end: "bottom center",
-      onEnter: () => workVideo?.play(),
-      onLeave: () => workVideo?.pause(),
-      onEnterBack: () => workVideo?.play(),
-      onLeaveBack: () => workVideo?.pause(),
+      onEnter: () => {
+        if (hasUserScrolledRef.current) workVideo?.play();
+      },
+      onLeave: () => {
+        if (hasUserScrolledRef.current) workVideo?.pause();
+      },
+      onEnterBack: () => {
+        if (hasUserScrolledRef.current) workVideo?.play();
+      },
+      onLeaveBack: () => {
+        if (hasUserScrolledRef.current) workVideo?.pause();
+      },
     });
 
     const waitForThumbnails = () => {
