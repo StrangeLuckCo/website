@@ -48,6 +48,7 @@ type ProjectFields = {
   displayType: string;
   projectImages?: string[];
   projectAudioFiles?: string[];
+  externalUrl?: string;
 };
 
 export type Project = {

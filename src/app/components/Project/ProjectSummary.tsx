@@ -11,8 +11,15 @@ export const ProjectSummary = ({
   project: Project;
   className?: string;
 }) => {
-  const { title, filmPoster, description, releaseDate, productionCredits } =
-    project.fields;
+  const {
+    title,
+    filmPoster,
+    description,
+    releaseDate,
+    productionCredits,
+    externalUrl,
+  } = project.fields;
+  console.log(project.fields);
   const isMobile = useIsMobile();
   return (
     <div className={`flex flex-col sm:gap-y-12 ${className}`}>
@@ -53,6 +60,16 @@ export const ProjectSummary = ({
           <p className="sl-p sl-p-mobile blur-xxs font-normal text-xl">
             {description}
           </p>
+          {externalUrl && (
+            <a
+              href={externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sl-h4 sl-h5-mobile text-xl font-medium underline hover:text-blue-300 transition cursor-[url('/hand_cursor_2.png'),_pointer]"
+            >
+              Explore more →
+            </a>
+          )}
         </div>
       </div>
     </div>
