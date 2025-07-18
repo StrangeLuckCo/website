@@ -43,7 +43,7 @@ export default function GradientBackgroundHomepageSections() {
   return (
     <div>
       {/* Low-power fallback */}
-      <div className="low-power-gradient" />
+      <div className="low-power-gradient low-power-image" />
 
       {/* WebGL animation */}
       {shouldShowUnicorn && isReady && (

@@ -62,7 +62,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
           className="w-full h-full object-cover"
         >
           <source
-            src="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline.mov"
+            src="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -71,7 +71,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
 
       {/* Black overlay that fades out on play */}
       <div
-        className={`fixed inset-0 bg-black z-[9999] transition-opacity duration-700 ease-in-out ${
+        className={`fixed inset-0 bg-black z-[9997] transition-opacity duration-700 ease-in-out ${
           hasStarted ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       />

@@ -48,6 +48,7 @@ export default function Home() {
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
+  const [introReady, setIntroReady] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const hasUserScrolledRef = useRef(false);
   const [scrollTarget, setScrollTarget] = useState<string | null | undefined>(
@@ -77,8 +78,9 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const played = Boolean(localStorage.getItem("introPlayed"));
+      const played = localStorage.getItem("introPlayed") === "true";
       setIntroDone(played);
+      setIntroReady(true); // ✅ we now know whether to show the intro
     }
   }, []);
 
@@ -106,12 +108,10 @@ export default function Home() {
     };
   }, [introDone, scrollTarget]);
 
-  const videoUrl =
-    "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4";
   const heroVideo = () => {
     return (
       <video
-        src={videoUrl}
+        src="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
         autoPlay
         loop
         muted
@@ -313,6 +313,8 @@ export default function Home() {
   //   ariaLabel: "Canvas animation scene",
   // });
 
+  if (!introReady) return null;
+
   return (
     <>
       <Head>
@@ -320,12 +322,17 @@ export default function Home() {
         <link rel="stylesheet" href="https://use.typekit.net/hqi1rdb.css" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
-          rel="preload"
+          // rel="preload"
           as="video"
           href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline.mp4"
           type="video/mp4"
         />
-        <link rel="preload" as="video" href={videoUrl} type="video/mp4" />
+        <link
+          // rel="preload"
+          as="video"
+          href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
+          type="video/mp4"
+        />
       </Head>
 
       <Suspense fallback={null}>
@@ -366,7 +373,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                // preload="auto"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/about_background.mp4" type="video/mp4" />
@@ -387,7 +394,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                // preload="auto"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
@@ -409,7 +416,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                // preload="auto"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/BlueVHS.mp4" type="video/mp4" />
