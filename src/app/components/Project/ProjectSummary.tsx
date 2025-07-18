@@ -19,12 +19,11 @@ export const ProjectSummary = ({
     productionCredits,
     externalUrl,
   } = project.fields;
-  console.log(project.fields);
   const isMobile = useIsMobile();
   return (
     <div className={`flex flex-col sm:gap-y-12 ${className}`}>
       {!isMobile && (
-        <h1 className="sl-h1 sl-h1-mobile blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+        <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
           {title}
         </h1>
       )}
@@ -38,20 +37,20 @@ export const ProjectSummary = ({
           <div className="flex flex-col gap-y-6">
             {releaseDate && (
               <div className="flex flex-col gap-y-[6px]">
-                <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
+                <h3 className="sl-h3 sl-h3-mobile sl-h3-tablet font-medium text-[32px]">
                   Release Date
                 </h3>
-                <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
+                <h4 className="sl-h4 sl-h5-mobile sl-h5-tablet blur-xxs font-medium text-[28px]">
                   {releaseDate}
                 </h4>
               </div>
             )}
             {productionCredits && (
               <div className="flex flex-col gap-y-[6px]">
-                <h3 className="sl-h3 sl-h3-mobile font-medium text-[32px]">
+                <h3 className="sl-h3 sl-h3-mobile sl-h3-tablet font-medium text-[32px]">
                   Production Credits
                 </h3>
-                <h4 className="sl-h4 sl-h5-mobile blur-xxs font-medium text-[28px]">
+                <h4 className="sl-h4 sl-h5-mobile sl-h5-tablet blur-xxs font-medium text-[28px]">
                   {productionCredits}
                 </h4>
               </div>

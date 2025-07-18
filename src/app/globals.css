@@ -355,6 +355,40 @@ body {
   }
 }
 
+/* Tablet */
+@media (min-width: 640px) and (max-width: 1024px) {
+  .sl-h1-tablet {
+    font-size: 54px !important;
+  }
+  .sl-h2-tablet {
+    font-size: 30px !important;
+  }
+
+  .sl-h4-tablet {
+    font-size: 20px !important;
+  }
+
+  .sl-h5-mobile {
+    font-size: 36px !important;
+  }
+
+  .sl-h5-tablet {
+    font-size: 20px !important;
+  }
+
+  .sl-p-mobile {
+    font-size: 15px !important;
+  }
+
+  .sl-h2-tablet {
+    font-size: 32px !important;
+  }
+
+  .sl-h3-tablet {
+    font-size: 28px !important;
+  }
+}
+
 .text-stroke-lg {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #000;

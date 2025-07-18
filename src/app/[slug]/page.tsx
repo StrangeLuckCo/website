@@ -201,7 +201,7 @@ export default function Project() {
       {project && (displayType === "audio" || displayType === "art") && (
         <div className="flex flex-col mt-[100px] sm:mt-0">
           {isMobile && (
-            <h1 className="sl-h1 sl-h1-mobile blur-xs z-20 text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+            <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs z-20 text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
               {project?.fields.title}
             </h1>
           )}
@@ -237,7 +237,7 @@ export default function Project() {
         {project && (
           <div className="flex flex-col gap-y-[77px]">
             {isMobile && displayType === "video" && (
-              <h1 className="sl-h1 sl-h1-mobile blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+              <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
                 {project?.fields.title}
               </h1>
             )}
