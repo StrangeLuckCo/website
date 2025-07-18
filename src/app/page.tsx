@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
@@ -12,6 +11,7 @@ import { getEntities } from "../pages/api/entities";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollHandler from "./components/ScrollHandler";
+import ScrollTargetSetter from "./components/ScrollTargetSetter";
 // import { useIsMobile } from "./utility/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -45,13 +45,14 @@ const IntroVideo = dynamic(() => import("./components/IntroVideo"), {
 });
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const [scrollTarget, setScrollTarget] = useState<string | null>(null);
   const [projects, setProjects] = useState<Record<string, Project[]>>({});
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Project[]>([]);
   const [introDone, setIntroDone] = useState(false);
   const hasUserScrolledRef = useRef(false);
+  const [scrollTarget, setScrollTarget] = useState<string | null | undefined>(
+    null
+  );
   // const [isReady, setIsReady] = useState(false);
   // const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
   // const isMobile = useIsMobile();
@@ -70,10 +71,9 @@ export default function Home() {
     return () => container.removeEventListener("scroll", onScroll);
   }, [introDone]);
 
-  useEffect(() => {
-    const value = searchParams?.get("scrollTo");
-    if (value) setScrollTarget(value);
-  }, []);
+  <Suspense fallback={null}>
+    <ScrollTargetSetter setScrollTarget={setScrollTarget} />
+  </Suspense>;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
