@@ -1,7 +1,8 @@
 ## Contentful
 
 [Link here](https://app.contentful.com/spaces/t86k561yagqf)
-This is what we use for all of a project's data -- project name, release date, artwork and URL's, etc. You can create a new portfolio piece (or edit an existing) to create a new "Project" page on the website. Any changes that you save will appear _immediately_ on the live website.
+
+<small>This is what we use for all of a project's data -- project name, release date, artwork and URL's, etc. You can create a new portfolio piece (or edit an existing) to create a new "Project" page on the website. Any changes that you save will appear _immediately_ on the live website.</small>
 
 ### Create a Project: Content --> Add entry --> Project
 
@@ -44,7 +45,8 @@ Required fields will be highlighted in red. Each field has some helper text that
 ## Amazon AWS (S3)
 
 [Link here](https://us-east-1.console.aws.amazon.com/s3/buckets/strange-luck)
-All your files for the website are stored here for free/low-cost file storage.
+
+<small>All your files for the website are stored here for free/low-cost file storage.</small>
 
 ### How to upload a file:
 
@@ -88,7 +90,7 @@ Site Hosting -- Netlify
 -- HTTPS certificate issued here. auto-renews every 3 months.
 -- Updates in GitHub /main branch will automatically create a new deployment in Netlify. After a few minutes, as long as the netlify deployment doesn't fail, the changes will be live on the website!
 
-## Getting Started
+## Getting Started with Github
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
