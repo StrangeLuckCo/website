@@ -4,9 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function DescriptionOverlay({
-  credits,
   image,
-  description,
   className,
 }: {
   credits: string;
@@ -15,7 +13,6 @@ export default function DescriptionOverlay({
   className?: string;
 }) {
   const [expanded, setExpanded] = useState(false);
-  console.log(credits, description);
   const dummyText =
     "This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work. This is an example description of the project. It extends beyond four lines to demonstrate scrolling behavior. Keep reading for more details on the process, collaboration, and inspiration behind the sound design work.";
   return (

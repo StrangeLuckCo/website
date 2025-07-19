@@ -420,7 +420,6 @@ export default function Home() {
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/BlueVHS.mp4" type="video/mp4" />
-                <source src="/BlueVHS.mov" type="video/quicktime" />
                 Your browser does not support the video tag.
               </video>
               <div className="relative z-10 mb-8">

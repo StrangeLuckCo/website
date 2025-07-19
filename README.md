@@ -68,6 +68,8 @@ How to upload a file:
 
 - /headshots/ --> your photos! These appear under About section of the homepage. You can replace these but make sure to keep the same file naming conventions in order to update the website ("Jacki_Huntington.png", "Jen_Ng.png", "Jess_Dipierro_Obert.png")
 
+- /headshots/staff-bios.json --> all staff info under the "About" section can be edited here (ie. bios, etc.). Make sure to follow JSON file conventions or else the About section will break and parse the data incorrectly (ie. quote marks around keys ("imageSrc", "bio") and data values "Co-founder").
+
 - /homepage_hero/ --> this folder's used for assets in the website. File naming must stay the same for all these files (the website looks for each file name in AWS).
   -- /REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4 --> homepage hero video.
   -- /LogoAnimation-WithTagline_new.mp4 --> opening animation when a user visits Strange Luck for the first time.
