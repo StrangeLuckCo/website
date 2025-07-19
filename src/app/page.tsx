@@ -324,7 +324,7 @@ export default function Home() {
         <link
           // rel="preload"
           as="video"
-          href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline.mp4"
+          href="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
           type="video/mp4"
         />
         <link
