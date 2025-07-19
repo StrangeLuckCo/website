@@ -1,23 +1,13 @@
-Notes for Documentation:
+## Contentful
 
-ReSend -- email verification
-*API Key
-*MX and TXT records (in Porkbun)
-
-DNS -- handled in Porkbun
-
-- ALIAS and CNAME -- these point to the Netlify website/URL/IP Address
-  \*MX and 2 TXT records -- these point to Resend for email verification (for the contact form)
-
-Site Hosting -- Netlify
-HTTPS certificate issued here. auto-renews every 3 months.
-
-Contentful
-https://app.contentful.com/spaces/t86k561yagqf
+[Link here](https://app.contentful.com/spaces/t86k561yagqf)
 This is what we use for all of a project's data -- project name, release date, artwork and URL's, etc. You can create a new portfolio piece (or edit an existing) to create a new "Project" page on the website. Any changes that you save will appear _immediately_ on the live website.
 
-Create a Project: Content --> Add entry --> Project
+### Create a Project: Content --> Add entry --> Project
+
 Required fields will be highlighted in red. Each field has some helper text that explains where you'll see this info. appear on the website. You can "archive" a project to remove it from the website without deleting all the data.
+
+### Project Fields - updates these to edit your existing projects
 
 - Title: this is the name of the project. You'll see this on the homepage and as the largest heading of the project page.
 
@@ -51,11 +41,12 @@ Required fields will be highlighted in red. Each field has some helper text that
 
 - Tags: (optional) used to determine which category your project will appear underneath the Work section of the homepage. Choose from one or more of the following ("Design", "Film", "Photo", "Sound", "Writing"). These can be updated under Settings --> Tags.
 
-Amazon AWS (S3)
-https://us-east-1.console.aws.amazon.com/s3/buckets/strange-luck
+## Amazon AWS (S3)
+
+[Link here](https://us-east-1.console.aws.amazon.com/s3/buckets/strange-luck)
 All your files for the website are stored here for free/low-cost file storage.
 
-How to upload a file:
+### How to upload a file:
 
 1. Log into Amazon
 2. Amazon S3 --> Buckets --> strange-luck --> folder (ie. headshots, homepage_hero, etc.)
@@ -63,6 +54,8 @@ How to upload a file:
 4. Permissions --> click "Grant public-read access" --> check yes for "I understand the risk of granting public-read access to the specified objects."
    P.S. Don't worry about the warning message -- anything you're sharing as a portfolio piece should be public, and these permissions only grant people the ability to view the image/video file that you're uploading online.
 5. Click "Upload" at the bottom-right of the page. You're done!
+
+### Folders
 
 - /features/ --> All of the main File URLs for the Film projects are stored here. These are the full-screen long-form video files that you see on a Project page. File names aren't important as long as you also update the "File URL" field of the corresponding project in Contentful.
 
@@ -80,9 +73,24 @@ How to upload a file:
 
 - /thumbnails/ --> All the thumbnail images for all projects are stored here. These appear on the Work section. File names aren't important as long as you also update the "File URL" field of the corresponding project in Contentful.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Site Hosting & Site Certificates
+
+ReSend -- email verification
+*API Key
+*MX and TXT records (in Porkbun)
+
+DNS -- handled in Porkbun
+
+- ALIAS and CNAME -- these point to the Netlify website/URL/IP Address
+  \*MX and 2 TXT records -- these point to Resend for email verification (for the contact form)
+
+Site Hosting -- Netlify
+-- HTTPS certificate issued here. auto-renews every 3 months.
+-- Updates in GitHub /main branch will automatically create a new deployment in Netlify. After a few minutes, as long as the netlify deployment doesn't fail, the changes will be live on the website!
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 First, run the development server:
 
@@ -99,20 +107,3 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
