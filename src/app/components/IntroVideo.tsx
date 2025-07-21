@@ -50,8 +50,8 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
 
   return (
     <>
-      {/* Fullscreen video container */}
-      <div className="fixed inset-0 bg-black z-[9998]">
+      {/* Fullscreen, centered video container */}
+      <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black overflow-hidden">
         <video
           ref={videoRef}
           autoPlay
@@ -59,7 +59,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
           playsInline
           onPlay={handlePlay}
           onEnded={handleEnded}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain scale-[1.8] sm:scale-100"
         >
           <source
             src="https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
