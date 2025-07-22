@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -40,6 +41,12 @@ export default function MobileNav() {
       });
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      setIsSafari(true);
+    }
+  }, []);
 
   const handleNavClick = (e, hash) => {
     e.preventDefault();
@@ -82,16 +89,28 @@ export default function MobileNav() {
       }}
     >
       <Link href="#" onClick={(e) => scrollToTop(e)}>
-        <Image
-          src={"/StrangeLuck-Logo-VHS-Wide.svg"}
-          alt="Black background with 'Strange Luck: A Storytelling Studio' text"
-          height={39}
-          width={205}
-          priority
-        />
+        {isSafari ? (
+          <Image
+            src="/Logo.png"
+            alt="Strange Luck Logo"
+            height={39}
+            width={205}
+            priority
+            className="cursor-[url('/hand_cursor_2.png'),_pointer]"
+          />
+        ) : (
+          <Image
+            src="/StrangeLuck-Logo-VHS-Wide.svg"
+            alt="Strange Luck Logo"
+            height={39}
+            width={205}
+            priority
+            className="cursor-[url('/hand_cursor_2.png'),_pointer]"
+          />
+        )}
       </Link>
       <button
-        className="mobile-nav-menu blur-xs"
+        className="mobile-nav-menu blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
         onClick={() => setIsOpen(true)}
       >
         MENU
@@ -103,17 +122,28 @@ export default function MobileNav() {
         style={{ transform: "translateX(100%)" }}
       >
         <Link href="#" onClick={(e) => scrollToTop(e)}>
-          <Image
-            src={"/StrangeLuck-Logo-VHS-Wide.svg"}
-            alt="Black background with 'Strange Luck: A Storytelling Studio' text"
-            height={39}
-            width={205}
-            priority
-            className="absolute top-3 left-3.5 "
-          />
+          {isSafari ? (
+            <Image
+              src="/Logo.png"
+              alt="Strange Luck Logo"
+              height={39}
+              width={205}
+              priority
+              className="absolute top-3 left-3.5 cursor-[url('/hand_cursor_2.png'),_pointer]"
+            />
+          ) : (
+            <Image
+              src="/StrangeLuck-Logo-VHS-Wide.svg"
+              alt="Strange Luck Logo"
+              height={39}
+              width={205}
+              priority
+              className="absolute top-3 left-3.5 cursor-[url('/hand_cursor_2.png'),_pointer]"
+            />
+          )}
         </Link>
         <button
-          className="absolute top-6 right-6"
+          className="absolute top-6 right-6 cursor-[url('/hand_cursor_2.png'),_pointer]"
           onClick={() => setIsOpen(false)}
         >
           <X className="h-6 w-6" />
@@ -123,7 +153,7 @@ export default function MobileNav() {
           <Link
             href="#"
             onClick={(e) => scrollToTop(e)}
-            className="sl-h1-mobile blur-sm mb-10 hover-fill-neon"
+            className="sl-h1-mobile blur-sm mb-10 hover-fill-neon cursor-[url('/hand_cursor_2.png'),_pointer]"
             style={{ WebkitTextStrokeWidth: "0.75px" }}
           >
             Home
@@ -131,7 +161,7 @@ export default function MobileNav() {
           <li>
             <Link
               href="#work"
-              className="sl-h4-mobile blur-xs"
+              className="sl-h4-mobile blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "work")}
             >
@@ -141,7 +171,7 @@ export default function MobileNav() {
           <li>
             <Link
               href="#services"
-              className="sl-h4-mobile blur-xs"
+              className="sl-h4-mobile blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "services")}
             >
@@ -151,7 +181,7 @@ export default function MobileNav() {
           <li>
             <Link
               href="#about"
-              className="sl-h4-mobile blur-xs"
+              className="sl-h4-mobile blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "about")}
             >
@@ -161,7 +191,7 @@ export default function MobileNav() {
           <li>
             <Link
               href="#contact"
-              className="sl-h4-mobile blur-xs"
+              className="sl-h4-mobile blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
               style={{ WebkitTextStrokeWidth: "0.75px" }}
               onClick={(e) => handleNavClick(e, "contact")}
             >
