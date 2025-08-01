@@ -39,7 +39,7 @@ export default function Navigation() {
   const logoGlow =
     "https://strange-luck.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE-Glowing.svg";
   return (
-    <nav className="hidden sm:flex h-[127px] absolute w-full text-#b6b7b9 justify-center items-center px-[94px] pt-[22px] pb-[62px] z-20 bg-nav-gradient backdrop-blur-sm">
+    <nav className="hidden sm:flex h-[77px] absolute w-full text-#b6b7b9 justify-center items-center px-[94px] pt-[22px] pb-[12px] z-20 bg-nav-gradient backdrop-blur-sm">
       <div className="flex gap-x-[15px] md:gap-x-[45px] lg:gap-x-[100px] xl:gap-x-[156px] shrink-0 items-start sl-p2 blur-xs">
         <a
           href="#work"

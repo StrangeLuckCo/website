@@ -423,14 +423,14 @@ export default function Home() {
                 Your browser does not support the video tag.
               </video>
               <div className="relative z-10 mb-8">
-                <div className="flex flex-col items-center sm:items-start mb-6 sm:mt-20 sm:mb-0">
-                  <h1 className="sl-h1-mobile gradient-text blur-sm text-center sm:text-left w-3/4">
+                <div className="flex flex-col items-center sm:items-start mb-6  sm:mb-0">
+                  <h1 className="sl-h1-mobile gradient-text sm:text-[48px] md:text-[64px] blur-sm text-center sm:text-left w-3/4">
                     Choose your path
                   </h1>
                 </div>
 
-                <nav className="justify-center sm:justify-between p-1 mb-[70px] sm:mb-0">
-                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-x-2 sm:mb-8 sm:gap-4 sm:text-[32px]">
+                <nav className="justify-center sm:justify-between sm:pt-[18px] mb-[70px] sm:mb-0">
+                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-x-2 sm:mb-[97px] sm:gap-4 sm:text-[32px]">
                     {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
                       <div
                         key={category}
