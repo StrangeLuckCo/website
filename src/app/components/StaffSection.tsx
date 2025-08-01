@@ -17,7 +17,7 @@ export default function StaffSection() {
     async function fetchStaffData() {
       try {
         const res = await fetch(
-          "https://strange-luck.s3.us-east-1.amazonaws.com/headshots/staff-bios.json"
+          "https://strange-luck-website.s3.us-east-1.amazonaws.com/headshots/staff-bios.json"
         );
         const data = await res.json();
         setStaffData(data);
