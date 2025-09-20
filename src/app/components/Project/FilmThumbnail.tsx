@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const FilmThumbnail = ({ src }: { src: string }) => {
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden glow">
       <Image
         src={src}
         alt="Movie poster"

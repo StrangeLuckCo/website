@@ -82,20 +82,16 @@ export default function MobileNav() {
 
   return (
     <nav
-      className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-30 py-3 text-white container-x"
-      style={{
-        background:
-          "linear-gradient(180deg, #0D0888 0%, #0D0888 26.92%, rgba(54, 56, 99, 0.00) 100%)",
-      }}
+      className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-30 py-3 text-white container-x bg-nav-gradient"
     >
       <Link href="#" onClick={(e) => scrollToTop(e)}>
           <Image
-            src={"/logo-white-yellow-01.svg"}
+            src={"/logo-white-yellow-no-tagline-01.svg"}
             alt="Strange Luck Logo"
             height={39}
             width={205}
             priority
-            className="blur-[0.8px] opacity-90 cursor-[url('/hand_cursor_2.png'),_pointer]"
+            className="blur-[0.8px] opacity-90 cursor-[url('/hand_cursor_2.png'),_pointer] mt-1"
           />
       </Link>
       <button
@@ -112,7 +108,7 @@ export default function MobileNav() {
       >
         <Link href="#" onClick={(e) => scrollToTop(e)}>
             <Image
-              src={"/logo-white-yellow-01.svg"}
+              src={"/logo-white-yellow-no-tagline-01.svg"}
               alt="Strange Luck Logo"
               height={39}
               width={205}

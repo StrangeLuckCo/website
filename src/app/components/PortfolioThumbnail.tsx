@@ -19,7 +19,7 @@ const PortfolioThumbnail = ({
 
   return (
     <div className="flex flex-col gap-y-4" onClick={() => router.push(`/${slug}`)}>
-      <div className="w-full aspect-[4/3] mb-4 relative overflow-hidden shadow-[2px_2px_13px_0px_#ffffffcc,_-2px_-2px_13px_0px_#ffffff] hover:shadow-[4px_4px_18px_1px_#E6FC6D,_-4px_-4px_18px_1px_#E6FC6D]">
+      <div className="w-full aspect-[4/3] mb-4 relative overflow-hidden glow-with-hover">
         {isVideo ? (
           <video
             src={url}

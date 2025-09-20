@@ -39,7 +39,7 @@ export default function Navigation() {
   const logoGlow =
     "https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE-Glowing.svg";
   return (
-    <nav className="hidden sm:block h-[77px] absolute w-full text-#b6b7b9 justify-center items-center pt-[22px] pb-[12px] z-20 bg-nav-gradient backdrop-blur-sm">
+    <nav className="hidden sm:block h-[77px] fixed w-full text-#b6b7b9 justify-center items-center pt-[22px] pb-[12px] z-20 bg-nav-gradient">
       {/*<div className="container-x flex gap-x-[15px] md:gap-x-[45px] lg:gap-x-[100px] xl:gap-x-[156px] shrink-0 items-center sl-p2">*/}
       <div className="container-x flex items-center sl-p2">
         <a
@@ -64,7 +64,7 @@ export default function Navigation() {
           {/* SVG for most browsers */}
 
           <Image
-            src={"/logo-white-yellow-01.svg"}
+            src={"/logo-white-yellow-no-tagline-01.svg"}
             alt="Black background with 'Strange Luck: A Storytelling Studio' text"
             height="100"
             width="267"
