@@ -200,17 +200,16 @@ body {
 /* Helvetica Desktop Title */
 @media (min-width: 640px) {
   .desktop-title {
-    -webkit-text-stroke-width: 2px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #e3e4cb;
     -webkit-text-stroke-color: #000;
+    -webkit-text-stroke-width: 2px;
+    background-clip: text;
     font-size: 64px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
     letter-spacing: -2.56px;
-
-    -webkit-text-fill-color: #e3e4cb;
-    background-clip: text;
-    -webkit-background-clip: text;
+    line-height: normal;
     text-shadow: -5px 4px 4px #000;
   }
 }
@@ -289,18 +288,17 @@ body {
 /* Desktop/H1 */
 @media (min-width: 640px) {
   .sl-h1 {
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #000;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: #e3e4cb;
+    -webkit-text-stroke-color: #000;
+    -webkit-text-stroke-width: 2px;
+    background-clip: text;
+    color: transparent;
     font-size: 64px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
     letter-spacing: -2.56px;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: #e3e4cb;
+    line-height: normal;
     text-shadow: -5px 4px 4px #000;
   }
 }
@@ -343,6 +341,7 @@ body {
 @media (min-width: 640px) {
   .sl-h4 {
     -webkit-text-fill-color: #e3e4cb;
+    color: #e3e4cb;
     font-size: 28px;
     font-style: normal;
     font-weight: 500;
@@ -388,6 +387,36 @@ body {
     font-size: 28px !important;
   }
 }
+
+/* containers */
+
+.container-constrained {
+  @apply items-center justify-center;
+  @apply w-full max-w-[1600px];
+  @apply mx-auto;
+}
+
+/* horizontal container for top-level layout */
+.container-x {
+  @apply mx-6 sm:mx-8 lg:mx-12;
+  @apply max-w-screen-xl mx-auto;
+  @apply px-6 sm:px-8 lg:px-12;
+}
+
+
+/* vertical container for top-level layout */
+.container-flex-y {
+  @apply gap-y-6 sm:gap-y-6 lg:gap-y-12;
+}
+
+/* copy / text */
+.paragraph {
+  @apply sl-p sl-p-mobile blur-xxs font-normal text-xl
+}
+
+/* project page */
+
+/* .project- */
 
 .text-stroke-lg {
   -webkit-text-stroke-width: 2px;
@@ -552,7 +581,7 @@ body {
     0px 1px 2px rgb(0 0 0 / 0.2),
     0px 3px 2px rgb(0 0 0 / 0.2),
     0px 4px 8px rgb(0 0 0 / 0.2);
-  filter: blur(0.3px);
+  filter: blur(0.25px);
 }
 
 /* Snap-To effect with GSAP */
@@ -708,9 +737,9 @@ body {
 }
 
 /* Safari override */
-.safari .logo-svg {
-  display: none !important;
-}
-.safari .logo-png {
-  display: block !important;
-}
+/* .safari .logo-svg { */
+/*   display: none !important; */
+/* } */
+/* .safari .logo-png { */
+/*   display: block !important; */
+/* } */

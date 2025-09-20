@@ -199,13 +199,13 @@ export default function Project() {
       )}
 
       {project && (displayType === "audio" || displayType === "art") && (
-        <div className="flex flex-col mt-[100px] sm:mt-0">
-          {isMobile && (
-            <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs z-20 text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
+        <div className="flex flex-col">
+          {/*isMobile && (
+            <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs z-20 leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
               {project?.fields.title}
             </h1>
-          )}
-          <div className="relative z-10 flex pt-12 sm:pt-32 justify-center items-center flex-col gap-y-6">
+          )*/}
+          <div className="relative z-10 flex sm:pt-32 justify-center items-center flex-col gap-y-6">
             {/\.(mp4|mov|webm)$/i.test(project.fields.thumbnailUrl || "") ? (
               <video
                 src={project.fields.thumbnailUrl}
@@ -235,23 +235,25 @@ export default function Project() {
 
       <div className="h-full relative z-10 pt-16 sm:pt-28 text-white text-2xl">
         {project && (
-          <div className="flex flex-col gap-y-[77px]">
-            {isMobile && displayType === "video" && (
-              <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs text-stroke-lg text-[64px] leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
-                {project?.fields.title}
+          <div className="flex flex-col container-flex-y container-x">
+            {/*isMobile && displayType === "video" && (
+              <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs leading-[0.9] mb-4 sm:mb-0">
+                {project?.fields.title}.
               </h1>
-            )}
-            <ProjectSummary project={project} className="px-4 sm:px-20" />
+            )*/}
+
+            <ProjectSummary project={project} />
+
             {project.fields.projectImages &&
               project.fields.projectImages.length > 0 && (
                 <Carousel
                   images={project.fields.projectImages || []}
-                  className="sm:mt-12"
+                  className="relative left-1/2 w-dvw max-w-none -translate-x-1/2"
                 />
               )}
 
             {project.fields.markdownDescription && (
-              <div className="sl-h4 sl-p2-mobile blur-xs px-10 mb-24 sm:mb-2">
+              <div className="sl-p sl-p-mobile blur-xxs">
                 {documentToReactComponents(
                   project.fields.markdownDescription as Document,
                   options

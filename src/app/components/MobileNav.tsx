@@ -82,32 +82,21 @@ export default function MobileNav() {
 
   return (
     <nav
-      className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-30 pl-[14px] pr-[25px] py-3 text-white"
+      className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-30 py-3 text-white container-x"
       style={{
         background:
           "linear-gradient(180deg, #0D0888 0%, #0D0888 26.92%, rgba(54, 56, 99, 0.00) 100%)",
       }}
     >
       <Link href="#" onClick={(e) => scrollToTop(e)}>
-        {isSafari ? (
           <Image
-            src="/Logo.png"
+            src={"/logo-white-yellow-01.svg"}
             alt="Strange Luck Logo"
             height={39}
             width={205}
             priority
-            className="cursor-[url('/hand_cursor_2.png'),_pointer]"
+            className="blur-[0.8px] opacity-90 cursor-[url('/hand_cursor_2.png'),_pointer]"
           />
-        ) : (
-          <Image
-            src="/StrangeLuck-Logo-VHS-Wide.svg"
-            alt="Strange Luck Logo"
-            height={39}
-            width={205}
-            priority
-            className="cursor-[url('/hand_cursor_2.png'),_pointer]"
-          />
-        )}
       </Link>
       <button
         className="mobile-nav-menu blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
@@ -122,34 +111,23 @@ export default function MobileNav() {
         style={{ transform: "translateX(100%)" }}
       >
         <Link href="#" onClick={(e) => scrollToTop(e)}>
-          {isSafari ? (
             <Image
-              src="/Logo.png"
+              src={"/logo-white-yellow-01.svg"}
               alt="Strange Luck Logo"
               height={39}
               width={205}
               priority
-              className="absolute top-3 left-3.5 cursor-[url('/hand_cursor_2.png'),_pointer]"
+              className="blur-[0.8px] opacity-90 absolute top-3 left-3.5 cursor-[url('/hand_cursor_2.png'),_pointer]"
             />
-          ) : (
-            <Image
-              src="/StrangeLuck-Logo-VHS-Wide.svg"
-              alt="Strange Luck Logo"
-              height={39}
-              width={205}
-              priority
-              className="absolute top-3 left-3.5 cursor-[url('/hand_cursor_2.png'),_pointer]"
-            />
-          )}
         </Link>
         <button
-          className="absolute top-6 right-6 cursor-[url('/hand_cursor_2.png'),_pointer]"
+          className="blur-[0.7px] opacity-90 absolute top-3 right-6 cursor-[url('/hand_cursor_2.png'),_pointer]"
           onClick={() => setIsOpen(false)}
         >
           <X className="h-6 w-6" />
         </button>
 
-        <ul className="flex flex-col gap-3 mt-[125px] text-center">
+        <ul className="flex flex-col gap-5 mt-40 text-center">
           <Link
             href="#"
             onClick={(e) => scrollToTop(e)}
