@@ -7,13 +7,13 @@ export default function UpdatedContactSection() {
   return (
     <section
       id="contact"
-      className="z-10 sm:h-screen pt-20 sm:pt-0 pb-16 mb-12 sm:mb-20 max-w-screen overflow-hidden flex flex-col items-center justify-center text-center"
+      className="z-10 sm:h-screen pt-20 sm:pt-0 pb-16 mb-12 sm:mb-20 max-w-screen overflow-hidden flex flex-col items-center justify-center text-center container-x"
     >
-      <h2 className="sl-h2 sl-h4-mobile blur-xs sm:blur-md w-4/5 mb-16 sm:mt-20 sm:mb-4 ">
+      <h2 className="sl-h2 sl-h4-mobile blur-xs sm:blur-sm w-4/5 mb-16 sm:mt-20 sm:mb-4 ">
         Want to fall in love with the world — its sounds, its stories, its
         textures, its contradictions, its juxtapositions, its surprises?
       </h2>
-      <h3 className="sl-h4-mobile sl-h3 blur-xs sm:blur-sm mb-6">
+      <h3 className="sl-h4-mobile sl-h3 blur-xs sm:blur-xs mb-6">
         A dream collaboration could be in your future.
       </h3>
       <Link
@@ -31,7 +31,7 @@ export default function UpdatedContactSection() {
           HI@YOURSTRANGELUCK.COM
         </h1>
       </Link>
-      <p className="sl-p2-mobile sl-p blur-xs sm:blur-sm mb-12 sm:mb-10">
+      <p className="sl-p2-mobile sl-p blur-xs sm:blur-xs mb-12 sm:mb-10">
         OFFER EXPIRES 6:00PM FEBRUARY 23, 2060
       </p>
       <h4 className="sl-h4-mobile sl-h4 blur-xs sm:blur-sm mb-10">
