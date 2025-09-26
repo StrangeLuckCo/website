@@ -169,6 +169,7 @@ export function useAudioEngine(audioUrls: string[]) {
   };
 
   const handlePlayPause = () => {
+    console.log("Handle Play/Pause clicked");
     if (duration > 0) {
       if (isPlaying) {
         pause();
@@ -209,6 +210,7 @@ export function useAudioEngine(audioUrls: string[]) {
     const response = await fetch(url);
     const arrayBuffer = await response.arrayBuffer();
     const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+    console.log("Audio loaded and decoded:", url);
     preloadCache.current[url] = audioBuffer;
     setBuffer(audioBuffer);
     setDuration(audioBuffer.duration);
@@ -234,6 +236,8 @@ export function useAudioEngine(audioUrls: string[]) {
   };
 
   const play = (rate = 1, dir: PlaybackDirection = "forward") => {
+    console.log("Play called with rate:", rate, "direction:", dir);
+    console.log({ buffer, audioContext: audioContextRef.current });
     if (!buffer || !audioContextRef.current) return;
 
     stopPlayback();
@@ -251,6 +255,8 @@ export function useAudioEngine(audioUrls: string[]) {
     const offset =
       dir === "reverse" ? activeBuffer.duration - currentTime : currentTime;
     src.start(0, offset);
+    console.log("Source started at offset:", offset);
+
 
     const playbackStartTime = ctx.currentTime;
     const update = () => {

@@ -32,26 +32,22 @@ export default function StaffSection() {
   return (
     <section
       id="staff"
-      className="flex flex-col  min-h-screen sm:p-20 pt-20 sm:pt-0 gap-y-10 text-center sm:text-left"
+      className="sm:min-h-screen flex flex-col py-24 gap-20 text-center sm:text-left container-x"
     >
-      <h1 className="pl-4 sm:pl-0 text-3xl desktop-title sl-h1-mobile blur-md sm:mt-[70px]">
+      <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-sm">
         About
       </h1>
-      <div className="min-h-screen flex items-center justify-center mb-20">
-        <div className="flex flex-col gap-32 sm:gap-40">
-          {staffData.map((staff, index) => (
-            <StaffHeadshot
-              key={index}
-              imageSrc={staff.imageSrc}
-              altText={staff.altText}
-              name={staff.name}
-              title={staff.title}
-              credits={staff.credits}
-              bio={staff.bio}
-            />
-          ))}
-        </div>
-      </div>
+      {staffData.map((staff, index) => (
+        <StaffHeadshot
+          key={index}
+          imageSrc={staff.imageSrc}
+          altText={staff.altText}
+          name={staff.name}
+          title={staff.title}
+          credits={staff.credits}
+          bio={staff.bio}
+        />
+      ))}
     </section>
   );
 }

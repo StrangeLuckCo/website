@@ -102,37 +102,37 @@ export default function AudioScrubber({
       </div>
 
       {showControls && (
-        <div className="flex gap-x-[19px] mt-4 max-h-[34px]">
+        <div className="flex gap-x-[19px] mt-4 max-h-[34px] blur-xxs">
           <Image
-            src="/stop_button_container.svg"
+            src="/controls/audio-stop-01.svg"
             onClick={handleStop}
-            width={70}
-            height={40}
+            width={60}
+            height={30}
             style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
             alt="Stop"
           />
           <Image
-            src="/rewind_button_container.svg"
+            src="/controls/audio-rewind-01.svg"
             onClick={handleRewind}
-            width={70}
-            height={40}
+            width={60}
+            height={30}
             style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
             alt="Reverse"
           />
 
           <Image
-            src="/play_button_container.svg"
+            src="/controls/audio-play-01.svg"
             onClick={handlePlayPause}
-            width={70}
-            height={40}
+            width={60}
+            height={30}
             style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
             alt="Play"
           />
           <Image
-            src="/skip_button_container.svg"
+            src="/controls/audio-ff-01.svg"
             onClick={handleFastForward}
-            width={70}
-            height={40}
+            width={60}
+            height={30}
             style={{ filter: "drop-shadow(-5px 4px 4px #000)" }}
             alt="Fast forward"
           />
