@@ -11,12 +11,10 @@ import type { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Options } from "@contentful/rich-text-react-renderer";
-import { useIsMobile } from "../utility/hooks";
 import Navigation from "../components/Navigation";
 import MobileNav from "../components/MobileNav";
 import AudioScrubber from "../components/Project/AudioScrubber";
 import MediaScrubber from "../components/Project/MediaScrubber";
-import MediaControls from "../components/Project/MediaControls";
 
 const options: Options = {
   renderText: (text) => {
@@ -291,11 +289,6 @@ export default function Project() {
 
       {project && (displayType === "audio" || displayType === "art") && (
         <div className="flex flex-col">
-          {/*isMobile && (
-            <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs z-20 leading-[0.9] mb-4 sm:mb-0 text-center sm:text-left">
-              {project?.fields.title}
-            </h1>
-          )*/}
           <div className="relative z-10 flex sm:pt-32 justify-center items-center flex-col gap-y-6">
             {/\.(mp4|mov|webm)$/i.test(project.fields.thumbnailUrl || "") ? (
               <video
@@ -327,12 +320,6 @@ export default function Project() {
       <div className="h-full relative z-10 pt-16 sm:pt-28 text-white text-2xl">
         {project && (
           <div className="flex flex-col container-flex-y container-x">
-            {/*isMobile && displayType === "video" && (
-              <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs leading-[0.9] mb-4 sm:mb-0">
-                {project?.fields.title}.
-              </h1>
-            )*/}
-
             <ProjectSummary project={project} />
 
             {project.fields.projectImages &&

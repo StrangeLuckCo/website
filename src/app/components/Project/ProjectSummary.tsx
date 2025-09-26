@@ -2,7 +2,6 @@
 
 import { Project } from "../../[slug]/page";
 import FilmThumbnail from "./FilmThumbnail";
-import { useIsMobile } from "../../utility/hooks";
 
 export const ProjectSummary = ({
   project,
@@ -19,15 +18,8 @@ export const ProjectSummary = ({
     productionCredits,
     externalUrl,
   } = project.fields;
-  const isMobile = useIsMobile();
   return (
     <div className={`flex flex-col gap-y-10 ${className}`}>
-      {/*!isMobile && (
-        <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-xs">
-          {title}
-        </h1>
-      )*/}
-
       <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-sm">
         {title}
       </h1>
