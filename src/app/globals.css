@@ -390,12 +390,6 @@ body {
 
 /* containers */
 
-.container-constrained {
-  @apply items-center justify-center;
-  @apply w-full max-w-[1600px];
-  @apply mx-auto;
-}
-
 /* horizontal container for top-level layout */
 .container-x {
   @apply mx-6 sm:mx-8 lg:mx-12;
@@ -407,11 +401,6 @@ body {
 /* vertical container for top-level layout */
 .container-flex-y {
   @apply gap-y-6 sm:gap-y-6 lg:gap-y-12;
-}
-
-/* copy / text */
-.paragraph {
-  @apply sl-p sl-p-mobile blur-xxs font-normal text-xl
 }
 
 /* project page */
@@ -752,11 +741,3 @@ body {
   @apply backdrop-blur-sm;
   mask: linear-gradient(black, black, transparent);
 }
-
-/* Safari override */
-/* .safari .logo-svg { */
-/*   display: none !important; */
-/* } */
-/* .safari .logo-png { */
-/*   display: block !important; */
-/* } */

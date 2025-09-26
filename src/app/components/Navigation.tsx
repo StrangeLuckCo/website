@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
-  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -34,13 +33,8 @@ export default function Navigation() {
     }
   };
 
-  const logo =
-    "https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.svg";
-  const logoGlow =
-    "https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE-Glowing.svg";
   return (
     <nav className="hidden sm:block h-[77px] fixed w-full text-#b6b7b9 justify-center items-center pt-[22px] pb-[12px] z-20 bg-nav-gradient">
-      {/*<div className="container-x flex gap-x-[15px] md:gap-x-[45px] lg:gap-x-[100px] xl:gap-x-[156px] shrink-0 items-center sl-p2">*/}
       <div className="container-x flex items-center sl-p2">
         <a
           href="#work"
@@ -61,8 +55,6 @@ export default function Navigation() {
           onClick={(e) => handleLogoClick(e)}
           className="cursor-[url('/hand_cursor_2.png'),_pointer] grow"
         >
-          {/* SVG for most browsers */}
-
           <Image
             src={"/logo-white-yellow-no-tagline-01.svg"}
             alt="Black background with 'Strange Luck: A Storytelling Studio' text"
@@ -70,10 +62,8 @@ export default function Navigation() {
             width="267"
             priority
             className="sm:block h-auto blur-[1.0px] opacity-85"
-            // className="blur-[1.25px] sm:blur-[2px] opacity-90 w-auto"
           />
         </Link>
-
         <a
           href="#staff"
           onClick={(e) => handleLogoClick(e, "staff")}
@@ -92,27 +82,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
-          {/*<Image
-            alt="Logo"
-            priority
-            src={hovered ? logoGlow : logo}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            height={51}
-            width={267}
-            className="logo-svg hidden sm:block"
-            style={{ height: "auto" }}
-          />*/}
-
-          {/* PNG fallback for Safari */}
-          {/*<Image
-            alt="Logo PNG fallback"
-            priority
-            src={hovered ? "/Logo-glow.png" : "/Logo.png"}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            height={51}
-            width={267}
-            className="logo-png hidden sm:block"
-          />*/}

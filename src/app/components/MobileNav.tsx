@@ -9,7 +9,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSafari, setIsSafari] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -41,12 +40,6 @@ export default function MobileNav() {
       });
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      setIsSafari(true);
-    }
-  }, []);
 
   const handleNavClick = (e, hash) => {
     e.preventDefault();

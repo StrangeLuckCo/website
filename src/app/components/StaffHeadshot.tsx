@@ -16,7 +16,6 @@ export default function StaffHeadshot({
   bio: string;
 }) {
   return (
-    // <div className="max-w-5xl">
       <div className="flex flex-col items-center sm:items-start gap-y-3">
         <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-y-0 gap-x-5 sm:gap-x-10 items-center sm:items-start">
           <Image

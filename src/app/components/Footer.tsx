@@ -1,11 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useIsMobile } from "../utility/hooks";
 
 export default function Footer() {
-  const isMobile = useIsMobile();
-
   return (
     <footer className="w-full flex flex-col items-center justify-center mt-[45px] pb-28 sm:m-0">
       <div className="flex flex-col items-center justify-center gap-y-[31px] sm:gap-y-10 sm:mb-16 sm:mx-12">

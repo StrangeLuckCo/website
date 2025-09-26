@@ -48,10 +48,6 @@ export default function StaffSection() {
           bio={staff.bio}
         />
       ))}
-      { /* <div className="min-h-screen flex items-center justify-center mb-20">
-        <div className="flex flex-col gap-32 sm:gap-40">
-        </div>
-      </div> */ }
     </section>
   );
 }
