@@ -62,7 +62,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
           className="w-full h-full object-contain scale-[1.8] sm:scale-100"
         >
           <source
-            src="https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
+            src="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.

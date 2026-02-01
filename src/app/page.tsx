@@ -111,7 +111,7 @@ export default function Home() {
   const heroVideo = () => {
     return (
       <video
-        src="https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
+        src="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
         autoPlay
         loop
         muted
@@ -149,17 +149,14 @@ export default function Home() {
         const res: Project[] = await getEntities();
         if (!res) return;
 
-        const groupedProjects = res.reduce(
-          (acc, item) => {
-            const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
-            tags.forEach((tag) => {
-              if (!acc[tag]) acc[tag] = [];
-              acc[tag].push(item);
-            });
-            return acc;
-          },
-          {} as Record<string, Project[]>
-        );
+        const groupedProjects = res.reduce((acc, item) => {
+          const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
+          tags.forEach((tag) => {
+            if (!acc[tag]) acc[tag] = [];
+            acc[tag].push(item);
+          });
+          return acc;
+        }, {} as Record<string, Project[]>);
 
         sortProjects(groupedProjects);
 
@@ -324,13 +321,13 @@ export default function Home() {
         <link
           // rel="preload"
           as="video"
-          href="https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
+          href="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
           type="video/mp4"
         />
         <link
           // rel="preload"
           as="video"
-          href="https://strange-luck-website.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
+          href="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
           type="video/mp4"
         />
       </Head>
