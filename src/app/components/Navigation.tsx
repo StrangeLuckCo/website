@@ -15,7 +15,7 @@ export default function Navigation() {
 
   const handleLogoClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    hash?: string
+    hash?: string,
   ) => {
     e.preventDefault();
 
@@ -33,10 +33,6 @@ export default function Navigation() {
     }
   };
 
-  const logo =
-    "https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE.svg";
-  const logoGlow =
-    "https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/Logo-WIDE-Glowing.svg";
   return (
     <nav className="hidden sm:block h-[77px] fixed w-full text-#b6b7b9 justify-center items-center pt-[22px] pb-[12px] z-20 bg-nav-gradient">
       <div className="container-x flex items-center sl-p2">
