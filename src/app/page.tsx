@@ -375,8 +375,8 @@ export default function Home() {
               >
                 <source src="/about_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 sm:blur-md blur-sm">
-                <h2>
+              <div className="absolute z-10 text-left max-w-[min(50vw,450px)] left-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:left-[clamp(4rem,12vw,12rem)] sm:bottom-[clamp(3rem,12vh,7rem)]">
+                <h2 className="sl-h2 mobile-title sm:blur-md blur-sm">
                   Strange Luck is a storytelling studio for the human spirit.
                 </h2>
               </div>
@@ -396,8 +396,8 @@ export default function Home() {
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
               </video>
-              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] mobile-title sl-h2 sm:blur-md blur-sm">
-                <h2>
+              <div className="absolute z-10 text-left max-w-[min(80vw,600px)] right-[clamp(1rem,8vw,6rem)] bottom-[clamp(5rem,16vh,8rem)] sm:right-[clamp(4rem,12vw,6.5rem)] sm:bottom-[clamp(3rem,12vh,7rem)] ">
+                <h2 className="sl-h2 mobile-title sm:blur-md blur-sm">
                   We work with brands, nonprofits, and media companies to tell
                   stories that generate empathy and drive engagement.
                 </h2>
@@ -406,64 +406,47 @@ export default function Home() {
 
             <section
               id="work"
-              className="section-snap z-10 relative flex flex-col text-white pt-28 px-10 sm:px-20 sm:pt-24 pb-20"
+              className="section-snap z-10 relative text-white pt-28 sm:pt-24 pb-20"
             >
-              <video
-                id="work-video"
-                muted
-                loop
-                playsInline
-                // preload="auto"
-                className="absolute top-0 left-0 w-full h-full object-cover z-0"
-              >
+              <video id="work-video" muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
                 <source src="/BlueVHS.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              <div className="relative z-10 mb-8">
-                <div className="flex flex-col items-center sm:items-start mb-6  sm:mb-0">
-                  <h1 className="sl-h1-mobile gradient-text sm:text-[48px] md:text-[64px] blur-sm text-center sm:text-left w-3/4">
+
+              <div className="container-x flex flex-col gap-y-20">
+                <header className="flex flex-col gap-y-6 sm:gap-y-4">
+                  <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-sm text-center sm:text-left sm:whitespace-nowrap">
                     Choose your path
                   </h1>
-                </div>
-
-                <nav className="justify-center sm:justify-between sm:pt-[18px] mb-[70px] sm:mb-0">
-                  <div className="flex flex-wrap justify-center sm:justify-start text-md gap-x-2 sm:mb-[97px] sm:gap-4 sm:text-[32px]">
-                    {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
-                      <div
-                        key={category}
-                        className="flex items-center gap-x-2 sm:gap-4"
-                      >
-                        <button
-                          onClick={() => handleTagClick(category)}
-                          className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C]  focus:underline !hover:text-gray-400 cursor-[url('/hand_cursor_2.png'),_pointer] focus:decoration-[#DFFC3C] `}
-                          style={{
-                            WebkitTextFillColor:
-                              selectedTag === CATEGORY_TO_TAG[category]
-                                ? "#DFFC3C"
-                                : "",
-                            textDecoration:
-                              selectedTag === CATEGORY_TO_TAG[category]
-                                ? "underline"
-                                : "none",
-                            textDecorationColor:
-                              selectedTag === CATEGORY_TO_TAG[category]
-                                ? "#DFFC3C"
-                                : "inherit",
-                          }}
+                  <nav className="justify-center sm:justify-between">
+                    <div className="flex flex-wrap justify-center sm:justify-start gap-x-2 sm:gap-2">
+                      {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
+                        <div
+                          key={category}
+                          className="flex items-center gap-x-2 sm:gap-4"
                         >
-                          {category}
-                        </button>
-                        {idx !== arr.length - 1 && (
-                          <span className="sl-list-item mobile-subtitle blur-xs text-gray-400">
-                            |
-                          </span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </nav>
+                          <button
+                            key={category}
+                            onClick={() => handleTagClick(category)}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[42px] gap-y-[115px] sm:gap-y-[120px]">
+                            className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C] !hover:text-gray-400 cursor-[url('/hand_cursor_2.png'),_pointer] focus:decoration-[#DFFC3C]`}
+                            style={{
+                              WebkitTextFillColor: selectedTag === CATEGORY_TO_TAG[category] ? "#DFFC3C" : "",
+                              textDecoration: selectedTag === CATEGORY_TO_TAG[category] ? "" : "none",
+                              textDecorationColor: selectedTag === CATEGORY_TO_TAG[category] ? "#DFFC3C" : "inherit",
+                            }}
+                          >
+                            {category}
+                          </button>
+                          {idx !== arr.length - 1 && (
+                            <span className="sl-list-item mobile-subtitle blur-xs text-gray-400"> | </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </nav>
+                </header>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-20">
                   {filteredItems.map((entity) => {
                     const asset = entity.fields;
                     return (

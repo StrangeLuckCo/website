@@ -54,8 +54,7 @@ export default function Carousel({
               <div className="relative w-full aspect-[3/2] my-2">
                 {/* rounded shadow layer behind the image */}
                 <div
-                  className="absolute left-0 right-0 bottom-0 top-[2px] rounded-xl pointer-events-none
-               [box-shadow:-2px_-2px_13px_0_#FFF,2px_2px_13px_0_rgba(255,255,255,0.80)]"
+                  className="absolute left-0 right-0 bottom-0 top-[2px] pointer-events-none glow"
                   aria-hidden
                 />
                 <Image

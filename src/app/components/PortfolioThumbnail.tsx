@@ -18,8 +18,8 @@ const PortfolioThumbnail = ({
   const isVideo = url?.toLowerCase().endsWith(".mp4");
 
   return (
-    <div className="flex flex-col mb-2" onClick={() => router.push(`/${slug}`)}>
-      <div className="w-full aspect-[4/3] mb-[32px] relative overflow-hidden shadow-[2px_2px_13px_0px_#ffffffcc,_-2px_-2px_13px_0px_#ffffff] hover:shadow-[4px_4px_18px_1px_#E6FC6D,_-4px_-4px_18px_1px_#E6FC6D]">
+    <div className="flex flex-col gap-y-4" onClick={() => router.push(`/${slug}`)}>
+      <div className="w-full aspect-[4/3] mb-4 relative overflow-hidden glow-with-hover">
         {isVideo ? (
           <video
             src={url}
@@ -39,10 +39,10 @@ const PortfolioThumbnail = ({
           />
         )}
       </div>
-      <h2 className="text-2xl sl-h2 sl-h2-mobile blur-sm sm:blur-xs mb-[12px]">
+      <h2 className="sl-h2 sl-h2-mobile sl-h2-tablet blur-sm sm:blur-xs">
         {title}
       </h2>
-      <p className="sl-p sl-p-mobile blur-xs">{shortDescription}</p>
+      <p className="sl-p sl-p-mobile blur-xxs">{shortDescription}</p>
     </div>
   );
 };

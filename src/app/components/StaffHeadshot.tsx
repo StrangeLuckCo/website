@@ -16,35 +16,34 @@ export default function StaffHeadshot({
   bio: string;
 }) {
   return (
-    <div className="max-w-5xl">
       <div className="flex flex-col items-center sm:items-start gap-y-3">
-        <div className="flex flex-col sm:flex-row text-4xl sm:text-5xl leading-none gap-3 items-center">
-          <h2 className="sl-h2 sl-h2-mobile sl-h2-tablet blur-xs sm:blur-sm">
-            {name}
-          </h2>
-          <span className="hidden sm:block sl-h2 blur-xs sm:blur-sm"> | </span>
-          <h2 className="sl-h2 sl-h3-mobile sl-h3-tablet blur-xs sm:blur-sm">
-            {title}
-          </h2>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 gap-x-4 sm:gap-x-[31px] items-center sm:items-start">
+        <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-y-0 gap-x-5 sm:gap-x-10 items-center sm:items-start">
           <Image
             src={imageSrc}
             width={280}
             height={350}
             alt={altText}
-            style={{ width: "auto" }}
+            className="w-auto sm:w-1/3 h-auto"
           />
-          <div className="flex flex-col gap-y-4 px-8 sm:px-0 text-2xl leading-none">
-            <h4 className="sl-h4 sl-h4-mobile sl-h4-tablet blur-xs md:blur-sm">
+          <div className="flex flex-col gap-y-4 px-8 sm:px-0 leading-none">
+            <div className="flex flex-col md:flex-row leading-none gap-3 md:items-center">
+              <h2 className="sl-h2 sl-h2-mobile sl-h2-tablet blur-sm sm:blur-xs whitespace-nowrap">
+                {name}
+              </h2>
+              <span className="hidden md:block sl-h2 blur-xs sm:blur-sm"> | </span>
+              <h3 className="sm:hidden md:block sl-h3 sl-h3-mobile sl-h3-tablet blur-xs whitespace-nowrap">
+                {title}
+              </h3>
+            </div>
+            <h4 className="sl-h4 sl-h5-mobile sl-h5-tablet blur-xxs">
               {credits}
             </h4>
-            <p className="text-xs sl-p sl-p-mobile sl-p-tablet font-normal leading-none blur-xs">
+            <p className="sl-p sl-p-mobile blur-xxs">
               {bio}
             </p>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
