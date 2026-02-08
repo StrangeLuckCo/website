@@ -76,8 +76,22 @@ export default function Project() {
     controlsTimeoutRef.current = setTimeout(() => {
       setDisplayControls(false);
     }, 3000);
-  }
+  };
 
+  useEffect(() => {
+    // Defensive: if any other UI left the document scroll-locked,
+    // project pages rely on document scroll so we must re-enable it.
+    const html = document.documentElement;
+    const body = document.body;
+
+    html.style.overflow = "auto";
+    body.style.overflow = "auto";
+
+    // If something used the “fixed body” lock technique, undo it.
+    body.style.position = "";
+    body.style.top = "";
+    body.style.width = "";
+  }, []);
 
   useEffect(() => {
     const getProject = async () => {
@@ -182,33 +196,36 @@ export default function Project() {
             <div
               id="controls"
               className="container-x relative flex flex-col h-full pt-20 pb-24 sm:pt-24 sm:pb-6 z-40"
-              style={{ opacity: displayControls ? 1 : 0, transition: "opacity 0.5s" }}
+              style={{
+                opacity: displayControls ? 1 : 0,
+                transition: "opacity 0.5s",
+              }}
             >
               <div className="grow">
                 <div className="flex flex-row gap-x-3">
-                {playState === "play" ? (
-                  <>
-                    <h4 className="!text-[30px] vhs-scrubber-text">PLAY</h4>
-                    <Image
-                      src={"/controls/play-white-01.svg"}
-                      width={19}
-                      height={32}
-                      className="h-auto opacity-90"
-                      alt="Playing Icon"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <h4 className="!text-[28px] vhs-scrubber-text">PAUSE</h4>
-                    <Image
-                      src={"/controls/pause-white-01.svg"}
-                      width={15}
-                      height={32}
-                      className="h-auto opacity-90"
-                      alt="Paused Icon"
-                    />
-                  </>
-                )}
+                  {playState === "play" ? (
+                    <>
+                      <h4 className="!text-[30px] vhs-scrubber-text">PLAY</h4>
+                      <Image
+                        src={"/controls/play-white-01.svg"}
+                        width={19}
+                        height={32}
+                        className="h-auto opacity-90"
+                        alt="Playing Icon"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="!text-[28px] vhs-scrubber-text">PAUSE</h4>
+                      <Image
+                        src={"/controls/pause-white-01.svg"}
+                        width={15}
+                        height={32}
+                        className="h-auto opacity-90"
+                        alt="Paused Icon"
+                      />
+                    </>
+                  )}
                 </div>
               </div>
               <div className="justify-start flex flex-row items-start">
@@ -228,34 +245,33 @@ export default function Project() {
                       SP {formatTime(currentTime)}
                     </h4>
                   </div>
-
                 </div>
 
-                <div className="
+                <div
+                  className="
                     flex flex-row gap-x-10
                     absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                     sm:translate-x-0 sm:translate-y-0 sm:static sm:gap-x-4
-                    ">
-                  <button
-                    onClick={() => togglePlay() }
-                  >
-                  {playState === "play" ? (
-                    <Image
-                      src={"/controls/pause-white-01.svg"}
-                      width={16}
-                      height={32}
-                      className="w-8 sm:w-4 h-auto opacity-95"
-                      alt="Paused Icon"
-                    />
-                  ) : (
-                    <Image
-                      src={"/controls/play-white-01.svg"}
-                      width={20}
-                      height={32}
-                      className="w-8 sm:w-4 h-auto opacity-95"
-                      alt="Playing Icon"
-                    />
-                  )}
+                    "
+                >
+                  <button onClick={() => togglePlay()}>
+                    {playState === "play" ? (
+                      <Image
+                        src={"/controls/pause-white-01.svg"}
+                        width={16}
+                        height={32}
+                        className="w-8 sm:w-4 h-auto opacity-95"
+                        alt="Paused Icon"
+                      />
+                    ) : (
+                      <Image
+                        src={"/controls/play-white-01.svg"}
+                        width={20}
+                        height={32}
+                        className="w-8 sm:w-4 h-auto opacity-95"
+                        alt="Playing Icon"
+                      />
+                    )}
                   </button>
                   <button
                     onClick={() => setIsMuted(!isMuted)}
@@ -332,7 +348,7 @@ export default function Project() {
                 <div className="sl-p sl-p-mobile blur-xxs">
                   {documentToReactComponents(
                     project.fields.markdownDescription as Document,
-                    options
+                    options,
                   )}
                 </div>
               )}
@@ -346,7 +362,6 @@ export default function Project() {
         {/* Background Gradient */}
         <div className="fixed bg-custom-gradient top-0 left-0 w-full h-full z-0"></div>
       </div>
-
     </>
   );
 }
