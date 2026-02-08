@@ -17,7 +17,7 @@ export default function StaffSection() {
     async function fetchStaffData() {
       try {
         const res = await fetch(
-          "https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/headshots/staff-bios.json"
+          "https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/headshots/staff-bios.json",
         );
         const data = await res.json();
         setStaffData(data);
@@ -32,11 +32,9 @@ export default function StaffSection() {
   return (
     <section
       id="staff"
-      className="sm:min-h-screen flex flex-col py-24 gap-20 text-center sm:text-left container-x"
+      className="section-snap sm:min-h-screen flex flex-col py-24 gap-20 text-center sm:text-left container-x"
     >
-      <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-sm">
-        About
-      </h1>
+      <h1 className="sl-h1 sl-h1-mobile sl-h1-tablet blur-sm">About</h1>
       {staffData.map((staff, index) => (
         <StaffHeadshot
           key={index}

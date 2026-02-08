@@ -397,7 +397,6 @@ body {
   @apply px-6 sm:px-8 lg:px-12;
 }
 
-
 /* vertical container for top-level layout */
 .container-flex-y {
   @apply gap-y-6 sm:gap-y-6 lg:gap-y-12;
@@ -586,11 +585,17 @@ body {
   height: 100svh;
   overscroll-behavior-y: none !important;
   -webkit-overflow-scrolling: auto; /* disables momentum scroll on iOS */
+  scroll-behavior: auto !important;
 }
 
 .section-snap {
   scroll-snap-align: start;
   min-height: 100vh;
+}
+
+.container-main.is-programmatic-scroll {
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
 }
 
 .section-snap.dummy-footer {
@@ -726,7 +731,7 @@ body {
 }
 
 .glow {
-  box-shadow: 0px 0px 6px 4px #FFFFFFCC;
+  box-shadow: 0px 0px 6px 4px #ffffffcc;
 }
 
 .glow-with-hover {
@@ -734,7 +739,7 @@ body {
 }
 
 .glow-with-hover:hover {
-  box-shadow: 0px 0px 6px 5px #E6FC6DCC;
+  box-shadow: 0px 0px 6px 5px #e6fc6dcc;
 }
 
 .bg-nav-gradient {

@@ -56,11 +56,11 @@ export default function GradientBackgroundHomepageSections() {
         </>
       )}
 
-      <main className="section-snap relative z-0">
+      <main className="relative z-0">
         <div id="gradient-trigger" className="relative top-[-35vh] h-[1px]" />
         <ServicesSection />
         <StaffSection />
-        <section>
+        <section id="contact" className="section-snap">
           <UpdatedContactSection />
           <Footer />
         </section>

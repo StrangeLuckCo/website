@@ -52,7 +52,7 @@ export default function Home() {
   const [introDone, setIntroDone] = useState(false);
   const hasUserScrolledRef = useRef(false);
   const [scrollTarget, setScrollTarget] = useState<string | null | undefined>(
-    null
+    null,
   );
   // const [isReady, setIsReady] = useState(false);
   // const [shouldShowUnicorn, setShouldShowUnicorn] = useState(false);
@@ -149,14 +149,17 @@ export default function Home() {
         const res: Project[] = await getEntities();
         if (!res) return;
 
-        const groupedProjects = res.reduce((acc, item) => {
-          const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
-          tags.forEach((tag) => {
-            if (!acc[tag]) acc[tag] = [];
-            acc[tag].push(item);
-          });
-          return acc;
-        }, {} as Record<string, Project[]>);
+        const groupedProjects = res.reduce(
+          (acc, item) => {
+            const tags = item.metadata?.tags?.map((tag) => tag.sys.id) || [];
+            tags.forEach((tag) => {
+              if (!acc[tag]) acc[tag] = [];
+              acc[tag].push(item);
+            });
+            return acc;
+          },
+          {} as Record<string, Project[]>,
+        );
 
         sortProjects(groupedProjects);
 
@@ -179,10 +182,10 @@ export default function Home() {
     if (!introDone) return;
 
     const aboutVideo = document.getElementById(
-      "about-video"
+      "about-video",
     ) as HTMLVideoElement;
     const about2Video = document.getElementById(
-      "about2-video"
+      "about2-video",
     ) as HTMLVideoElement;
 
     ScrollTrigger.create({
@@ -243,7 +246,7 @@ export default function Home() {
 
     const waitForThumbnails = () => {
       const videos = document.querySelectorAll(
-        ".portfolio-thumbnail"
+        ".portfolio-thumbnail",
       ) as NodeListOf<HTMLVideoElement>;
 
       let loadedCount = 0;
@@ -286,7 +289,7 @@ export default function Home() {
         a.fields.thumbnailRanking,
         b.fields.thumbnailRanking,
         a.fields.title,
-        b.fields.title
+        b.fields.title,
       );
       return (
         a.fields.thumbnailRanking - b.fields.thumbnailRanking ||
@@ -408,7 +411,13 @@ export default function Home() {
               id="work"
               className="section-snap z-10 relative text-white pt-28 sm:pt-24 pb-20"
             >
-              <video id="work-video" muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
+              <video
+                id="work-video"
+                muted
+                loop
+                playsInline
+                className="absolute top-0 left-0 w-full h-full object-cover z-0"
+              >
                 <source src="/BlueVHS.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -420,29 +429,42 @@ export default function Home() {
                   </h1>
                   <nav className="justify-center sm:justify-between">
                     <div className="flex flex-wrap justify-center sm:justify-start gap-x-2 sm:gap-2">
-                      {Object.keys(CATEGORY_TO_TAG).map((category, idx, arr) => (
-                        <div
-                          key={category}
-                          className="flex items-center gap-x-2 sm:gap-4"
-                        >
-                          <button
+                      {Object.keys(CATEGORY_TO_TAG).map(
+                        (category, idx, arr) => (
+                          <div
                             key={category}
-                            onClick={() => handleTagClick(category)}
-
-                            className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C] !hover:text-gray-400 cursor-[url('/hand_cursor_2.png'),_pointer] focus:decoration-[#DFFC3C]`}
-                            style={{
-                              WebkitTextFillColor: selectedTag === CATEGORY_TO_TAG[category] ? "#DFFC3C" : "",
-                              textDecoration: selectedTag === CATEGORY_TO_TAG[category] ? "" : "none",
-                              textDecorationColor: selectedTag === CATEGORY_TO_TAG[category] ? "#DFFC3C" : "inherit",
-                            }}
+                            className="flex items-center gap-x-2 sm:gap-4"
                           >
-                            {category}
-                          </button>
-                          {idx !== arr.length - 1 && (
-                            <span className="sl-list-item mobile-subtitle blur-xs text-gray-400"> | </span>
-                          )}
-                        </div>
-                      ))}
+                            <button
+                              key={category}
+                              onClick={() => handleTagClick(category)}
+                              className={`sl-list-item mobile-subtitle blur-xs focus:text-[#DFFC3C] !hover:text-gray-400 cursor-[url('/hand_cursor_2.png'),_pointer] focus:decoration-[#DFFC3C]`}
+                              style={{
+                                WebkitTextFillColor:
+                                  selectedTag === CATEGORY_TO_TAG[category]
+                                    ? "#DFFC3C"
+                                    : "",
+                                textDecoration:
+                                  selectedTag === CATEGORY_TO_TAG[category]
+                                    ? ""
+                                    : "none",
+                                textDecorationColor:
+                                  selectedTag === CATEGORY_TO_TAG[category]
+                                    ? "#DFFC3C"
+                                    : "inherit",
+                              }}
+                            >
+                              {category}
+                            </button>
+                            {idx !== arr.length - 1 && (
+                              <span className="sl-list-item mobile-subtitle blur-xs text-gray-400">
+                                {" "}
+                                |{" "}
+                              </span>
+                            )}
+                          </div>
+                        ),
+                      )}
                     </div>
                   </nav>
                 </header>
@@ -463,7 +485,7 @@ export default function Home() {
               </div>
             </section>
             <GradientBackgroundHomepageSections />
-            <div className="!h-[1px] section-snap dummy-footer min-h-[1px] max-h-[1px]"></div>
+            <div className="!h-[1px] dummy-footer min-h-[1px] max-h-[1px]"></div>
           </div>
 
           {/* Parallax Background */}

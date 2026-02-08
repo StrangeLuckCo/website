@@ -21,15 +21,15 @@ export default function Navigation() {
 
     if (pathname === "/") {
       if (hash) {
-        const el = document.querySelector(`#${hash}`);
-        el?.scrollIntoView();
+        // Route through ScrollHandler so CSS scroll-snap + smooth can’t “cut off” the jump
+        router.replace(`/?scrollTo=${hash}`, { scroll: false });
       } else {
         document
           .querySelector(".container-main")
           ?.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
-      router.push(`/?scrollTo=${hash}`);
+      router.push(`/?scrollTo=${hash}`, { scroll: false });
     }
   };
 
@@ -72,7 +72,7 @@ export default function Navigation() {
           ABOUT
         </a>
         <a
-          // href="#contact"
+          href="#contact"
           onClick={(e) => handleLogoClick(e, "contact")}
           className="cursor-[url('/hand_cursor_2.png'),_pointer] hover-fill-neon blur-xs"
         >
