@@ -74,29 +74,31 @@ export default function MobileNav() {
   };
 
   return (
-    <nav
-      className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-30 py-3 text-white container-x bg-nav-gradient"
-    >
-      <Link href="#" onClick={(e) => scrollToTop(e)}>
-          <Image
-            src={"/logo-white-yellow-no-tagline-01.svg"}
-            alt="Strange Luck Logo"
-            height={39}
-            width={205}
-            priority
-            className="blur-[0.8px] opacity-90 cursor-[url('/hand_cursor_2.png'),_pointer] mt-1"
-          />
-      </Link>
-      <button
-        className="mobile-nav-menu blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
-        onClick={() => setIsOpen(true)}
+    <>
+      <nav
+        className="sm:hidden fixed top-0 left-0 w-full flex justify-between items-center z-50 py-3 text-white container-x bg-nav-gradient"
       >
-        MENU
-      </button>
+        <Link href="#" onClick={(e) => scrollToTop(e)}>
+            <Image
+              src={"/logo-white-yellow-no-tagline-01.svg"}
+              alt="Strange Luck Logo"
+              height={39}
+              width={205}
+              priority
+              className="blur-[0.8px] opacity-90 cursor-[url('/hand_cursor_2.png'),_pointer] mt-1"
+            />
+        </Link>
+        <button
+          className="mobile-nav-menu blur-xs cursor-[url('/hand_cursor_2.png'),_pointer]"
+          onClick={() => setIsOpen(true)}
+        >
+          MENU
+        </button>
+      </nav>
 
       <div
         ref={menuRef}
-        className="fixed top-0 right-0 w-full h-full bg-black bg-custom-gradient text-white flex-col items-center hidden"
+        className="sm:hidden fixed top-0 right-0 w-full h-full z-50 bg-black bg-custom-gradient text-white flex-col items-center hidden"
         style={{ transform: "translateX(100%)" }}
       >
         <Link href="#" onClick={(e) => scrollToTop(e)}>
@@ -167,6 +169,6 @@ export default function MobileNav() {
           </li>
         </ul>
       </div>
-    </nav>
+    </>
   );
 }
