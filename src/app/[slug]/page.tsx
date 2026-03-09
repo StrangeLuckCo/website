@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { getProjectBySlug } from "@/pages/api/project";
@@ -65,18 +65,25 @@ export default function Project() {
   const [isMuted, setIsMuted] = useState(true);
 
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const throttleRef = useRef(false);
   const [displayControls, setDisplayControls] = useState(false);
 
   const params = useParams();
   const slug = params?.slug as string;
 
-  const toggleControlsDisplay = () => {
+  const toggleControlsDisplay = useCallback(() => {
+    if (throttleRef.current) return;
+    throttleRef.current = true;
+    setTimeout(() => {
+      throttleRef.current = false;
+    }, 300);
+
     setDisplayControls(true);
     clearTimeout(controlsTimeoutRef.current as NodeJS.Timeout);
     controlsTimeoutRef.current = setTimeout(() => {
       setDisplayControls(false);
     }, 3000);
-  };
+  }, []);
 
   useEffect(() => {
     // Defensive: if any other UI left the document scroll-locked,
@@ -151,10 +158,6 @@ export default function Project() {
         muted={isMuted ? true : false}
         playsInline
         onPlay={() => console.log("video is playing")}
-        onEnded={() => {
-          setCurrentTime(0);
-          videoRef.current?.play();
-        }}
         className="absolute top-1/2 left-1/2 min-w-full min-h-full w-full h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover"
       />
     );
@@ -173,29 +176,32 @@ export default function Project() {
     return `${hh}${mm}:${ss}`;
   };
 
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     if (!videoRef.current) return;
-    if (playState === "play") {
-      videoRef.current.pause();
-      setPlayState("pause");
-    } else {
+    if (videoRef.current.paused) {
       videoRef.current.play();
       setPlayState("play");
+    } else {
+      videoRef.current.pause();
+      setPlayState("pause");
     }
-  };
+  }, []);
 
   return (
     <>
       <Navigation />
       <MobileNav />
 
-      <div className="flex flex-col" onMouseMove={toggleControlsDisplay}>
+      <div className="flex flex-col h-screen overflow-y-auto">
         {project && displayType === "video" && (
-          <div className="relative z-10 h-screen overflow-hidden">
+          <div
+            className="relative z-10 h-screen shrink-0 overflow-hidden"
+            onMouseMove={toggleControlsDisplay}
+          >
             {renderMedia()}
             <div
               id="controls"
-              className="container-x relative flex flex-col h-full pt-20 pb-24 sm:pt-24 sm:pb-6 z-40"
+              className="absolute top-0 left-0 w-full h-full container-x flex flex-col pt-20 pb-24 sm:pt-24 sm:pb-6 z-40"
               style={{
                 opacity: displayControls ? 1 : 0,
                 transition: "opacity 0.5s",
@@ -358,10 +364,10 @@ export default function Project() {
             <Footer />
           </div>
         </div>
-
-        {/* Background Gradient */}
-        <div className="fixed bg-custom-gradient top-0 left-0 w-full h-full z-0"></div>
       </div>
+
+      {/* Background Gradient — outside scroll container so fixed positioning works */}
+      <div className="fixed bg-custom-gradient top-0 left-0 w-full h-full z-0"></div>
     </>
   );
 }

@@ -57,6 +57,7 @@ export default function IntroVideo({ onIntroEnd }: { onIntroEnd: () => void }) {
           autoPlay
           muted
           playsInline
+          preload="auto"
           onPlay={handlePlay}
           onEnded={handleEnded}
           className="w-full h-full object-contain scale-[1.8] sm:scale-100"

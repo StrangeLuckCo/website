@@ -27,6 +27,7 @@ const PortfolioThumbnail = ({
             loop
             muted
             playsInline
+            preload="metadata"
             className="portfolio-thumbnail absolute top-0 left-0 w-full h-full object-cover"
           />
         ) : (

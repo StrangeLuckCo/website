@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
-import Head from "next/head";
 import dynamic from "next/dynamic";
 import PortfolioThumbnail from "./components/PortfolioThumbnail";
 import Navigation from "./components/Navigation";
@@ -139,6 +138,10 @@ export default function Home() {
     ScrollTrigger.defaults({
       scroller: ".container-main",
     });
+
+    return () => {
+      ScrollTrigger.defaults({ scroller: undefined });
+    };
   }, []);
 
   useEffect(() => {
@@ -188,7 +191,7 @@ export default function Home() {
       "about2-video",
     ) as HTMLVideoElement;
 
-    ScrollTrigger.create({
+    const st1 = ScrollTrigger.create({
       trigger: "#about",
       start: "top center",
       end: "bottom center",
@@ -206,7 +209,7 @@ export default function Home() {
       },
     });
 
-    ScrollTrigger.create({
+    const st2 = ScrollTrigger.create({
       trigger: "#about-2",
       start: "top center",
       end: "bottom center",
@@ -226,7 +229,7 @@ export default function Home() {
 
     const workVideo = document.getElementById("work-video") as HTMLVideoElement;
 
-    ScrollTrigger.create({
+    const st3 = ScrollTrigger.create({
       trigger: "#work",
       start: "top center",
       end: "bottom center",
@@ -275,6 +278,12 @@ export default function Home() {
     };
 
     waitForThumbnails();
+
+    return () => {
+      st1.kill();
+      st2.kill();
+      st3.kill();
+    };
   }, [introDone, projects]);
 
   const handleTagClick = (category: string) => {
@@ -317,24 +326,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://use.typekit.net/hqi1rdb.css" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          // rel="preload"
-          as="video"
-          href="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/LogoAnimation-WithTagline_new.mp4"
-          type="video/mp4"
-        />
-        <link
-          // rel="preload"
-          as="video"
-          href="https://strange-luck-website-assets.s3.us-east-1.amazonaws.com/homepage_hero/REEL-WEBSITE-SLSTUDIO-NOSOUND-16x9-20250701_FORSITE.mp4"
-          type="video/mp4"
-        />
-      </Head>
-
       <Suspense fallback={null}>
         <ScrollHandler introDone={introDone} />
       </Suspense>
@@ -373,7 +364,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
-                // preload="auto"
+                preload="auto"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/about_background.mp4" type="video/mp4" />
@@ -394,7 +385,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
-                // preload="auto"
+                preload="metadata"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/about2_background.mp4" type="video/mp4" />
@@ -416,6 +407,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
+                preload="metadata"
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
               >
                 <source src="/BlueVHS.mp4" type="video/mp4" />
